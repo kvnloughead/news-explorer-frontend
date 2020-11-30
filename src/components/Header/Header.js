@@ -1,12 +1,12 @@
 import React from 'react';
-import HeaderLink from '../HeaderLink/HeaderLink.js';
+import HeaderNav from '../HeaderNav/HeaderNav.js'
 
-function Header({ userEmail, loggedIn, handleSignOut }) {
+function Header({ loggedIn }) {
   return (
     <>
-    <header className="header">
+    <header className='header'>
       <h1 className='header__title'>NewsExplorer</h1>
-      <HeaderLink loggedIn={loggedIn} userEmail={userEmail} handleSignOut={handleSignOut}/>
+      <HeaderNav loggedIn={loggedIn} />
     </header>
     </>
   )
