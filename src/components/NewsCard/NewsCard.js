@@ -1,7 +1,6 @@
 import React from 'react';
 
 function NewsCard({ card }) {
-  // style={{ backgroundImage: `url(${card.image})`}
   return (
     <>
       {

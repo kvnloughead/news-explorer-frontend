@@ -50,6 +50,13 @@
   border: none;
   box-sizing: border-box;
   border-radius: 100px;
+  margin: 0 0 0 24px;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  color: #1A1B22;
 }
 
 .search-form__search-button {
