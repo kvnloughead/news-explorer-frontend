@@ -59,6 +59,10 @@
   color: #1A1B22;
 }
 
+.search-form__search-bar:focus {
+  outline: none;
+}
+
 .search-form__search-button {
   background-color: #2F71E5;
   width: 168px;
