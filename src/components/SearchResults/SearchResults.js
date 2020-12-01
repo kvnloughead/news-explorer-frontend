@@ -8,14 +8,14 @@ function SearchResults({ cards }) {
     <section className='search-results'>
       <h2 className='search-results__title'>Search Results</h2>
       <ul className="search-results__list">
-        {cards && cards.map((card) => (
+        {cards && cards.slice(0,3).map((card) => (
           <NewsCard
             key={card._id}
             card={card}
           />
         ))}
-        <NewsCard />
       </ul>
+      <button className='search-results__button'>Show more</button>
     </section>
   );
 }
