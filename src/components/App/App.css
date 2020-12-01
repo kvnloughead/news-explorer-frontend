@@ -1,7 +1,6 @@
 .page {
-  padding: 0 104px 0 104px;
   background-image: url('../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.jpg');
-  background-size: cover;
+  background-size: 100% 576px;
   background-repeat: no-repeat;
-  min-height: 567px;
+  min-height: 576px;
 }

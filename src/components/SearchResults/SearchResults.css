@@ -1,0 +1,24 @@
+.search-results {
+  padding: 0 104px 0 104px;
+  background-color: #F5F6F7;
+  padding-top: 80px;
+}
+
+.search-results__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-results__title {
+  margin: 0 0 64px 0;
+  font-family: 'Roboto Slab';
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 46px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #1A1B22;
+}

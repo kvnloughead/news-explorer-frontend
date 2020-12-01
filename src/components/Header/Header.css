@@ -1,4 +1,5 @@
 .header {
+  padding: 0 104px 0 104px;
   border-bottom: #c4c4c4 solid 1px;
   display: flex;
   justify-content: space-between;
