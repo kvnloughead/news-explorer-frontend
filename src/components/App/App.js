@@ -10,12 +10,12 @@ import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
 import Footer from '../Footer/Footer.js';
 import SavedNews from '../SavedNews/SavedNews.js';
-import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader.js';
 
 import { initialCards } from '../../temporary/data.js';
 
 function App() {
   const [cards, setCards] = useState(initialCards);
+  const [savedCards, setSavedCards] = useState(initialCards);
   const [loggedIn, setLoggedIn] = useState(true);
   const [userName, setUserName] = useState('Kevin');
   const [isSaved, setIsSaved] = useState(true);
@@ -35,8 +35,8 @@ function App() {
         />
       </Route>
       <Route exact path='/saved-news'>
-        <Header loggedIn={loggedIn} userName={userName} isMainPage={false}/>
-        <SavedNews />
+        <Header loggedIn={loggedIn} userName={userName} isMainPage={false} savedCards={savedCards}/>
+        <SavedNews savedCards={savedCards}/>
       </Route>
       <Footer />
     </Router>

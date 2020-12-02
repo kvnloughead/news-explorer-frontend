@@ -5,7 +5,7 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader.js';
 import SearchForm from '../SearchForm/SearchForm.js';
 
 
-function Header({ loggedIn, userName, isMainPage }) {
+function Header({ loggedIn, userName, isMainPage, savedCards }) {
   return (
     <div class={`header__background ${isMainPage ? 'header__background_image' : ''}`}>
     <header className={`header`}>
@@ -15,7 +15,7 @@ function Header({ loggedIn, userName, isMainPage }) {
     {isMainPage ? (
       <SearchForm />  
     ) : (
-      <SavedNewsHeader />
+      <SavedNewsHeader userName={userName} savedCards={savedCards}/>
     )}
     </div>
     
