@@ -2,12 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import logoutIcon from '../../images/icons/logout.png';
+import logoutDarkIcon from '../../images/icons/logout-dark.png';
 
-function HeaderNav({ handleSignIn, loggedIn, userName }) {
+function HeaderNav({ handleSignIn, loggedIn, userName, isMainPage }) {
   return (
     <>
       <ul className='header-nav__links'>
-        <li className='header-nav__home clickable'>Home</li>
+        <li
+          class={`header-nav__home clickable ${
+            isMainPage && 'header-nav__bottom-border'
+          }`}
+        >
+          <Link
+            class={`header-nav__home-text ${
+              !isMainPage ? 'header-nav__home-text_dark' : ''
+            }`}
+            to='/'
+          >
+            Home
+          </Link>
+        </li>
         {!loggedIn ? (
           <li>
             <button
@@ -20,20 +34,29 @@ function HeaderNav({ handleSignIn, loggedIn, userName }) {
           </li>
         ) : (
           <>
-            <li>
-              <Link
-                className='header-nav__saved-news clickable'
-                to='/saved-news'
-              >
+            <li
+              class={`header-nav__saved-news clickable ${
+                !isMainPage && 'header-nav__bottom-border_dark'
+              }`}
+            >
+              <Link className='header-nav__saved-news-text' to='/saved-news'>
                 Saved articles
               </Link>
             </li>
             <li>
-              <button className='header-nav__user-button clickable'>
+              <button
+                className={`header-nav__user-button clickable ${
+                  !isMainPage ? 'header-nav__user-button_dark' : ''
+                }`}
+              >
                 {userName}
-                <img className='header-nav__logout-icon' src={logoutIcon} alt='Logout icon'/>
+                <img
+                  className='header-nav__logout-icon'
+                  src={isMainPage ? logoutIcon : logoutDarkIcon}
+                  alt='Logout icon'
+                />
               </button>
-            </li> 
+            </li>
           </>
         )}
       </ul>
