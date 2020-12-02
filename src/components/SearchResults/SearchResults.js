@@ -2,16 +2,18 @@ import React from "react";
 
 import NewsCard from '../NewsCard/NewsCard.js';
 
-function SearchResults({ cards }) {
+function SearchResults({ cards, loggedIn }) {
   debugger;
   return (
     <section className='search-results'>
       <h2 className='search-results__title'>Search Results</h2>
       <ul className="search-results__list">
-        {cards && cards.slice(0,3).map((card) => (
+        {cards && cards.slice(0,3).map((card, i) => (
           <NewsCard
+            loggedIn={loggedIn}
             key={card._id}
             card={card}
+            index={i}
           />
         ))}
       </ul>

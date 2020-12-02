@@ -80,3 +80,7 @@
   padding: 1px;
   margin: 0;
 }
+
+.search-form__search-button:hover {
+  cursor: pointer;
+}

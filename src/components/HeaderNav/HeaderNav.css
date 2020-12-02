@@ -20,6 +20,10 @@
   border-bottom: #FFFFFF 3px solid;
 }
 
+.header-nav__home:hover {
+  cursor: pointer;
+}
+
 .header-nav__signin {
   color: #FFFFFF;
   font-family: 'Roboto';
@@ -36,4 +40,8 @@
   border-radius: 100px;
   background: none;
   margin-left: 54px;
+}
+
+.header-nav__signin:hover {
+  cursor: pointer;
 }

@@ -11,11 +11,12 @@ import { initialCards } from '../../temporary/data.js';
 function App() {
 
   const [cards, setCards] = useState(initialCards);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   return (
     <div>
-      <Header />
-      <Main cards={cards}/>
+      <Header loggedIn={loggedIn}/>
+      <Main cards={cards} loggedIn={loggedIn}/>
       <Footer />
     </div>
   );

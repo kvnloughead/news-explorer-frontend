@@ -40,3 +40,7 @@
   letter-spacing: 0px;
   border: none;
 }
+
+.search-results__button:hover {
+  cursor: pointer;
+}
