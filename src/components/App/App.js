@@ -12,11 +12,13 @@ function App() {
 
   const [cards, setCards] = useState(initialCards);
   const [loggedIn, setLoggedIn] = useState(true);
+  const [userName, setUserName] = useState('Kevin');
+  const [isSaved, setIsSaved] = useState(true);
 
   return (
     <div>
-      <Header loggedIn={loggedIn}/>
-      <Main cards={cards} loggedIn={loggedIn}/>
+      <Header loggedIn={loggedIn} userName={userName}/>
+      <Main cards={cards} loggedIn={loggedIn} isSaved={isSaved}/>
       <Footer />
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 
 import NewsCard from '../NewsCard/NewsCard.js';
 
-function SearchResults({ cards, loggedIn }) {
+function SearchResults({ cards, loggedIn, isSaved }) {
   debugger;
   return (
     <section className='search-results'>
@@ -11,6 +11,7 @@ function SearchResults({ cards, loggedIn }) {
         {cards && cards.slice(0,3).map((card, i) => (
           <NewsCard
             loggedIn={loggedIn}
+            isSaved={isSaved}
             key={card._id}
             card={card}
             index={i}

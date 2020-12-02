@@ -1,18 +1,22 @@
 import React from 'react';
 
-function NewsCard({ card, loggedIn, index }) {
+function NewsCard({ card, loggedIn, index, isSaved }) {
   return (
     <>
       {card && (
-        <li className='card'>
+        <li className='card clickable'>
           <button
-            className={`card__signin-button${
+            className={`card__signin-button clickable${
               !loggedIn && index === 2 ? ' card__signin-button_visible' : ''
             }`}
           >
             Sign in to save articles
           </button>
-          <button className='card__save-button'></button>
+          <button
+            className={`card__save-button clickable ${
+              isSaved && ' card__save-button_saved'
+            }`}
+          ></button>
           <img className='card__image' src={card.image} alt={card.title} />
           <p className='card__date'>{card.date}</p>
           <h3 className='card__title'>{card.title}</h3>

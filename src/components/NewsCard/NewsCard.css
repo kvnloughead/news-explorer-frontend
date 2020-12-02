@@ -8,10 +8,6 @@
   margin: 0 16px 16px 0;
 }
 
-.card:hover {
-  cursor: pointer;
-}
-
 .card__save-button {
   width: 40px;
   height: 40px;
@@ -25,8 +21,8 @@
   background-position: center;
 }
 
-.card__save-button {
-  cursor: pointer;
+.card__save-button_saved {
+  background-image: url('../../images/icons/bookmark-saved.svg');
 }
 
 .card__signin-button {
@@ -45,10 +41,6 @@
   line-height: 14px;
   letter-spacing: 0em;
   border: none; 
-}
-
-.card__signin-button:hover {
-  cursor: pointer;
 }
 
 .card__signin-button_visible {
