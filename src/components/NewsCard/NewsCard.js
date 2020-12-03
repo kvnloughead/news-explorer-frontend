@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NewsCard({ card, loggedIn, index, isSaved }) {
+function NewsCard({ card, loggedIn, index, isSaved, isMainPage }) {
   return (
     <>
       {card && (
@@ -16,9 +16,9 @@ function NewsCard({ card, loggedIn, index, isSaved }) {
             Sign in to save articles
           </button>
           <button
-            className={`card__save-button clickable ${
-              isSaved && ' card__save-button_saved'
-            }`}
+            className={`card__button clickable ${
+              isSaved ? ' card__button_saved' : ''
+            }${!isMainPage ? ' card__button_trash' : ''}`}
           ></button>
           <img className='card__image' src={card.image} alt={card.title} />
           <p className='card__date'>{card.date}</p>

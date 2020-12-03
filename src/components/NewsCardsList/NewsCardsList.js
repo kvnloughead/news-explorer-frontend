@@ -21,6 +21,7 @@ function NewsCardsList({ cards, loggedIn, isSaved, isLoading, isMainPage }) {
                     .slice(0, 3)
                     .map((card, i) => (
                       <NewsCard
+                        isMainPage={isMainPage}
                         loggedIn={loggedIn}
                         isSaved={isSaved}
                         key={card._id}
