@@ -7,7 +7,6 @@ import About from '../About/About.js';
 function Main({ cards, loggedIn, isSaved, isLoading }) {
   return (
     <main >
-      {/* <SearchForm /> */}
       <SearchResults
         cards={cards}
         loggedIn={loggedIn}
