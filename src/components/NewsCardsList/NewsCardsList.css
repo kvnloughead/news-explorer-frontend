@@ -1,11 +1,10 @@
 .news-cards-list {
-  padding: 0 104px 0 104px;
+  padding: 0 104px 62px 104px;
   background-color: #F5F6F7;
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-height: 282px;
-  justify-content: center;
+  justify-content: start;
 }
 
 .news-cards-list__list {
@@ -13,6 +12,7 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: start;
 }
 
 .news-cards-list__title {
@@ -67,13 +67,14 @@
   height: 64px;
   background-color: #FFFFFF;
   border-radius: 80px;
-  margin: 64px 0 80px 0;
+  margin: 64px 0 18px 0;
   font-family: 'Roboto';
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
   letter-spacing: 0px;
   border: none;
+  align-self: center;
 }
 
 .news-cards-list__button:hover {

@@ -1,9 +1,5 @@
 import { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  useHistory,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
 
 import './App.css';
 import Header from '../Header/Header.js';
@@ -26,17 +22,23 @@ function App() {
   return (
     <Router>
       <Route exact path='/'>
-        <Header loggedIn={loggedIn} userName={userName} isMainPage={true}/>
+        <Header loggedIn={loggedIn} userName={userName} isMainPage={true} />
         <Main
           cards={cards}
           loggedIn={loggedIn}
           isSaved={isSaved}
           isLoading={isLoading}
+          isMainPage={true}
         />
       </Route>
       <Route exact path='/saved-news'>
-        <Header loggedIn={loggedIn} userName={userName} isMainPage={false} savedCards={savedCards}/>
-        <SavedNews savedCards={savedCards}/>
+        <Header
+          loggedIn={loggedIn}
+          userName={userName}
+          isMainPage={false}
+          savedCards={savedCards}
+        />
+        <SavedNews cards={savedCards} loggedIn={loggedIn} isMainPage={false} />
       </Route>
       <Footer />
     </Router>
