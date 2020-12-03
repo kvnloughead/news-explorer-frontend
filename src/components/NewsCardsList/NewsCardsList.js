@@ -2,9 +2,9 @@ import React from 'react';
 
 import NewsCard from '../NewsCard/NewsCard.js';
 
-function SearchResults({ cards, loggedIn, isSaved, isLoading }) {
+function NewsCardsList({ cards, loggedIn, isSaved, isLoading }) {
   return (
-    <section className='search-results'>
+    <section className='news-cards-list'>
       {isLoading ? (
         <div className='circle-preloader'>
           <i className='circle-preloader__circle'></i>
@@ -14,8 +14,8 @@ function SearchResults({ cards, loggedIn, isSaved, isLoading }) {
         <>
           {cards.length > 0 ? (
             <>
-              <h2 className='search-results__title'>Search Results</h2>
-              <ul className='search-results__list'>
+              <h2 className='news-cards-list__title'>Search Results</h2>
+              <ul className='news-cards-list__list'>
                 {cards &&
                   cards
                     .slice(0, 3)
@@ -29,7 +29,7 @@ function SearchResults({ cards, loggedIn, isSaved, isLoading }) {
                       />
                     ))}
               </ul>
-              <button className='search-results__button'>Show more</button>
+              <button className='news-cards-list__button'>Show more</button>
             </>
           ) : (
             <div class='not-found'>
@@ -46,4 +46,4 @@ function SearchResults({ cards, loggedIn, isSaved, isLoading }) {
   );
 }
 
-export default SearchResults;
+export default NewsCardsList;
