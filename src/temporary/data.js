@@ -1,4 +1,4 @@
-export const initialCards = [
+export const foundCardsArray = [
   {
     keyword: 'nature',
     title: 'Everyone Needs a Special \'Sit Spot\' in Nature',
@@ -8,6 +8,7 @@ export const initialCards = [
     link: '#',
     image: 'https://imagizer.imageshack.com/img924/1082/cgqweD.png',
     owner: 'kevin',
+    isSaved: false,
     _id: Math.random(),
   },
   {
@@ -19,6 +20,7 @@ export const initialCards = [
     link: '#',
     image: 'https://imagizer.imageshack.com/img922/7828/FxdrAb.png',
     owner: 'kevin',
+    isSaved: true,
     _id: Math.random(),
   },
   {
@@ -30,6 +32,7 @@ export const initialCards = [
     link: '#',
     image: 'https://imagizer.imageshack.com/img924/1460/5H5jRn.png',
     owner: 'kevin',
+    isSaved: true,
     _id: Math.random(),
   },
   {
@@ -41,6 +44,7 @@ export const initialCards = [
     link: '#',
     image: 'https://imageshack.com/i/pmPlP5xDp',
     owner: 'kevin',
+    isSaved: true,
     _id: Math.random(),
   },
   {
@@ -52,6 +56,9 @@ export const initialCards = [
     link: '#',
     image: 'https://imageshack.com/i/pnYUYDYDp',
     owner: 'kevin',
+    isSaved: true,
     _id: Math.random(),
   },
 ];
+
+export const savedCardsArray = foundCardsArray.slice(1);

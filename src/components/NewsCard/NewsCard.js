@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NewsCard({ card, loggedIn, index, isSaved, isMainPage }) {
+function NewsCard({ card, isMainPage }) {
   return (
     <>
       {card && (
@@ -10,7 +10,7 @@ function NewsCard({ card, loggedIn, index, isSaved, isMainPage }) {
           </p>
           <button
             className={`card__button clickable ${
-              isSaved ? ' card__button_saved' : ''
+              card.isSaved ? ' card__button_saved' : ''
             }${!isMainPage ? ' card__button_trash' : ''}`}
           ></button>
           <button

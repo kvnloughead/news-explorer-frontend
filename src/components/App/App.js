@@ -7,14 +7,13 @@ import Main from '../Main/Main.js';
 import Footer from '../Footer/Footer.js';
 import SavedNews from '../SavedNews/SavedNews.js';
 
-import { initialCards } from '../../temporary/data.js';
+import { foundCardsArray, savedCardsArray } from '../../temporary/data.js';
 
 function App() {
-  const [cards, setCards] = useState(initialCards);
-  const [savedCards, setSavedCards] = useState(initialCards);
+  const [cards, setCards] = useState(foundCardsArray);
+  const [savedCards, setSavedCards] = useState(savedCardsArray);
   const [loggedIn, setLoggedIn] = useState(true);
   const [userName, setUserName] = useState('Kevin');
-  const [isSaved, setIsSaved] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();
@@ -35,7 +34,6 @@ function App() {
         <Main
           cards={cards}
           loggedIn={loggedIn}
-          isSaved={isSaved}
           isLoading={isLoading}
           isMainPage={true}
         />
