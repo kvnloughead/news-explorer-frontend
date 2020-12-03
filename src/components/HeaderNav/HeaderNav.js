@@ -4,7 +4,13 @@ import { Link } from 'react-router-dom';
 import logoutIcon from '../../images/icons/logout.png';
 import logoutDarkIcon from '../../images/icons/logout-dark.png';
 
-function HeaderNav({ handleSignIn, loggedIn, userName, isMainPage }) {
+function HeaderNav({
+  handleSignIn,
+  loggedIn,
+  userName,
+  isMainPage,
+  handleSignout,
+}) {
   return (
     <>
       <ul className='header-nav__links'>
@@ -50,11 +56,13 @@ function HeaderNav({ handleSignIn, loggedIn, userName, isMainPage }) {
                 }`}
               >
                 {userName}
-                <img
-                  className='header-nav__logout-icon'
-                  src={isMainPage ? logoutIcon : logoutDarkIcon}
-                  alt='Logout icon'
-                />
+                <Link to='/' onClick={handleSignout}>
+                  <img
+                    className='header-nav__logout-icon'
+                    src={isMainPage ? logoutIcon : logoutDarkIcon}
+                    alt='Logout icon'
+                  />
+                </Link>
               </button>
             </li>
           </>

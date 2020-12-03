@@ -19,10 +19,19 @@ function App() {
 
   const history = useHistory();
 
+  const handleSignout = () => {
+    setLoggedIn(false);
+  };
+
   return (
     <Router>
       <Route exact path='/'>
-        <Header loggedIn={loggedIn} userName={userName} isMainPage={true} />
+        <Header
+          loggedIn={loggedIn}
+          userName={userName}
+          isMainPage={true}
+          handleSignout={handleSignout}
+        />
         <Main
           cards={cards}
           loggedIn={loggedIn}
@@ -37,6 +46,7 @@ function App() {
           userName={userName}
           isMainPage={false}
           savedCards={savedCards}
+          handleSignout={handleSignout}
         />
         <SavedNews cards={savedCards} loggedIn={loggedIn} isMainPage={false} />
       </Route>
