@@ -29,8 +29,10 @@ function App() {
     setModalType('signup');
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeModal = (evt) => {
+    if (!evt.key || evt.key === 'Escape') {
+      setIsModalOpen(false);
+    }
   };
 
   const handleSignin = () => {

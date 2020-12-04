@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -6,17 +6,27 @@ function PopupWithForm({
   modalType,
   isModalOpen,
   onClose,
+  onEscapeKey,
   handleSigninButtonClick,
   handleSignupButtonClick,
   handleSignin,
   handleSignup,
 }) {
+
+  useEffect(() => {
+    document.addEventListener('keydown', onClose);
+    return () => {
+      document.removeEventListener('keydown', onClose);
+    }
+  })
+
   return (
     <>
       <div
         className={
           'popup__overlay' + (isModalOpen ? ' popup__overlay_visible' : '')
         }
+        onClick={onClose}
       ></div>
       <div className={`popup` + (isModalOpen ? ' popup_visible' : '')}>
         <button
