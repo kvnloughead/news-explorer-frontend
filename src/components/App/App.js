@@ -31,12 +31,15 @@ function App() {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setModalType('');
   };
 
   const handleSignin = () => {
     setLoggedIn(true);
   };
+
+  const handleSignup = () => {
+    setModalType('success');
+  }
 
   const handleSignout = () => {
     setLoggedIn(false);
@@ -64,6 +67,8 @@ function App() {
           onClose={closeModal}
           handleSignupButtonClick={handleSignupButtonClick}
           handleSigninButtonClick={handleSigninButtonClick}
+          handleSignin={handleSignin}
+          handleSignup={handleSignup}
         />
       </Route>
       <Route exact path='/saved-news'>
