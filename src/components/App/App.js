@@ -18,6 +18,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
+  const [showAllCards, setShowAllCards] = useState(false);
 
   const handleSigninButtonClick = () => {
     setIsModalOpen(true);
@@ -35,13 +36,17 @@ function App() {
     }
   };
 
+  const handleShowMore = () => {
+    setShowAllCards(true);
+  };
+
   const handleSignin = () => {
     setLoggedIn(true);
   };
 
   const handleSignup = () => {
     setModalType('success');
-  }
+  };
 
   const handleSignout = () => {
     setLoggedIn(false);
@@ -62,6 +67,8 @@ function App() {
           loggedIn={loggedIn}
           isLoading={isLoading}
           isMainPage={true}
+          onShowMore={handleShowMore}
+          showAllCards={showAllCards}
         />
         <PopupWithForm
           modalType={modalType}
@@ -81,7 +88,12 @@ function App() {
           savedCards={savedCards}
           handleSignout={handleSignout}
         />
-        <SavedNews cards={savedCards} loggedIn={loggedIn} isMainPage={false} />
+        <SavedNews
+          cards={savedCards}
+          loggedIn={loggedIn}
+          isMainPage={false}
+          showAllCards={true}
+        />
       </Route>
       <Footer />
     </Router>

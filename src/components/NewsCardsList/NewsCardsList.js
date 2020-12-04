@@ -2,7 +2,16 @@ import React from 'react';
 
 import NewsCard from '../NewsCard/NewsCard.js';
 
-function NewsCardsList({ cards, loggedIn, isSaved, isLoading, isMainPage }) {
+function NewsCardsList({
+  cards,
+  loggedIn,
+  isSaved,
+  isLoading,
+  isMainPage,
+  showAllCards,
+  onShowMore,
+}) {
+  debugger;
   return (
     <section className='news-cards-list'>
       {isLoading ? (
@@ -30,19 +39,27 @@ function NewsCardsList({ cards, loggedIn, isSaved, isLoading, isMainPage }) {
                       />
                     ))}
               </ul>
-              {isMainPage ? (
-                <button className='news-cards-list__button'>Show more</button>
+              {!showAllCards ? (
+                <button
+                  className='news-cards-list__button'
+                  onClick={onShowMore}
+                >
+                  Show more
+                </button>
               ) : (
                 <ul className='news-cards-list__list'>
-                  {cards && cards.slice(3).map((card, i) => (
-                    <NewsCard
-                      loggedIn={loggedIn}
-                      isSaved={isSaved}
-                      key={card._id}
-                      card={card}
-                      index={i}
-                    />
-                  ))}
+                  {cards &&
+                    cards
+                      .slice(3)
+                      .map((card, i) => (
+                        <NewsCard
+                          loggedIn={loggedIn}
+                          isSaved={isSaved}
+                          key={card._id}
+                          card={card}
+                          index={i}
+                        />
+                      ))}
                 </ul>
               )}
             </>

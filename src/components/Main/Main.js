@@ -4,7 +4,7 @@ import React from 'react';
 import NewsCardsList from '../NewsCardsList/NewsCardsList.js';
 import About from '../About/About.js';
 
-function Main({ cards, loggedIn, isSaved, isLoading, isMainPage }) {
+function Main({ cards, loggedIn, isSaved, isLoading, isMainPage, showAllCards, onShowMore }) {
   return (
     <main >
       <NewsCardsList
@@ -13,6 +13,8 @@ function Main({ cards, loggedIn, isSaved, isLoading, isMainPage }) {
         isSaved={isSaved}
         isLoading={isLoading}
         isMainPage={isMainPage}
+        showAllCards={showAllCards}
+        onShowMore={onShowMore}
       />
       <About />
     </main>
