@@ -11,7 +11,7 @@
 
 .search-form__title { 
   color: #FFFFFF;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', serif;
   font-size: 60px;
   font-style: normal;
   font-weight: 400;
@@ -24,7 +24,7 @@
 
 .search-form__subtitle {
   color: #FFFFFF; 
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -54,7 +54,7 @@
   box-sizing: border-box;
   border-radius: 100px;
   margin: 0 0 0 24px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
@@ -73,7 +73,7 @@
   box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
   border: none;
   border-radius: 100px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;

@@ -59,7 +59,7 @@
 }
 
 .popup__title {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-size: 24px;
   font-weight: 900;
   line-height: 28px;
@@ -73,7 +73,7 @@
 }
 
 .popup__input-label {
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 12px;
   line-height: 15px;
   color: #2F71E5;
@@ -88,7 +88,7 @@
   border-style: none;
   padding: 0 0 10px 0;
   border-bottom: 1px solid rgba(0, 0, 0, .5);
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 14px;
   line-height: 17px;
   color: #000000;
@@ -114,7 +114,7 @@
   height: 64px;
   background: #E6E8EB;
   border-radius: 100px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -134,7 +134,7 @@
 }
 
 .popup__go-elsewhere {
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 14px;
   line-height: 17px;
   color: #000000;
