@@ -2,7 +2,14 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-function PopupWithForm({ modalType, isModalOpen, onClose, onSubmit }) {
+function PopupWithForm({
+  modalType,
+  isModalOpen,
+  onClose,
+  onSubmit,
+  handleSigninButtonClick,
+  handleSignupButtonClick,
+}) {
   return (
     <>
       <div
@@ -17,7 +24,9 @@ function PopupWithForm({ modalType, isModalOpen, onClose, onSubmit }) {
           aria-label={`close-modal`}
           onClick={onClose}
         ></button>
-        <h2 className={'popup__title'}>Sign in</h2>
+        <h2 className={'popup__title'}>
+          Sign {modalType === 'signin' ? 'in' : 'up'}
+        </h2>
         <form
           id={`${modalType}-form`}
           name={`${modalType}Form`}
@@ -50,21 +59,52 @@ function PopupWithForm({ modalType, isModalOpen, onClose, onSubmit }) {
             name='password'
             placeholder='Enter password'
             required
-            // onChange={handlepasswordChange}
+            // onChange={handlePasswordChange}
             autoComplete='on'
           />
           <span className='popup__input-error' id='password-input-error'></span>
+          {modalType === 'signup' && (
+            <>
+              <label class='popup__input-label' for='username'>
+                Username
+              </label>
+              <input
+                className='popup__input'
+                type='text'
+                id='username'
+                name='username'
+                placeholder='Enter your username'
+                required
+                // onChange={handleUsernameChange}
+                autoComplete='on'
+              />
+              <span
+                className='popup__input-error'
+                id='username-input-error'
+              ></span>
+            </>
+          )}
           <button
             // add clickable class when made active
             className='popup__submit-button popup__submit_inactive'
             type='submit'
-            value='Sign in'
-            aria-label='submit-signin'
+            value={`Sign ${modalType === 'signin' ? 'in' : 'up'}`}
+            aria-label={`submit-sign${modalType === 'signin' ? 'in' : 'up'}`}
           >
-            Sign in
+            Sign {modalType === 'signin' ? 'in' : 'up'}
           </button>
           <p className='popup__go-elsewhere'>
-            or <Link className='popup__go-elsewhere popup__go-elsewhere_link'>Sign up</Link>
+            or{' '}
+            <Link
+              onClick={
+                modalType === 'signin'
+                  ? handleSignupButtonClick
+                  : handleSigninButtonClick
+              }
+              className='popup__go-elsewhere popup__go-elsewhere_link'
+            >
+              Sign {modalType === 'signin' ? 'up' : 'in'}
+            </Link>
           </p>
         </form>
       </div>

@@ -63,6 +63,7 @@ function App() {
           isModalOpen={isModalOpen}
           onClose={closeModal}
           handleSignupButtonClick={handleSignupButtonClick}
+          handleSigninButtonClick={handleSigninButtonClick}
         />
       </Route>
       <Route exact path='/saved-news'>
