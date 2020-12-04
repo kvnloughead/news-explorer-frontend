@@ -10,6 +10,7 @@ function HeaderNav({
   userName,
   isMainPage,
   handleSignout,
+  handleSigninButtonClick
 }) {
   return (
     <>
@@ -32,8 +33,7 @@ function HeaderNav({
           <li>
             <button
               className='header-nav__signin clickable'
-              onClick={handleSignIn}
-              to='/signin'
+              onClick={handleSigninButtonClick}
             >
               Sign in
             </button>
