@@ -40,7 +40,6 @@
   width: 608px;
   height: 64px;
   background: #FFFFFF;
-  border: 1px solid #D1D2D6;
   box-sizing: border-box;
   backdrop-filter: blur(8px);
   border-radius: 100px;
@@ -72,6 +71,7 @@
   width: 168px;
   height: 64px;
   box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  border: none;
   border-radius: 100px;
   font-family: 'Roboto';
   font-size: 18px;
@@ -81,8 +81,8 @@
   letter-spacing: 0px;
   text-align: center;
   color: #ffffff;
-  padding: 1px;
   margin: 0;
+  padding: 0;
 }
 
 .search-form__search-button:hover {

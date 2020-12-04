@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -6,19 +6,20 @@ function PopupWithForm({
   modalType,
   isModalOpen,
   onClose,
-  onEscapeKey,
   handleSigninButtonClick,
   handleSignupButtonClick,
   handleSignin,
   handleSignup,
 }) {
 
+  const [isValid, setIsValid] = useState(false);
+  
   useEffect(() => {
     document.addEventListener('keydown', onClose);
     return () => {
       document.removeEventListener('keydown', onClose);
-    }
-  })
+    };
+  });
 
   return (
     <>
@@ -59,7 +60,6 @@ function PopupWithForm({
               name='email'
               placeholder='Enter email'
               required
-              // onChange={handleEmailChange}
               autoComplete='on'
             />
             <span className='popup__input-error' id='email-input-error'></span>
@@ -73,7 +73,6 @@ function PopupWithForm({
               name='password'
               placeholder='Enter password'
               required
-              // onChange={handlePasswordChange}
               autoComplete='on'
             />
             <span
@@ -92,7 +91,6 @@ function PopupWithForm({
                   name='username'
                   placeholder='Enter your username'
                   required
-                  // onChange={handleUsernameChange}
                   autoComplete='on'
                 />
                 <span
@@ -103,7 +101,9 @@ function PopupWithForm({
             )}
             <button
               // add clickable class when made active
-              className='popup__submit-button popup__submit_inactive'
+              className={`popup__submit-button ${
+                isValid ? 'popup__submit-button_active clickable' : ''
+              }`}
               type='submit'
               value={`Sign ${modalType === 'signin' ? 'in' : 'up'}`}
               aria-label={`submit-sign${modalType === 'signin' ? 'in' : 'up'}`}
@@ -112,9 +112,11 @@ function PopupWithForm({
             </button>
           </form>
         )}
-        <p className={`popup__go-elsewhere ${
-              modalType === 'success' ? 'popup__go-elsewhere_success' : ''
-            }`}>
+        <p
+          className={`popup__go-elsewhere ${
+            modalType === 'success' ? 'popup__go-elsewhere_success' : ''
+          }`}
+        >
           {modalType !== 'success' ? 'or ' : ''}
           <Link
             onClick={
