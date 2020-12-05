@@ -145,7 +145,7 @@
 }
 
 .popup__go-elsewhere_success {
-  align-self: start;
+  align-self: flex-start;
   margin: 14px 0 0 0;
 }
 

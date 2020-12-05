@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   min-height: 282px;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .news-cards-list__list {
@@ -12,7 +12,7 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .news-cards-list__title {
@@ -25,7 +25,7 @@
   letter-spacing: 0px;
   text-align: left;
   color: #1A1B22;
-  align-self: start;
+  align-self: flex-start;
 }
 
 .circle-preloader {
