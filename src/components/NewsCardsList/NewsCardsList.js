@@ -71,9 +71,9 @@ function NewsCardsList({
           ) : (
             <div class='not-found'>
               <div className='not-found__icon'></div>
-              <h3 className='not-found__title'>Nothing found</h3>
+              <h3 className='not-found__title'>{isMainPage ? 'Nothing found' : 'Nothing here'}</h3>
               <p className='not-found__text'>
-                Sorry, but nothing matched your search terms.
+                {isMainPage ? 'Sorry, but nothing matched your search terms.' : 'Go save some articles!'}
               </p>
             </div>
           )}

@@ -1,7 +1,6 @@
 import { buildKeyWordString } from '../../utils/helpers.js';
 
 function SavedNewsHeader({ userName, cards }) {
-
   const keywordString = buildKeyWordString(cards);
 
   return (
@@ -12,7 +11,12 @@ function SavedNewsHeader({ userName, cards }) {
         {cards.length !== 1 ? 's' : ''}.
       </p>
       <p className='saved-news-header__keywords'>
-        By keywords: <span class='saved-news-header__keywords saved-news-header__keywords_emphasized'>{keywordString}</span>
+        {cards.length > 0 && 'By keywords: '}
+        {cards.length > 0 && (
+          <span class='saved-news-header__keywords saved-news-header__keywords_emphasized'>
+            {keywordString}
+          </span>
+        )}
       </p>
     </section>
   );
