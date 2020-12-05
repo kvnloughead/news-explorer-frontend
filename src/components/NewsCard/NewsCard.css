@@ -34,9 +34,16 @@
   right: 24px;
   border-radius: 8px;
   border: none;
-  background-image: url('../../images/icons/bookmark.svg');
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.card__button_not-saved {
+  background-image: url('../../images/icons/bookmark.svg');
+}
+
+.card__button_not-saved:hover {
+  background-image: url('../../images/icons/bookmark-hover.svg');
 }
 
 .card__button_saved {
@@ -45,10 +52,6 @@
 
 .card__button_trash {
   background-image: url('../../images/icons/trash.svg');
-}
-
-.card__button:hover {
-  background-image: url('../../images/icons/bookmark-saved.svg');
 }
 
 .card__button:hover + .card__tooltip {
