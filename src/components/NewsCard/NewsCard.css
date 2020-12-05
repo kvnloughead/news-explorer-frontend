@@ -16,7 +16,7 @@
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 500;
-  line-height: 36px;
+  line-height: 40px;
   letter-spacing: 0px;
   position: absolute;
   top: 24px;
@@ -45,6 +45,10 @@
 
 .card__button_trash {
   background-image: url('../../images/icons/trash.svg');
+}
+
+.card__button:hover {
+  background-image: url('../../images/icons/bookmark-saved.svg');
 }
 
 .card__button:hover + .card__tooltip {

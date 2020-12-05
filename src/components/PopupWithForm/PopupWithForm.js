@@ -31,7 +31,7 @@ function PopupWithForm({
       ></div>
       <div className={`popup` + (isModalOpen ? ' popup_visible' : '')}>
         <button
-          className={'popup__close-button'}
+          className={'popup__close-button clickable'}
           type='reset'
           aria-label={`close-modal`}
           onClick={onClose}

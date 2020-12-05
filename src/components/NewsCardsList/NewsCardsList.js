@@ -41,7 +41,7 @@ function NewsCardsList({
               </ul>
               {!showAllCards ? (
                 <button
-                  className='news-cards-list__button'
+                  className='news-cards-list__button clickable'
                   onClick={onShowMore}
                 >
                   Show more

@@ -32,10 +32,6 @@
   text-align: center; 
 }
 
-.footer__link:hover {
-  cursor: pointer;
-}
-
 .footer__icon {
   width: 20px;
   height: 20px;

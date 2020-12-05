@@ -93,6 +93,7 @@
   line-height: 17px;
   color: #000000;
   opacity: .5;
+  caret-color: #2F71E5;
 }
 
 .popup__input:focus {
