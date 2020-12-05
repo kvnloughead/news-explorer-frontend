@@ -38,19 +38,31 @@
   background-position: center;
 }
 
-.card__button_not-saved {
+.card__button_type_bookmark {
   background-image: url('../../images/icons/bookmark.svg');
 }
 
-.card__button_not-saved:hover {
+.card__button_type_bookmark-saved {
+  background-image: url('../../images/icons/bookmark-saved.svg');
+}
+
+.card__button_type_bookmark:hover {
   background-image: url('../../images/icons/bookmark-hover.svg');
 }
+
+/* .card__button_not-saved {
+  background-image: url('../../images/icons/bookmark.svg');
+} */
+
+/* .card__button_not-saved:hover {
+  background-image: url('../../images/icons/bookmark-hover.svg');
+} */
 
 .card__button_saved {
   background-image: url('../../images/icons/bookmark-saved.svg');
 }
 
-.card__button_trash {
+.card__button_type_delete {
   background-image: url('../../images/icons/trash.svg');
 }
 
