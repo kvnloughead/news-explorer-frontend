@@ -13,7 +13,6 @@ function NewsCardsList({
   handleDeleteClick,
   handleBookmarkClick
 }) {
-  debugger;
   return (
     <section className='news-cards-list'>
       {isLoading ? (
@@ -24,7 +23,7 @@ function NewsCardsList({
       ) : (
         <>
           {cards.length > 0 ? (
-            <>
+            <div className='news-cards-list__container'>
               <h2 className='news-cards-list__title'>Search Results</h2>
               <ul className='news-cards-list__list'>
                 {cards &&
@@ -67,7 +66,7 @@ function NewsCardsList({
                       ))}
                 </ul>
               )}
-            </>
+            </div>
           ) : (
             <div class='not-found'>
               <div className='not-found__icon'></div>

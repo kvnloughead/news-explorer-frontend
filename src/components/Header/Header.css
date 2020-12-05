@@ -4,6 +4,9 @@
   display: flex;
   justify-content: space-between;
   position: relative;
+  width: 1440px;
+  box-sizing: border-box;
+  margin: auto;
 }
 
 .header__background {
@@ -13,7 +16,7 @@
 
 .header__background_image {
   background-image: url('../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.jpg');
-  background-size: 100% 576px;
+  background-size: cover;
   background-repeat: no-repeat;  
   width: 100vw;
   min-height: 576px;

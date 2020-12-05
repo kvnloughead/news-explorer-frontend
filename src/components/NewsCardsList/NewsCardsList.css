@@ -1,10 +1,16 @@
 .news-cards-list {
   padding: 0 104px 62px 104px;
   background-color: #F5F6F7;
+  min-height: 282px;
   display: flex;
   flex-direction: column;
-  min-height: 282px;
+  align-items: center;
+}
+
+.news-cards-list__container {
+  display: flex;
   justify-content: flex-start;
+  flex-direction: column;
 }
 
 .news-cards-list__list {
@@ -26,6 +32,7 @@
   text-align: left;
   color: #1A1B22;
   align-self: flex-start;
+  width: 100%;
 }
 
 .circle-preloader {

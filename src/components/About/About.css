@@ -3,6 +3,8 @@
   box-sizing: border-box;
   background-color: #fff;
   padding: 80px 104px 0 104px;
+  width: 1440px;
+  margin: auto;
   display: flex;
 }
 

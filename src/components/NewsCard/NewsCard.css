@@ -6,6 +6,16 @@
   border-radius: 16px;
   list-style: none;
   margin: 0 16px 16px 0;
+} 
+
+@media screen and (min-width: 1600px) {
+  .card {
+    margin: 0 calc(.05 * 100vw) calc(.05 * 100vw) 0;
+  }
+}
+
+.card:nth-of-type(3n) {
+  margin: 0 0 16px 0;
 }
 
 .card__keyword {
@@ -77,10 +87,6 @@
   font-weight: 500;
   line-height: 14px;
   border: none; 
-}
-
-.card:nth-of-type(3n) {
-  margin: 0 0 16px 0;
 }
 
 .card__image {

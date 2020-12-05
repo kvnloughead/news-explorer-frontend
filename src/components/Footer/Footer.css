@@ -2,7 +2,16 @@
   background-color: #FFF;
   display: flex;
   justify-content: space-between;
-  margin: 0 104px 0 104px;
+  padding: 0 104px 0 104px;
+  width: 1440px;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 1600px) {
+  .footer {
+    padding: 0;
+  }
 }
 
 .footer__copyright {
