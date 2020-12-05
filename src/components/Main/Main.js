@@ -4,9 +4,19 @@ import React from 'react';
 import NewsCardsList from '../NewsCardsList/NewsCardsList.js';
 import About from '../About/About.js';
 
-function Main({ cards, loggedIn, isSaved, isLoading, isMainPage, showAllCards, onShowMore }) {
+function Main({
+  cards,
+  loggedIn,
+  isSaved,
+  isLoading,
+  isMainPage,
+  showAllCards,
+  onShowMore,
+  handleBookmarkClick,
+  handleDeleteClick,
+}) {
   return (
-    <main >
+    <main>
       <NewsCardsList
         cards={cards}
         loggedIn={loggedIn}
@@ -15,6 +25,8 @@ function Main({ cards, loggedIn, isSaved, isLoading, isMainPage, showAllCards, o
         isMainPage={isMainPage}
         showAllCards={showAllCards}
         onShowMore={onShowMore}
+        handleBookmarkClick={handleBookmarkClick}
+        handleDeleteClick={handleDeleteClick}
       />
       <About />
     </main>

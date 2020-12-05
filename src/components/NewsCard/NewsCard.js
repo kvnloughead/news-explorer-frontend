@@ -1,6 +1,12 @@
 import React from 'react';
 
-function NewsCard({ card, isMainPage, loggedIn }) {
+function NewsCard({
+  card,
+  isMainPage,
+  loggedIn,
+  handleBookmarkClick,
+  handleDeleteClick,
+}) {
   return (
     <>
       {card && (
@@ -10,18 +16,22 @@ function NewsCard({ card, isMainPage, loggedIn }) {
           </p>
           {isMainPage ? (
             <button
+              onClick={() => {
+                handleBookmarkClick(card);
+              }}
               className={`card__button clickable ${
                 card.isSaved
                   ? ' card__button_type_bookmark-saved'
-                  : 'card__button_type_bookmark'
+                  : ' card__button_type_bookmark'
               }`}
             ></button>
           ) : (
             <button
+              onClick={() => {
+                handleDeleteClick(card);
+              }}
               className={`card__button clickable ${
-                card.isSaved
-                  ? ' card__button_type_delete'
-                  : ''
+                card.isSaved ? ' card__button_type_delete' : ''
               }`}
             ></button>
           )}

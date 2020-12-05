@@ -30,6 +30,28 @@ function App() {
     setModalType('signup');
   };
 
+  const handleBookmarkClick = (card) => {
+    if (!card.isSaved) {
+      card.isSaved = true;
+      const newCards = cards.map((c) => {
+        return c._id === card._id ? card : c;
+      });
+      savedCards.push(card);
+      setCards(newCards);
+      setSavedCards(savedCards);
+    }
+  };
+
+  const handleDeleteClick = (card) => {
+    setSavedCards(savedCards.filter((c) => { return c._id !== card._id }));
+    card.isSaved = false;
+    const newCards = cards.map((c) => {
+      return c._id === card._id ? card : c;
+    });
+    savedCards.push(card);
+    setCards(newCards);
+  };
+
   const closeModal = (evt) => {
     if (!evt.key || evt.key === 'Escape') {
       setIsModalOpen(false);
@@ -69,6 +91,8 @@ function App() {
           isMainPage={true}
           onShowMore={handleShowMore}
           showAllCards={showAllCards}
+          handleBookmarkClick={handleBookmarkClick}
+          handleDeleteClick={handleDeleteClick}
         />
         <PopupWithForm
           modalType={modalType}
@@ -85,7 +109,7 @@ function App() {
           loggedIn={loggedIn}
           userName={userName}
           isMainPage={false}
-          savedCards={savedCards}
+          cards={savedCards}
           handleSignout={handleSignout}
         />
         <SavedNews
@@ -93,6 +117,8 @@ function App() {
           loggedIn={loggedIn}
           isMainPage={false}
           showAllCards={true}
+          handleBookmarkClick={handleBookmarkClick}
+          handleDeleteClick={handleDeleteClick}
         />
       </Route>
       <Footer />

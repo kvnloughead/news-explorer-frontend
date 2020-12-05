@@ -10,6 +10,8 @@ function NewsCardsList({
   isMainPage,
   showAllCards,
   onShowMore,
+  handleDeleteClick,
+  handleBookmarkClick
 }) {
   debugger;
   return (
@@ -30,12 +32,13 @@ function NewsCardsList({
                     .slice(0, 3)
                     .map((card, i) => (
                       <NewsCard
+                        handleBookmarkClick={handleBookmarkClick}
+                        handleDeleteClick={handleDeleteClick}
                         isMainPage={isMainPage}
                         loggedIn={loggedIn}
                         isSaved={isSaved}
                         key={card._id}
                         card={card}
-                        index={i}
                       />
                     ))}
               </ul>
@@ -53,11 +56,13 @@ function NewsCardsList({
                       .slice(3)
                       .map((card, i) => (
                         <NewsCard
+                          handleBookmarkClick={handleBookmarkClick}
+                          handleDeleteClick={handleDeleteClick}
                           loggedIn={loggedIn}
                           isSaved={isSaved}
+                          isMainPage={isMainPage}
                           key={card._id}
                           card={card}
-                          index={i}
                         />
                       ))}
                 </ul>

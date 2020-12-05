@@ -9,7 +9,7 @@ export const foundCardsArray = [
     image: 'https://imagizer.imageshack.com/img924/1082/cgqweD.png',
     owner: 'kevin',
     isSaved: false,
-    _id: Math.random(),
+    _id: Math.random().toString(),
   },
   {
     keyword: 'nature',
@@ -21,7 +21,7 @@ export const foundCardsArray = [
     image: 'https://imagizer.imageshack.com/img922/7828/FxdrAb.png',
     owner: 'kevin',
     isSaved: true,
-    _id: Math.random(),
+    _id: Math.random().toString(),
   },
   {
     keyword: 'parks',
@@ -33,7 +33,7 @@ export const foundCardsArray = [
     image: 'https://imagizer.imageshack.com/img924/1460/5H5jRn.png',
     owner: 'kevin',
     isSaved: true,
-    _id: Math.random(),
+    _id: Math.random().toString(),
   },
   {
     keyword: 'Yellowstone',
@@ -45,7 +45,7 @@ export const foundCardsArray = [
     image: 'https://imageshack.com/i/pmPlP5xDp',
     owner: 'kevin',
     isSaved: true,
-    _id: Math.random(),
+    _id: Math.random().toString(),
   },
   {
     keyword: 'photography',
@@ -57,7 +57,7 @@ export const foundCardsArray = [
     image: 'https://imageshack.com/i/pnYUYDYDp',
     owner: 'kevin',
     isSaved: true,
-    _id: Math.random(),
+    _id: Math.random().toString(),
   },
 ];
 

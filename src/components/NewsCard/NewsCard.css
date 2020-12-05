@@ -50,14 +50,6 @@
   background-image: url('../../images/icons/bookmark-hover.svg');
 }
 
-/* .card__button_not-saved {
-  background-image: url('../../images/icons/bookmark.svg');
-} */
-
-/* .card__button_not-saved:hover {
-  background-image: url('../../images/icons/bookmark-hover.svg');
-} */
-
 .card__button_saved {
   background-image: url('../../images/icons/bookmark-saved.svg');
 }

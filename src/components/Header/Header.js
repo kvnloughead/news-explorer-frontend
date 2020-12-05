@@ -8,7 +8,7 @@ function Header({
   loggedIn,
   userName,
   isMainPage,
-  savedCards,
+  cards,
   handleSignout,
   handleSigninButtonClick
 }) {
@@ -38,7 +38,7 @@ function Header({
       ) : (
         <SavedNewsHeader
           userName={userName}
-          savedCards={savedCards}
+          cards={cards}
           handleSignout={handleSignout}
         />
       )}
