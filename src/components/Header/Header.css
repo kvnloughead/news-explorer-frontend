@@ -22,6 +22,10 @@
   min-height: 576px;
 }
 
+.header__background_dark {
+  background-color: #1A1B22;
+}
+
 .header__title {
   font-family: 'Roboto Slab', serif;
   font-size: 20px;
@@ -37,6 +41,18 @@
 
 .header__title_dark {
   color: #1A1B22;
+}
+
+.header__mobile-links {
+  height: 248px;
+  width: 100vw;
+  background-color: #1A1B22;
+  margin-top: -56px;
+  list-style: none;
+  padding-top: 72px;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 1600px) {
@@ -64,3 +80,20 @@
   }
 }
 
+@media screen and (max-width: 600px) {
+  .header {
+    padding: 0 16px 0 16px;
+    height: 56px;
+  }
+
+  .header__background_image {
+    min-height: 536px;
+  }
+  
+  .header__title {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 16px 0 16px 0;
+  }
+
+}

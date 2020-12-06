@@ -137,3 +137,9 @@
     height: 56px;
   }
 }
+
+@media screen and (max-width: 767.5px) {
+  .news-cards-list__container {
+    width: 456px;
+  }
+}

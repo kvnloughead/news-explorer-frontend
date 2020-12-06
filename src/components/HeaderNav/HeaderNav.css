@@ -5,6 +5,12 @@
   margin: 0;
 }
 
+.header-nav__links_mobile {
+  height: 286px;
+  width: 100vw;
+  background-color: #1A1B22;
+  margin-top: -56px;
+}
 
 .header-nav__home {
   line-height: 4.4;
@@ -68,6 +74,10 @@
   color: #B6BCBF;
 }
 
+.header-nav__saved-news-text_light {
+  color: #fff;
+}
+
 .header-nav__user-button {
   width: 112px;
   height: 48px;
@@ -128,5 +138,97 @@
     line-height: 24px;
     padding-top: 6px;
   }
+}
 
+.header-nav__menu {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  margin-left: auto;
+  height: 24px;
+  width: 24px;
+  margin: auto 0 auto auto;
+}
+
+.header-nav__menu_burger {
+  background-image: url('../../images/icons/menu-burger.png');
+}
+
+.header-nav__menu_close {
+  background-image: url('../../images/icons/close.png');
+}
+
+@media screen and (max-width: 600px) {  
+  
+  .header-nav__home {
+    height: auto;
+    text-align: left;
+    line-height: 56px;
+
+  }
+  
+  .header-nav__bottom-border {
+    border: none;
+  }
+  
+  .header-nav__bottom-border_dark {
+    border: none;
+  }
+  
+  .header-nav__home-text {
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    text-decoration: none;
+    padding-left: 0;
+    line-height: 56px;
+  }
+  
+  .header-nav__saved-news {
+    height: auto;
+    margin-left: 0;
+    text-align: left;
+  }
+  
+  .header-nav__saved-news-text {
+    font-size: 18px;
+
+    color: #fff
+  }
+  
+  .header-nav__user-button {
+    width: 112px;
+    height: 48px;
+    background: none;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 100px;
+    margin: 0 0 0 64px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 9px;
+  }
+  
+  .header-nav__user-button_dark {
+    color: #1A1B22;
+    border: 1px solid #1A1B22;
+  }
+
+  .header-nav__signin {
+    font-size: 18px;
+    width: 288px;
+    height: 56px;
+    align-self: center; 
+    margin: 22px 0 24px 0;
+  }
+  
 }

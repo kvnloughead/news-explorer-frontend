@@ -19,6 +19,16 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [showAllCards, setShowAllCards] = useState(false);
+  const [showAllNavLinks, setShowAllNavLinks] = useState(false)
+  const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
+
+  const handleMenuIconClick = () => {
+    setShowAllNavLinks(!showAllNavLinks);
+  }
+
+  const handleResize = () => {
+    setWindowInnerWidth(window.innerWidth);
+  };
 
   const handleSigninButtonClick = () => {
     setIsModalOpen(true);
@@ -83,6 +93,10 @@ function App() {
           isMainPage={true}
           handleSignout={handleSignout}
           handleSigninButtonClick={handleSigninButtonClick}
+          handleMenuIconClick={handleMenuIconClick}
+          showAllNavLinks={showAllNavLinks}
+          handleResize={handleResize}
+          windowInnerWidth={windowInnerWidth}
         />
         <Main
           cards={cards}
@@ -111,6 +125,10 @@ function App() {
           isMainPage={false}
           cards={savedCards}
           handleSignout={handleSignout}
+          handleResize={handleResize}
+          handleMenuIconClick={handleMenuIconClick}
+          showAllNavLinks={showAllNavLinks}
+          windowInnerWidth={windowInnerWidth}
         />
         <SavedNews
           cards={savedCards}
