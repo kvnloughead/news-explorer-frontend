@@ -8,7 +8,6 @@
 
 .header-nav__home {
   line-height: 4.4;
-  letter-spacing: 0px;
   text-decoration: none;
   text-align: center;
   height: 100%;
@@ -43,7 +42,6 @@
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  letter-spacing: 0px;
   text-align: center;
   width: 176px;
   height: 48px;
@@ -66,7 +64,6 @@
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
   font-weight: 500;
-  letter-spacing: 0px;
   text-decoration: none;
   color: #B6BCBF;
 }
@@ -86,11 +83,50 @@
   line-height: 24px;
   color: #fff;
   display: flex;
-  align-items: center;
   justify-content: space-around;
+  padding-top: 9px;
 }
 
 .header-nav__user-button_dark {
   color: #1A1B22;
   border: 1px solid #1A1B22;
+}
+
+@media screen and (max-width: 1024px) {
+ 
+  .header-nav__home {
+    width: 68px;
+  }
+  
+  .header-nav__home-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .header-nav__signin {
+    font-size: 16px;
+    line-height: 24px;
+    width: 152px;
+    height: 40px;
+    margin-left: 28px;
+  }
+  
+  .header-nav__saved-news {
+    width: 160px;
+    margin: 0 0 0 16px;
+  }
+  
+  .header-nav__saved-news-text {
+    font-size: 16px;
+  }
+  
+  .header-nav__user-button {
+    width: 100px;
+    height: 40px;
+    margin: 0 0 0 16px;
+    font-size: 16px;
+    line-height: 24px;
+    padding-top: 6px;
+  }
+
 }

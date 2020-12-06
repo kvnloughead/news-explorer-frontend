@@ -28,7 +28,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 46px;
-  letter-spacing: 0px;
   text-align: left;
   color: #1A1B22;
   align-self: flex-start;
@@ -65,7 +64,7 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
-  letter-spacing: 0px;
+  
   color: #B6BCBF;
 }
 
@@ -79,7 +78,6 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
-  letter-spacing: 0px;
   border: none;
   align-self: center;
 }
@@ -108,7 +106,7 @@
   font-size: 26px;
   font-weight: 400;
   line-height: 30px;
-  letter-spacing: 0px;
+  
   color: #1A1B22;
   margin: 31px 0 16px 0;
 }
@@ -121,4 +119,22 @@
   color: #B6BCBF;
   margin: 0 0 80px 0;
   width: 245px;
+}
+
+@media screen and (max-width: 1024px) {
+  .news-cards-list {
+    padding: 0 40px 0 40px;
+  }
+
+  .news-cards-list__title {
+    margin: 40px 0 32px 0;
+    font-size: 30px;
+    line-height: 34px;
+  }
+
+  .news-cards-list__button {
+    margin: 22px 0 40px 0;
+    width: 240px;
+    height: 56px;
+  }
 }
