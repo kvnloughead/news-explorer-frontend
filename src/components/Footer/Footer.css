@@ -60,4 +60,8 @@
     grid-template-columns: 88px 176px 46px 48px;
     grid-template-rows: 64px;
   }
+
+  .footer__icon {
+    border-radius: 50%;
+  }
 }

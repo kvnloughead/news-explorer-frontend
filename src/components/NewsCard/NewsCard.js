@@ -11,9 +11,11 @@ function NewsCard({
     <>
       {card && (
         <li className='card clickable'>
-          <p className='card__keyword'>
-            {card.keyword[0].toUpperCase() + card.keyword.slice(1)}
-          </p>
+          {!isMainPage && (
+            <p className='card__keyword'>
+              {card.keyword[0].toUpperCase() + card.keyword.slice(1)}
+            </p>
+          )}
           {isMainPage ? (
             <button
               onClick={() => {

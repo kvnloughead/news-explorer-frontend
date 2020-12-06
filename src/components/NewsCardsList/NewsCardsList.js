@@ -24,7 +24,7 @@ function NewsCardsList({
         <>
           {cards.length > 0 ? (
             <div className='news-cards-list__container'>
-              <h2 className='news-cards-list__title'>Search Results</h2>
+              {isMainPage && <h2 className='news-cards-list__title'>Search Results</h2>}
               <ul className='news-cards-list__list'>
                 {cards &&
                   cards
