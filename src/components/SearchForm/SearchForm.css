@@ -155,20 +155,11 @@
   .search-form__search-bar {
     width: 288px;
     height: 56px;
-    border: none;
-    box-sizing: border-box;
-    border-radius: 100px;
     margin: 0;
-    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 22px;
     padding-left: 16px;
-    
-    color: #1a1b22;
-    caret-color: #2F71E5;
-    backdrop-filter: blur(8px);
-  border-radius: 100px;
   }
   
   .search-form__search-bar::placeholder {

@@ -54,6 +54,23 @@ function HeaderNav({
                 Home
               </Link>
             </li>
+            {(loggedIn || showAllNavLinks) && (
+              <li
+                class={`header-nav__saved-news clickable ${
+                  !isMainPage && 'header-nav__bottom-border_dark'
+                }`}
+              >
+                <Link
+                  className={`header-nav__saved-news-text ${
+                    isMainPage ? 'header-nav__saved-news-text_light' : ''
+                  }`}
+                  to='/saved-news'
+                >
+                  Saved articles
+                </Link>
+              </li>
+            )}
+
             {!loggedIn ? (
               <li>
                 <button
@@ -65,7 +82,7 @@ function HeaderNav({
               </li>
             ) : (
               <>
-                <li
+                {/* <li
                   class={`header-nav__saved-news clickable ${
                     !isMainPage && 'header-nav__bottom-border_dark'
                   }`}
@@ -78,7 +95,7 @@ function HeaderNav({
                   >
                     Saved articles
                   </Link>
-                </li>
+                </li> */}
                 {!loggedIn ? (
                   <li>
                     <button
