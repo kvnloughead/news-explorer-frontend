@@ -197,7 +197,6 @@
     height: auto;
     margin-left: 0;
     text-align: left;
-
   }
   
   .header-nav__saved-news-text {
@@ -205,10 +204,11 @@
   }
   
   .header-nav__user-button {
-    width: 112px;
+    width: 288px  ;
     height: 56px;
     margin: 0;
     padding-top: 13px;
+    justify-content: center;
   }
 
   .header-nav__user-button-container {
@@ -223,4 +223,7 @@
     margin: 0 0 20px 0;
   }
   
+  .header-nav__logout-icon {
+    padding-left: 10px;
+  }
 }

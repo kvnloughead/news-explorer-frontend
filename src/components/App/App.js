@@ -5,7 +5,7 @@ import './App.css';
 import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
 import Footer from '../Footer/Footer.js';
-import SavedNewsHeader from '../SavedNews/SavedNews.js';
+import SavedNews from '../SavedNews/SavedNews.js';
 import PopupWithForm from '../PopupWithForm/PopupWithForm.js';
 
 import { foundCardsArray, savedCardsArray } from '../../temporary/data.js';
@@ -130,7 +130,7 @@ function App() {
           showAllNavLinks={showAllNavLinks}
           windowInnerWidth={windowInnerWidth}
         />
-        <SavedNewsHeader
+        <SavedNews
           cards={savedCards}
           loggedIn={loggedIn}
           isMainPage={false}

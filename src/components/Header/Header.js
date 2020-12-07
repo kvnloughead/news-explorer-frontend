@@ -28,10 +28,9 @@ function Header({
           <Link
             to='/'
             className={`header__title ${
-              !showAllNavLinks &&
-              !isMainPage &&
-              !windowInnerWidth <= 767 &&
-              'header__title_dark'
+              !showAllNavLinks && !isMainPage && !windowInnerWidth <= 767
+                ? 'header__title_dark'
+                : ''
             }`}
           >
             NewsExplorer
@@ -52,7 +51,11 @@ function Header({
       {isMainPage ? (
         <SearchForm showAllNavLinks={showAllNavLinks} />
       ) : (
-        <SavedNewsHeader userName={userName} cards={cards} />
+        <SavedNewsHeader
+          userName={userName}
+          cards={cards}
+          showAllNavLinks={showAllNavLinks}
+        />
       )}
     </div>
   );

@@ -41,9 +41,8 @@
 
 .search-form_mobile-menu {
   justify-content: flex-end;
-  padding-top: 80px;
   position: absolute;
-    bottom: 40px;
+  bottom: 40px;
 }
 
 .search-form__search-bar {

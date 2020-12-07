@@ -1,11 +1,28 @@
 import { buildKeyWordString } from '../../utils/helpers.js';
 
-function SavedNewsHeader({ userName, cards }) {
+function SavedNewsHeader({ userName, cards, showAllNavLinks }) {
   const keywordString = buildKeyWordString(cards);
 
   return (
-    <section className='saved-news-header'>
-      <h2 className='saved-news-header__title'>Saved articles</h2>
+    <section className={`saved-news-header ${showAllNavLinks ? 'saved-news-header__mobile-menu': ''}`}>
+      {!showAllNavLinks && (
+        <>
+          <h2 className='saved-news-header__title'>Saved articles</h2>
+          <p className='saved-news-header__greeting'>
+            {userName && userName}, you have {cards.length} saved article
+            {cards.length !== 1 ? 's' : ''}.
+          </p>
+          <p className='saved-news-header__keywords'>
+            {cards.length > 0 && 'By keywords: '}
+            {cards.length > 0 && (
+              <span class='saved-news-header__keywords saved-news-header__keywords_emphasized'>
+                {keywordString}
+              </span>
+            )}
+          </p>
+        </>
+      )}
+      {/* <h2 className='saved-news-header__title'>Saved articles</h2>
       <p className='saved-news-header__greeting'>
         {userName && userName}, you have {cards.length} saved article
         {cards.length !== 1 ? 's' : ''}.
@@ -17,7 +34,7 @@ function SavedNewsHeader({ userName, cards }) {
             {keywordString}
           </span>
         )}
-      </p>
+      </p> */}
     </section>
   );
 }

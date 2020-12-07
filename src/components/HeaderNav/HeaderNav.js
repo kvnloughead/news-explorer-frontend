@@ -47,7 +47,9 @@ function HeaderNav({
             >
               <Link
                 class={`header-nav__home-text ${
-                  !isMainPage ? 'header-nav__home-text_dark' : ''
+                  !isMainPage && !showAllNavLinks
+                    ? 'header-nav__home-text_dark'
+                    : ''
                 }`}
                 to='/'
               >
@@ -62,7 +64,9 @@ function HeaderNav({
               >
                 <Link
                   className={`header-nav__saved-news-text ${
-                    isMainPage ? 'header-nav__saved-news-text_light' : ''
+                    isMainPage || showAllNavLinks
+                      ? 'header-nav__saved-news-text_light'
+                      : ''
                   }`}
                   to='/saved-news'
                 >
@@ -81,49 +85,28 @@ function HeaderNav({
                 </button>
               </li>
             ) : (
-              <>
-                {/* <li
-                  class={`header-nav__saved-news clickable ${
-                    !isMainPage && 'header-nav__bottom-border_dark'
+              <li className='header-nav__user-button-container'>
+                <button
+                  className={`header-nav__user-button clickable ${
+                    !isMainPage && !showAllNavLinks
+                      ? 'header-nav__user-button_dark'
+                      : ''
                   }`}
                 >
-                  <Link
-                    className={`header-nav__saved-news-text ${
-                      isMainPage ? 'header-nav__saved-news-text_light' : ''
-                    }`}
-                    to='/saved-news'
-                  >
-                    Saved articles
+                  {userName}
+                  <Link to='/' onClick={handleSignout}>
+                    <img
+                      className='header-nav__logout-icon'
+                      src={
+                        isMainPage || showAllNavLinks
+                          ? logoutIcon
+                          : logoutDarkIcon
+                      }
+                      alt='Logout icon'
+                    />
                   </Link>
-                </li> */}
-                {!loggedIn ? (
-                  <li>
-                    <button
-                      className='header-nav__signin clickable'
-                      onClick={handleSigninButtonClick}
-                    >
-                      Sign in
-                    </button>
-                  </li>
-                ) : (
-                  <li className='header-nav__user-button-container'>
-                    <button
-                      className={`header-nav__user-button clickable ${
-                        !isMainPage ? 'header-nav__user-button_dark' : ''
-                      }`}
-                    >
-                      {userName}
-                      <Link to='/' onClick={handleSignout}>
-                        <img
-                          className='header-nav__logout-icon'
-                          src={isMainPage ? logoutIcon : logoutDarkIcon}
-                          alt='Logout icon'
-                        />
-                      </Link>
-                    </button>
-                  </li>
-                )}
-              </>
+                </button>
+              </li>
             )}
           </>
         )}
