@@ -14,10 +14,10 @@ function Footer() {
         <a className='footer__link clickable' href='https://practicum.yandex.com/'>
           Practicum by Yandex
         </a>
-        <a className='footer__link clickable' href='https://github.com/kvnloughead/'>
+        <a className='footer__link footer__link_icon-container clickable' href='https://github.com/kvnloughead/'>
           <img class='footer__icon clickable' src={githubIcon} alt=''/>
         </a>
-        <a className='footer__link clickable' href='https://www.facebook.com/'>
+        <a className='footer__link footer__link_icon-container clickable' href='https://www.facebook.com/'>
           <img class='footer__icon clickable' src={facebookIcon} alt=''/>
         </a>
       </nav>
