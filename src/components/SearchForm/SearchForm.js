@@ -2,6 +2,8 @@ import React from 'react';
 
 function SearchForm({ showAllNavLinks }) {
   return (
+    <>
+    
     <section className={`search-form ${showAllNavLinks ? 'search-form_mobile-menu' : ''}`}>
       {!showAllNavLinks && (
         <>
@@ -24,6 +26,7 @@ function SearchForm({ showAllNavLinks }) {
         <button className='search-form__search-button clickable'>Search</button>
       </form>
     </section>
+    </>
   );
 }
 

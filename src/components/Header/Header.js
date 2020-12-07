@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderNav from '../HeaderNav/HeaderNav.js';
 import SearchForm from '../SearchForm/SearchForm.js';
+import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader.js';
 
 function Header({
+  cards,
   loggedIn,
   userName,
   isMainPage,
@@ -26,9 +28,9 @@ function Header({
           <Link
             to='/'
             className={`header__title ${
-              (!showAllNavLinks &&
+              !showAllNavLinks &&
               !isMainPage &&
-              !windowInnerWidth <= 767) &&
+              !windowInnerWidth <= 767 &&
               'header__title_dark'
             }`}
           >
@@ -47,9 +49,12 @@ function Header({
           />
         </header>
       </div>
-      <SearchForm showAllNavLinks={showAllNavLinks}/>
+      {isMainPage ? (
+        <SearchForm showAllNavLinks={showAllNavLinks} />
+      ) : (
+        <SavedNewsHeader userName={userName} cards={cards} />
+      )}
     </div>
-    
   );
 }
 
