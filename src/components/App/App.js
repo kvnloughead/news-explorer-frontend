@@ -16,7 +16,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(true);
   const [userName, setUserName] = useState('Kevin');
   const [isLoading, setIsLoading] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [showAllCards, setShowAllCards] = useState(false);
   const [showAllNavLinks, setShowAllNavLinks] = useState(false)
@@ -28,15 +28,23 @@ function App() {
 
   const handleResize = () => {
     setWindowInnerWidth(window.innerWidth);
+    if (windowInnerWidth > 767) {
+      setShowAllNavLinks(false);
+    } else {
+      setShowAllNavLinks(true);
+    }
   };
 
   const handleSigninButtonClick = () => {
-    setIsModalOpen(true);
+    setmodalIsOpen(true);
+    if (windowInnerWidth < 767) {
+      setShowAllNavLinks(true);
+    }
     setModalType('signin');
   };
 
   const handleSignupButtonClick = () => {
-    setIsModalOpen(true);
+    setmodalIsOpen(true);
     setModalType('signup');
   };
 
@@ -64,7 +72,7 @@ function App() {
 
   const closeModal = (evt) => {
     if (!evt.key || evt.key === 'Escape') {
-      setIsModalOpen(false);
+      setmodalIsOpen(false);
     }
   };
 
@@ -97,6 +105,7 @@ function App() {
           showAllNavLinks={showAllNavLinks}
           handleResize={handleResize}
           windowInnerWidth={windowInnerWidth}
+          modalIsOpen={modalIsOpen}
         />
         <Main
           cards={cards}
@@ -110,7 +119,7 @@ function App() {
         />
         <PopupWithForm
           modalType={modalType}
-          isModalOpen={isModalOpen}
+          modalIsOpen={modalIsOpen}
           onClose={closeModal}
           handleSignupButtonClick={handleSignupButtonClick}
           handleSigninButtonClick={handleSigninButtonClick}
@@ -130,6 +139,7 @@ function App() {
           handleMenuIconClick={handleMenuIconClick}
           showAllNavLinks={showAllNavLinks}
           windowInnerWidth={windowInnerWidth}
+          modalIsOpen={modalIsOpen}
         />
         <SavedNews
           cards={savedCards}

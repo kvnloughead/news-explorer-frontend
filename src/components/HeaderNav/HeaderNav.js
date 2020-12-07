@@ -14,7 +14,9 @@ function HeaderNav({
   showAllNavLinks,
   handleResize,
   windowInnerWidth,
+  modalIsOpen
 }) {
+  
   useEffect(() => {
     window.addEventListener('resize', handleResize);
   });
@@ -23,16 +25,16 @@ function HeaderNav({
     <>
       <nav
         className={`header-nav__links ${
-          showAllNavLinks && windowInnerWidth <= 767
+          showAllNavLinks && windowInnerWidth < 768
             ? 'header-nav__links_mobile'
             : ''
         }`}
       >
-        {windowInnerWidth <= 767 && (
+        {windowInnerWidth < 768 && (
           <button
             onClick={handleMenuIconClick}
             className={`header-nav__menu ${
-              showAllNavLinks
+              (showAllNavLinks || modalIsOpen) 
                 ? `header-nav__menu_type_close`
                 : `header-nav__menu_type_burger${isMainPage ? '' : '-dark'}`
             }`}
@@ -76,7 +78,7 @@ function HeaderNav({
             )}
 
             {!loggedIn ? (
-              <li>
+              <li className='header-nav__signin-container'>
                 <button
                   className='header-nav__signin clickable'
                   onClick={handleSigninButtonClick}

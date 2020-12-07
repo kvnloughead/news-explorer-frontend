@@ -15,15 +15,20 @@ function Header({
   showAllNavLinks,
   handleResize,
   windowInnerWidth,
+  modalIsOpen,
 }) {
   return (
     <div
-      class={`header__background ${
-        isMainPage ? 'header__background_image' : ''
-      } ${showAllNavLinks ? 'header__background_dark' : ''}
+      class={`header__background ${isMainPage ? 'header__background_image' : ''}
       `}
     >
-      <div className={`${showAllNavLinks ? 'header__mobile-overlay' : ''}`}>
+      <div
+        className={`${
+          showAllNavLinks || (modalIsOpen && windowInnerWidth < 768)
+            ? 'header__mobile-overlay'
+            : ''
+        }`}
+      >
         <header className={`header`}>
           <Link
             to='/'
@@ -45,11 +50,16 @@ function Header({
             showAllNavLinks={showAllNavLinks}
             handleResize={handleResize}
             windowInnerWidth={windowInnerWidth}
+            modalIsOpen={modalIsOpen}
           />
         </header>
       </div>
       {isMainPage ? (
-        <SearchForm showAllNavLinks={showAllNavLinks} />
+        <SearchForm
+          modalIsOpen={modalIsOpen}
+          windowInnerWidth={windowInnerWidth}
+          showAllNavLinks={showAllNavLinks}
+        />
       ) : (
         <SavedNewsHeader
           userName={userName}

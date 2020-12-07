@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function PopupWithForm({
   modalType,
-  isModalOpen,
+  modalIsOpen,
   onClose,
   handleSigninButtonClick,
   handleSignupButtonClick,
@@ -36,14 +36,14 @@ function PopupWithForm({
     <>
       <div
         className={
-          'popup__overlay' + (isModalOpen ? ' popup__overlay_visible' : '')
+          'popup__overlay' + (modalIsOpen ? ' popup__overlay_visible' : '')
         }
         onClick={onClose}
       ></div>
       <div
         className={
           `popup` +
-          (isModalOpen ? ' popup_visible' : '') +
+          (modalIsOpen ? ' popup_visible' : '') +
           (modalType === 'success' ? ' popup_success' : '')
         }
       >
