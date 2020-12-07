@@ -56,11 +56,9 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  
   color: #1a1b22;
   caret-color: #2F71E5;
   backdrop-filter: blur(8px);
-
 }
 
 .search-form__search-bar::placeholder {
@@ -161,39 +159,14 @@
     line-height: 22px;
     padding-left: 16px;
   }
-  
-  .search-form__search-bar::placeholder {
-    color: #B6BCBF;
-  }
-  
-  .search-form__search-bar:focus {
-    outline: none;
-  }
-  
+
   .search-form__search-button {
     width: 288px;
     height: 56px;
     margin-top: 16px;
     margin-bottom: 32px;
-    box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
-    border: none;
-    border-radius: 100px;
-    font-family: 'Roboto', sans-serif;
     font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
     line-height: 24px;
-    
-    text-align: center;
-    color: #ffffff;
     padding: 0;
-  }
-  
-  .search-form__search-button:hover {
-    background-color: #347EFF;
-  }
-  
-  .search-form__search-button:focus {
-    background-color: #2A65CC;
   }
 }

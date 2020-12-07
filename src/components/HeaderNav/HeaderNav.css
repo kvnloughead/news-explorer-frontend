@@ -187,12 +187,8 @@
   }
   
   .header-nav__home-text {
-    color: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
     font-size: 18px;
-    font-style: normal;
     font-weight: 500;
-    text-decoration: none;
     padding-left: 0;
     line-height: 56px;
   }
@@ -206,7 +202,6 @@
   
   .header-nav__saved-news-text {
     font-size: 18px;
-    color: #fff
   }
   
   .header-nav__user-button {
@@ -214,11 +209,6 @@
     height: 56px;
     margin: 0;
     padding-top: 13px;
-  }
-  
-  .header-nav__user-button_dark {
-    color: #1A1B22;
-    border: 1px solid #1A1B22;
   }
 
   .header-nav__user-button-container {
@@ -230,7 +220,7 @@
     width: 288px;
     height: 56px;
     align-self: center; 
-    margin: 22px 0 24px 0;
+    margin: 0 0 20px 0;
   }
   
 }
