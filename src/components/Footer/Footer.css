@@ -66,13 +66,13 @@
 
 @media screen and (max-width: 767px) {
   .footer {
-    padding: 0 18px 16px 16px;
+    padding: 20px 18px 16px 16px;
     margin: auto;
     flex-direction: column-reverse;
   }
   
   .footer__copyright {
-    margin: 38px 0 0 0;
+    margin: 18px 0 0 0;
   }
   
   .footer__nav {
