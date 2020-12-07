@@ -10,9 +10,11 @@
 }
 
 .header__mobile-overlay {
-  background-color: #1A1B22;
-  height: 286px;
-  z-index: -1;
+  background: linear-gradient(180deg, #1A1B22 50%, rgba(255, 255, 255, .5) 50%);
+  height: 568px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 

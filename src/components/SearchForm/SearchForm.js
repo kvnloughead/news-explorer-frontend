@@ -14,7 +14,7 @@ function SearchForm({ showAllNavLinks }) {
       )}
       <form className={`search-form__form`}>
         <input
-          className='search-form__search-bar'
+          className={`search-form__search-bar`}
           type='search'
           id='search'
           name='search'
