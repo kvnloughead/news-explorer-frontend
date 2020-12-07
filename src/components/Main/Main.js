@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import SearchForm from '../SearchForm/SearchForm.js';
+import SearchForm from '../SearchForm/SearchForm.js';
 import NewsCardsList from '../NewsCardsList/NewsCardsList.js';
 import About from '../About/About.js';
 
@@ -16,6 +16,7 @@ function Main({
   handleDeleteClick,
 }) {
   return (
+    <>
     <main>
       <NewsCardsList
         cards={cards}
@@ -29,7 +30,9 @@ function Main({
         handleDeleteClick={handleDeleteClick}
       />
       <About />
+      
     </main>
+    </>
   );
 }
 

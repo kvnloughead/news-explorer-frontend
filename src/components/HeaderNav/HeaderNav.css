@@ -6,10 +6,16 @@
 }
 
 .header-nav__links_mobile {
-  height: 286px;
+  height: 248px;
   width: 100vw;
-  background-color: #1A1B22;
   margin-top: -56px;
+  margin-left: -107px;
+  list-style: none;
+  padding-top: 72px;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .header-nav__home {
@@ -71,7 +77,7 @@
   font-size: 18px;
   font-weight: 500;
   text-decoration: none;
-  color: #B6BCBF;
+  color: #1A1B22;
 }
 
 .header-nav__saved-news-text_light {
@@ -145,27 +151,32 @@
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  margin-left: auto;
   height: 24px;
   width: 24px;
-  margin: auto 0 auto auto;
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
 
-.header-nav__menu_burger {
+.header-nav__menu_type_burger {
   background-image: url('../../images/icons/menu-burger.png');
 }
 
-.header-nav__menu_close {
+.header-nav__menu_type_burger-dark {
+  background-image: url('../../images/icons/menu-burger-dark.png');
+}
+
+.header-nav__menu_type_close {
   background-image: url('../../images/icons/close.png');
 }
 
-@media screen and (max-width: 600px) {  
+@media screen and (max-width: 767px) {  
   
   .header-nav__home {
     height: auto;
     text-align: left;
     line-height: 56px;
-
+    margin-top: 50px;
   }
   
   .header-nav__bottom-border {
@@ -191,36 +202,28 @@
     height: auto;
     margin-left: 0;
     text-align: left;
+    
   }
   
   .header-nav__saved-news-text {
     font-size: 18px;
-
     color: #fff
   }
   
   .header-nav__user-button {
     width: 112px;
-    height: 48px;
-    background: none;
-    border: 1px solid #FFFFFF;
-    box-sizing: border-box;
-    border-radius: 100px;
-    margin: 0 0 0 64px;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 24px;
-    color: #fff;
-    display: flex;
-    justify-content: space-around;
-    padding-top: 9px;
+    height: 56px;
+    margin: 0;
+    padding-top: 13px;
   }
   
   .header-nav__user-button_dark {
     color: #1A1B22;
     border: 1px solid #1A1B22;
+  }
+
+  .header-nav__user-button-container {
+    align-self: center;
   }
 
   .header-nav__signin {
