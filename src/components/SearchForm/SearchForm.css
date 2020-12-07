@@ -35,9 +35,13 @@
   height: 64px;
   background: #ffffff;
   box-sizing: border-box;
-  backdrop-filter: blur(8px);
   border-radius: 100px;
   display: flex;
+}
+
+.search-form_mobile-menu {
+  justify-content: flex-start;
+  padding-top: 80px;
 }
 
 .search-form__search-bar {
@@ -55,6 +59,8 @@
   
   color: #1a1b22;
   caret-color: #2F71E5;
+  backdrop-filter: blur(8px);
+
 }
 
 .search-form__search-bar::placeholder {
@@ -96,7 +102,7 @@
   
   .search-form {
     width: 452px;
-    height: 334px;
+    height: 288px;
     align-items: flex-start;
     margin: auto;
   }
@@ -122,5 +128,81 @@
     width: 160px;
     height: 56px;
   }
+}
 
+@media screen and (max-width: 767px) {
+  .search-form__title {
+    font-size: 36px;
+    line-height: 40px;
+    width: 285px;
+    margin: 30px 0 16px 16px;
+  }
+  
+  .search-form__subtitle {
+    width: 288px;
+    margin: 0 0 112px 16px;
+  }
+  
+  .search-form__form {
+    width: auto;
+    height: auto;
+    margin-left: 16px;
+    flex-direction: column;
+    background: none;
+    border-radius: none;
+  }
+  
+  .search-form__search-bar {
+    width: 288px;
+    height: 56px;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 100px;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    padding-left: 16px;
+    
+    color: #1a1b22;
+    caret-color: #2F71E5;
+    backdrop-filter: blur(8px);
+  border-radius: 100px;
+  }
+  
+  .search-form__search-bar::placeholder {
+    color: #B6BCBF;
+  }
+  
+  .search-form__search-bar:focus {
+    outline: none;
+  }
+  
+  .search-form__search-button {
+    width: 288px;
+    height: 56px;
+    margin-top: 16px;
+    margin-bottom: 32px;
+    box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+    border: none;
+    border-radius: 100px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    
+    text-align: center;
+    color: #ffffff;
+    padding: 0;
+  }
+  
+  .search-form__search-button:hover {
+    background-color: #347EFF;
+  }
+  
+  .search-form__search-button:focus {
+    background-color: #2A65CC;
+  }
 }

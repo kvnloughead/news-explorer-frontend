@@ -7,7 +7,6 @@ function Header({
   loggedIn,
   userName,
   isMainPage,
-  cards,
   handleSignout,
   handleSigninButtonClick,
   handleMenuIconClick,
@@ -48,7 +47,7 @@ function Header({
           />
         </header>
       </div>
-      <SearchForm />
+      <SearchForm showAllNavLinks={showAllNavLinks}/>
     </div>
     
   );
