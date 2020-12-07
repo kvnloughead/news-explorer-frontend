@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
 
 import './App.css';
@@ -19,25 +19,28 @@ function App() {
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [showAllCards, setShowAllCards] = useState(false);
-  const [showAllNavLinks, setShowAllNavLinks] = useState(false)
+  const [showAllNavLinks, setShowAllNavLinks] = useState(false);
   const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
 
   const handleMenuIconClick = () => {
     setShowAllNavLinks(!showAllNavLinks);
   }
 
+  useEffect(() => {
+    if (modalIsOpen && windowInnerWidth < 768) {
+      setShowAllNavLinks(true);
+    } else if (windowInnerWidth >= 768) {
+      setShowAllNavLinks(false);
+    }
+  }, [windowInnerWidth, modalIsOpen])
+
   const handleResize = () => {
     setWindowInnerWidth(window.innerWidth);
-    if (windowInnerWidth > 767) {
-      setShowAllNavLinks(false);
-    } else {
-      setShowAllNavLinks(true);
-    }
-  };
+  }
 
   const handleSigninButtonClick = () => {
     setmodalIsOpen(true);
-    if (windowInnerWidth < 767) {
+    if (windowInnerWidth <= 767) {
       setShowAllNavLinks(true);
     }
     setModalType('signin');

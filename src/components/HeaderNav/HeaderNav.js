@@ -16,7 +16,7 @@ function HeaderNav({
   windowInnerWidth,
   modalIsOpen
 }) {
-  
+
   useEffect(() => {
     window.addEventListener('resize', handleResize);
   });
@@ -39,7 +39,7 @@ function HeaderNav({
                 : `header-nav__menu_type_burger${isMainPage ? '' : '-dark'}`
             }`}
           ></button>
-        )}
+        )}  
         {(windowInnerWidth >= 768 || showAllNavLinks) && (
           <>
             <li

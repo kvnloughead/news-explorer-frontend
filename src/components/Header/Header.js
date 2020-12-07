@@ -24,7 +24,7 @@ function Header({
     >
       <div
         className={`${
-          showAllNavLinks || (modalIsOpen && windowInnerWidth < 768)
+          showAllNavLinks && windowInnerWidth < 768
             ? 'header__mobile-overlay'
             : ''
         }`}
@@ -33,7 +33,7 @@ function Header({
           <Link
             to='/'
             className={`header__title ${
-              !showAllNavLinks && !isMainPage && !windowInnerWidth <= 767
+              !showAllNavLinks && !isMainPage && !windowInnerWidth < 768
                 ? 'header__title_dark'
                 : ''
             }`}
