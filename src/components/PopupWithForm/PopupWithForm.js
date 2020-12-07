@@ -11,9 +11,8 @@ function PopupWithForm({
   handleSignin,
   handleSignup,
 }) {
-
   const [isValid, setIsValid] = useState(false);
-  
+
   useEffect(() => {
     document.addEventListener('keydown', onClose);
     return () => {
@@ -29,7 +28,7 @@ function PopupWithForm({
         }
         onClick={onClose}
       ></div>
-      <div className={`popup` + (isModalOpen ? ' popup_visible' : '')}>
+      <div className={`popup` + (isModalOpen ? ' popup_visible' : '') + (modalType === 'success' ? ' popup_success' : '')}>
         <button
           className={'popup__close-button clickable'}
           type='reset'
@@ -62,7 +61,9 @@ function PopupWithForm({
               required
               autoComplete='on'
             />
-            <span className='popup__input-error' id='email-input-error'></span>
+            <span className='popup__input-error' id='email-input-error'>
+              Insert error message here
+            </span>
             <label class='popup__input-label' for='password'>
               Password
             </label>
