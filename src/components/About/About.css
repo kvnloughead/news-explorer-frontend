@@ -83,6 +83,7 @@
   .about {
     padding: 32px 24px 112px 24px;
     flex-direction: column;
+    align-items: center;
   }
   
   .about__image {

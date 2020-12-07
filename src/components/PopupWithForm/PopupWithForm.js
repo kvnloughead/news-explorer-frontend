@@ -10,8 +10,20 @@ function PopupWithForm({
   handleSignupButtonClick,
   handleSignin,
   handleSignup,
+  windowInnerWidth,
 }) {
   const [isValid, setIsValid] = useState(false);
+  const [showKeyboard, setShowKeyboard] = useState(false);
+
+  const handleInputFocus = () => {
+    setShowKeyboard(!showKeyboard);
+  };
+
+  // useEffect(() => {
+  //   if (this.props.id === document.activeElement.id) {
+  //     setShowKeyboard(true);
+  //   }
+  // })
 
   useEffect(() => {
     document.addEventListener('keydown', onClose);
@@ -28,13 +40,21 @@ function PopupWithForm({
         }
         onClick={onClose}
       ></div>
-      <div className={`popup` + (isModalOpen ? ' popup_visible' : '') + (modalType === 'success' ? ' popup_success' : '')}>
-        <button
-          className={'popup__close-button clickable'}
-          type='reset'
-          aria-label={`close-modal`}
-          onClick={onClose}
-        ></button>
+      <div
+        className={
+          `popup` +
+          (isModalOpen ? ' popup_visible' : '') +
+          (modalType === 'success' ? ' popup_success' : '')
+        }
+      >
+        {windowInnerWidth > 767 && (
+          <button
+            className={'popup__close-button clickable'}
+            type='reset'
+            aria-label={`close-modal`}
+            onClick={onClose}
+          ></button>
+        )}
         <h2 className={'popup__title'}>
           {modalType === 'success'
             ? 'Registration successfully completed!'
@@ -60,6 +80,8 @@ function PopupWithForm({
               placeholder='Enter email'
               required
               autoComplete='on'
+              onFocus={handleInputFocus}
+              onBlur={handleInputFocus}
             />
             <span className='popup__input-error' id='email-input-error'>
               Insert error message here
@@ -75,6 +97,8 @@ function PopupWithForm({
               placeholder='Enter password'
               required
               autoComplete='on'
+              onFocus={handleInputFocus}
+              onBlur={handleInputFocus}
             />
             <span
               className='popup__input-error'
@@ -93,6 +117,8 @@ function PopupWithForm({
                   placeholder='Enter your username'
                   required
                   autoComplete='on'
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputFocus}
                 />
                 <span
                   className='popup__input-error'
@@ -101,7 +127,6 @@ function PopupWithForm({
               </>
             )}
             <button
-              // add clickable class when made active
               className={`popup__submit-button ${
                 isValid ? 'popup__submit-button_active clickable' : ''
               }`}
@@ -130,6 +155,11 @@ function PopupWithForm({
             Sign {modalType === 'signin' ? 'up' : 'in'}
           </Link>
         </p>
+        {showKeyboard && (
+          <div
+            className={`keyboard `}
+          ></div>
+        )}
       </div>
     </>
   );

@@ -153,13 +153,24 @@
   color: #2F71E5;
 }
 
+@media screen and (max-width: 768px) {
+  .keyboard {
+    background-image: url('../../images/tablet-keyboard.png');    
+    height: 264px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 430px) {
   .popup {
     width: 100vw;
-    height: 560px;
-    padding: 16px 16px 16px 16px;
+    min-height: 560px;
+    padding: 16px 16px 0px 16px;
     margin-top: -233px;
-    margin-left: -160px;
+    margin-left: -50vw;
   }
 
   .popup_success {
@@ -171,7 +182,7 @@
     opacity: 1;
     transition-delay: 0s;
   }
-  
+
   .popup__input-label {
     font-size: 12px;
     line-height: 14px;
@@ -193,5 +204,14 @@
     width: 288px;
     height: 64px;
     margin: 23px 0 0 0;
+  }
+
+  .keyboard {
+    background-image: url('../../images/mobile-keyboard.png');    
+    height: 248px;
+    position: static;
+    margin-left: -16px;
+    margin-right: -16px;
+    width: 100vw;
   }
 }

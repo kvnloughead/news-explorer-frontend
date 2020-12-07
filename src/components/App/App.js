@@ -116,6 +116,7 @@ function App() {
           handleSigninButtonClick={handleSigninButtonClick}
           handleSignin={handleSignin}
           handleSignup={handleSignup}
+          windowInnerWidth={windowInnerWidth}
         />
       </Route>
       <Route exact path='/saved-news'>

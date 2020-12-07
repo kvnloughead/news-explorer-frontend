@@ -225,12 +225,12 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 580px) {
   .card {
     width: 288px;
     height: 446px;
     list-style: none;
-    margin: 0 0 9px 0;
+    margin: 0 8px 9px 0;
   } 
   
   .card:nth-of-type(3n) {
