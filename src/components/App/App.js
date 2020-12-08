@@ -136,6 +136,7 @@ function App() {
           handleSearchSubmit={handleSearchSubmit}
           handleSearchChange={handleSearchChange}
           searchTerm={searchTerm}
+          setShowAllNavLinks={setShowAllNavLinks}
         />
         <Main
           cards={cards}
@@ -174,6 +175,7 @@ function App() {
           handleSearchSubmit={handleSearchSubmit}
           handleSearchChange={handleSearchChange}
           searchTerm={searchTerm}
+          setShowAllNavLinks={setShowAllNavLinks}
         />
         <SavedNews
           cards={savedCards}

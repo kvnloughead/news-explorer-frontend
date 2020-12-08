@@ -19,6 +19,7 @@ function Header({
   handleSearchChange,
   searchTerm,
   handleSearchSubmit,
+  setShowAllNavLinks,
 }) {
   return (
     <div
@@ -51,6 +52,7 @@ function Header({
             handleSigninButtonClick={handleSigninButtonClick}
             handleMenuIconClick={handleMenuIconClick}
             showAllNavLinks={showAllNavLinks}
+            setShowAllNavLinks={setShowAllNavLinks}
             handleResize={handleResize}
             windowInnerWidth={windowInnerWidth}
             modalIsOpen={modalIsOpen}

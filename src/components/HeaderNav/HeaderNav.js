@@ -12,6 +12,7 @@ function HeaderNav({
   handleSigninButtonClick,
   handleMenuIconClick,
   showAllNavLinks,
+  setShowAllNavLinks,
   handleResize,
   windowInnerWidth,
   modalIsOpen
@@ -46,6 +47,7 @@ function HeaderNav({
               class={`header-nav__home clickable ${
                 isMainPage && 'header-nav__bottom-border'
               }`}
+              onClick={() => {setShowAllNavLinks(false)}}
             >
               <Link
                 class={`header-nav__home-text ${
@@ -63,6 +65,8 @@ function HeaderNav({
                 class={`header-nav__saved-news clickable ${
                   !isMainPage && 'header-nav__bottom-border_dark'
                 }`}
+                  onClick={() => {setShowAllNavLinks(false)}}
+
               >
                 <Link
                   className={`header-nav__saved-news-text ${
