@@ -21,8 +21,9 @@ function App() {
   const [showAllCards, setShowAllCards] = useState(false);
   const [showAllNavLinks, setShowAllNavLinks] = useState(false);
   const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
-
+  const [notFound, setNotFound] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+
   const handleSearchChange = event => {
      setSearchTerm(event.target.value);
    };
@@ -31,7 +32,13 @@ function App() {
     const results = allCardsArray.filter(card =>
       card.keyword.toLowerCase() === searchTerm.toLowerCase()
     );
-    setCards(results);
+    if (results.length === 0) { 
+      setNotFound(true);
+      setCards(results);
+    } else {
+      setNotFound(false);
+      setCards(results);
+    }
   }
 
   const handleMenuIconClick = () => {
@@ -134,6 +141,7 @@ function App() {
           showAllCards={showAllCards}
           handleBookmarkClick={handleBookmarkClick}
           handleDeleteClick={handleDeleteClick}
+          notFound={notFound}
         />
         <PopupWithForm
           modalType={modalType}

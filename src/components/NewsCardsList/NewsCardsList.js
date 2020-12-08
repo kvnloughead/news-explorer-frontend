@@ -11,9 +11,9 @@ function NewsCardsList({
   showAllCards,
   onShowMore,
   handleDeleteClick,
-  handleBookmarkClick
+  handleBookmarkClick,
+  notFound
 }) {
-
   return (
     <section className='news-cards-list'>
       {isLoading ? (
@@ -25,7 +25,9 @@ function NewsCardsList({
         <>
           {cards.length > 0 ? (
             <div className='news-cards-list__container'>
-              {isMainPage && <h2 className='news-cards-list__title'>Search Results</h2>}
+              {isMainPage && (
+                <h2 className='news-cards-list__title'>Search Results</h2>
+              )}
               <ul className='news-cards-list__list'>
                 {cards &&
                   cards
@@ -69,13 +71,21 @@ function NewsCardsList({
               )}
             </div>
           ) : (
-            <div class='not-found'>
-              <div className='not-found__icon'></div>
-              <h3 className='not-found__title'>{isMainPage ? 'Nothing found' : 'Nothing here'}</h3>
-              <p className='not-found__text'>
-                {isMainPage ? 'Sorry, but nothing matched your search terms.' : 'Go save some articles!'}
-              </p>
-            </div>
+            <>
+              {notFound && (
+                <div class='not-found'>
+                  <div className='not-found__icon'></div>
+                  <h3 className='not-found__title'>
+                    {isMainPage ? 'Nothing found' : 'Nothing here'}
+                  </h3>
+                  <p className='not-found__text'>
+                    {isMainPage
+                      ? 'Sorry, but nothing matched your search terms.'
+                      : 'Go save some articles!'}
+                  </p>
+                </div>
+              )}
+            </>
           )}
         </>
       )}

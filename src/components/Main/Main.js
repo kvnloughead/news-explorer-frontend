@@ -14,24 +14,27 @@ function Main({
   onShowMore,
   handleBookmarkClick,
   handleDeleteClick,
+  notFound,
 }) {
   return (
     <>
-    <main>
-      <NewsCardsList
-        cards={cards}
-        loggedIn={loggedIn}
-        isSaved={isSaved}
-        isLoading={isLoading}
-        isMainPage={isMainPage}
-        showAllCards={showAllCards}
-        onShowMore={onShowMore}
-        handleBookmarkClick={handleBookmarkClick}
-        handleDeleteClick={handleDeleteClick}
-      />
-      <About />
-      
-    </main>
+      <main>
+        {(cards.length > 0 || notFound) && (
+          <NewsCardsList
+            cards={cards}
+            loggedIn={loggedIn}
+            isSaved={isSaved}
+            isLoading={isLoading}
+            isMainPage={isMainPage}
+            showAllCards={showAllCards}
+            onShowMore={onShowMore}
+            handleBookmarkClick={handleBookmarkClick}
+            handleDeleteClick={handleDeleteClick}
+            notFound={notFound}
+          />
+        )}
+        <About />
+      </main>
     </>
   );
 }

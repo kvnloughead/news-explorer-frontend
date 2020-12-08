@@ -9,11 +9,6 @@ function SearchForm({
   handleSearchSubmit
 }) {
 
-  // const [searchTerm, setSearchTerm] = useState('');
-  // const handleSearchChange = event => {
-  //   setSearchTerm(event.target.value);
-  // };
-
   return (
     <>
       <section
