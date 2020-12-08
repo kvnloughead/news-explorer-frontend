@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function SearchForm({
@@ -39,9 +39,9 @@ function SearchForm({
               onChange={handleSearchChange}
               value={searchTerm}
             ></input>
-            <Link onClick={handleSearchSubmit} className='search-form__search-button clickable'>
+            <button type='submit' onClick={handleSearchSubmit} className='search-form__search-button clickable'>
               Search
-            </Link>
+            </button>
           </form>
         )}
       </section>

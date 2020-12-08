@@ -28,7 +28,8 @@ function App() {
      setSearchTerm(event.target.value);
    };
 
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = (evt) => {
+    evt.preventDefault();
     const results = allCardsArray.filter(card =>
       card.keyword.toLowerCase() === searchTerm.toLowerCase()
     );
