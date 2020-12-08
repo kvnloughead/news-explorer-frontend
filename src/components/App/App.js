@@ -8,10 +8,10 @@ import Footer from '../Footer/Footer.js';
 import SavedNews from '../SavedNews/SavedNews.js';
 import PopupWithForm from '../PopupWithForm/PopupWithForm.js';
 
-import { foundCardsArray, savedCardsArray } from '../../temporary/data.js';
+import { allCardsArray, savedCardsArray } from '../../temporary/data.js';
 
 function App() {
-  const [cards, setCards] = useState(foundCardsArray);
+  const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState(savedCardsArray);
   const [loggedIn, setLoggedIn] = useState(true);
   const [userName, setUserName] = useState('Kevin');
@@ -21,6 +21,18 @@ function App() {
   const [showAllCards, setShowAllCards] = useState(false);
   const [showAllNavLinks, setShowAllNavLinks] = useState(false);
   const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleSearchChange = event => {
+     setSearchTerm(event.target.value);
+   };
+
+  const handleSearchSubmit = () => {
+    const results = allCardsArray.filter(card =>
+      card.keyword.toLowerCase() === searchTerm.toLowerCase()
+    );
+    setCards(results);
+  }
 
   const handleMenuIconClick = () => {
     setShowAllNavLinks(!showAllNavLinks);
@@ -109,6 +121,9 @@ function App() {
           handleResize={handleResize}
           windowInnerWidth={windowInnerWidth}
           modalIsOpen={modalIsOpen}
+          handleSearchSubmit={handleSearchSubmit}
+          handleSearchChange={handleSearchChange}
+          searchTerm={searchTerm}
         />
         <Main
           cards={cards}
@@ -143,6 +158,9 @@ function App() {
           showAllNavLinks={showAllNavLinks}
           windowInnerWidth={windowInnerWidth}
           modalIsOpen={modalIsOpen}
+          handleSearchSubmit={handleSearchSubmit}
+          handleSearchChange={handleSearchChange}
+          searchTerm={searchTerm}
         />
         <SavedNews
           cards={savedCards}

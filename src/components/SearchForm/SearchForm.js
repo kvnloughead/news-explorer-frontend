@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-function SearchForm({ showAllNavLinks, modalIsOpen, windowInnerWidth }) {
+function SearchForm({
+  showAllNavLinks,
+  modalIsOpen,
+  handleSearchChange,
+  searchTerm,
+  handleSearchSubmit
+}) {
+
+  // const [searchTerm, setSearchTerm] = useState('');
+  // const handleSearchChange = event => {
+  //   setSearchTerm(event.target.value);
+  // };
+
   return (
     <>
       <section
@@ -28,10 +41,12 @@ function SearchForm({ showAllNavLinks, modalIsOpen, windowInnerWidth }) {
               name='search'
               aria-label='Search for news articles'
               placeholder='Enter topic'
+              onChange={handleSearchChange}
+              value={searchTerm}
             ></input>
-            <button className='search-form__search-button clickable'>
+            <Link onClick={handleSearchSubmit} className='search-form__search-button clickable'>
               Search
-            </button>
+            </Link>
           </form>
         )}
       </section>

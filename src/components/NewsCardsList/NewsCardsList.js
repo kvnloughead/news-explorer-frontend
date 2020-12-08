@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import NewsCard from '../NewsCard/NewsCard.js';
 
@@ -13,6 +13,7 @@ function NewsCardsList({
   handleDeleteClick,
   handleBookmarkClick
 }) {
+
   return (
     <section className='news-cards-list'>
       {isLoading ? (

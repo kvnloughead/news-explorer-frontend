@@ -16,6 +16,9 @@ function Header({
   handleResize,
   windowInnerWidth,
   modalIsOpen,
+  handleSearchChange,
+  searchTerm,
+  handleSearchSubmit,
 }) {
   return (
     <div
@@ -59,6 +62,11 @@ function Header({
           modalIsOpen={modalIsOpen}
           windowInnerWidth={windowInnerWidth}
           showAllNavLinks={showAllNavLinks}
+          handleSearchChange={handleSearchChange}
+          searchTerm={searchTerm}
+          handleSearchSubmit={handleSearchSubmit}
+          handleSearchChange={handleSearchChange}
+          searchTerm={searchTerm}
         />
       ) : (
         <SavedNewsHeader
