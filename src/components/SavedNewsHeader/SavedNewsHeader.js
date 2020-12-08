@@ -4,8 +4,7 @@ function SavedNewsHeader({ userName, cards, showAllNavLinks }) {
   const keywordString = buildKeyWordString(cards);
 
   return (
-    <section className={`saved-news-header ${showAllNavLinks ? 'saved-news-header__mobile-menu': ''}`}>
-      {!showAllNavLinks && (
+    <section className={`saved-news-header`}>
         <>
           <h2 className='saved-news-header__title'>Saved articles</h2>
           <p className='saved-news-header__greeting'>
@@ -21,7 +20,6 @@ function SavedNewsHeader({ userName, cards, showAllNavLinks }) {
             )}
           </p>
         </>
-      )}
     </section>
   );
 }

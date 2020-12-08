@@ -209,18 +209,21 @@ function App() {
           showAllNavLinks={showAllNavLinks}
           windowInnerWidth={windowInnerWidth}
         />
-        {/* <HeaderMobileMenu 
-          loggedIn={loggedIn}
-          userName={userName}
-          isMainPage={false}
-          handleSignout={handleSignout}
-          handleSigninButtonClick={handleSigninButtonClick}
-          handleMenuIconClick={handleMenuIconClick}
-          showAllNavLinks={showAllNavLinks}
-          setShowAllNavLinks={setShowAllNavLinks}
-          handleResize={handleResize}
-          windowInnerWidth={windowInnerWidth}
-          modalIsOpen={modalIsOpen}/> */}
+        {showAllNavLinks && (
+          <HeaderMobileMenu
+            loggedIn={loggedIn}
+            userName={userName}
+            isMainPage={false}
+            handleSignout={handleSignout}
+            handleSigninButtonClick={handleSigninButtonClick}
+            handleMenuIconClick={handleMenuIconClick}
+            showAllNavLinks={showAllNavLinks}
+            setShowAllNavLinks={setShowAllNavLinks}
+            handleResize={handleResize}
+            windowInnerWidth={windowInnerWidth}
+            modalIsOpen={modalIsOpen}
+          />
+        )}
       </Route>
       <Footer />
     </Router>
