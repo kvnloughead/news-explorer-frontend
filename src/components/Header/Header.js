@@ -26,15 +26,15 @@ function Header({
       class={`header__background ${isMainPage ? 'header__background_image' : ''}
       `}
     >
-      <div
+      {/* <div
         className={`${
           showAllNavLinks && windowInnerWidth < 768
             ? 'header__mobile-overlay'
             : ''
         }`}
-      >
+      > */}
         <header className={`header`}>
-          <Link
+          {/* <Link
             to='/'
             className={`header__title ${
               !showAllNavLinks && !isMainPage && !windowInnerWidth < 768
@@ -43,7 +43,7 @@ function Header({
             }`}
           >
             NewsExplorer
-          </Link>
+          </Link> */}
           <HeaderNav
             loggedIn={loggedIn}
             userName={userName}
@@ -58,7 +58,7 @@ function Header({
             modalIsOpen={modalIsOpen}
           />
         </header>
-      </div>
+      {/* </div> */}
       {isMainPage ? (
         <SearchForm
           modalIsOpen={modalIsOpen}
@@ -67,8 +67,6 @@ function Header({
           handleSearchChange={handleSearchChange}
           searchTerm={searchTerm}
           handleSearchSubmit={handleSearchSubmit}
-          handleSearchChange={handleSearchChange}
-          searchTerm={searchTerm}
         />
       ) : (
         <SavedNewsHeader

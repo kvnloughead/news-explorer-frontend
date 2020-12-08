@@ -39,11 +39,11 @@
   display: flex;
 }
 
-.search-form_mobile-menu {
+/* .search-form_mobile-menu {
   justify-content: flex-end;
   position: absolute;
   bottom: 40px;
-}
+} */
 
 .search-form__search-bar {
   width: 100%;

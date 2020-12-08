@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
 import Header from '../Header/Header.js';
@@ -7,6 +7,7 @@ import Main from '../Main/Main.js';
 import Footer from '../Footer/Footer.js';
 import SavedNews from '../SavedNews/SavedNews.js';
 import PopupWithForm from '../PopupWithForm/PopupWithForm.js';
+import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
 
 import { allCardsArray, savedCardsArray } from '../../temporary/data.js';
 
@@ -24,31 +25,31 @@ function App() {
   const [notFound, setNotFound] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearchChange = event => {
-     setSearchTerm(event.target.value);
-   };
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   const handleSearchSubmit = (evt) => {
     evt.preventDefault();
     setIsLoading(true);
     window.setTimeout(() => {
-      const results = allCardsArray.filter(card =>
-        card.keyword.toLowerCase() === searchTerm.toLowerCase()
+      const results = allCardsArray.filter(
+        (card) => card.keyword.toLowerCase() === searchTerm.toLowerCase()
       );
       setIsLoading(false);
-      if (results.length === 0) { 
+      if (results.length === 0) {
         setNotFound(true);
         setCards(results);
       } else {
         setNotFound(false);
         setCards(results);
       }
-    }, 2000)
-  }
+    }, 2000);
+  };
 
   const handleMenuIconClick = () => {
     setShowAllNavLinks(!showAllNavLinks);
-  }
+  };
 
   useEffect(() => {
     if (modalIsOpen && windowInnerWidth < 768) {
@@ -56,11 +57,11 @@ function App() {
     } else if (windowInnerWidth >= 768) {
       setShowAllNavLinks(false);
     }
-  }, [windowInnerWidth, modalIsOpen])
+  }, [windowInnerWidth, modalIsOpen]);
 
   const handleResize = () => {
     setWindowInnerWidth(window.innerWidth);
-  }
+  };
 
   const handleSigninButtonClick = () => {
     setmodalIsOpen(true);
@@ -88,7 +89,11 @@ function App() {
   };
 
   const handleDeleteClick = (card) => {
-    setSavedCards(savedCards.filter((c) => { return c._id !== card._id }));
+    setSavedCards(
+      savedCards.filter((c) => {
+        return c._id !== card._id;
+      })
+    );
     card.isSaved = false;
     const newCards = cards.map((c) => {
       return c._id === card._id ? card : c;
@@ -159,6 +164,21 @@ function App() {
           handleSignup={handleSignup}
           windowInnerWidth={windowInnerWidth}
         />
+        {showAllNavLinks && (
+          <HeaderMobileMenu
+            loggedIn={loggedIn}
+            userName={userName}
+            isMainPage={true}
+            handleSignout={handleSignout}
+            handleSigninButtonClick={handleSigninButtonClick}
+            handleMenuIconClick={handleMenuIconClick}
+            showAllNavLinks={showAllNavLinks}
+            setShowAllNavLinks={setShowAllNavLinks}
+            handleResize={handleResize}
+            windowInnerWidth={windowInnerWidth}
+            modalIsOpen={modalIsOpen}
+          />
+        )}
       </Route>
       <Route exact path='/saved-news'>
         <Header
@@ -189,6 +209,18 @@ function App() {
           showAllNavLinks={showAllNavLinks}
           windowInnerWidth={windowInnerWidth}
         />
+        {/* <HeaderMobileMenu 
+          loggedIn={loggedIn}
+          userName={userName}
+          isMainPage={false}
+          handleSignout={handleSignout}
+          handleSigninButtonClick={handleSigninButtonClick}
+          handleMenuIconClick={handleMenuIconClick}
+          showAllNavLinks={showAllNavLinks}
+          setShowAllNavLinks={setShowAllNavLinks}
+          handleResize={handleResize}
+          windowInnerWidth={windowInnerWidth}
+          modalIsOpen={modalIsOpen}/> */}
       </Route>
       <Footer />
     </Router>

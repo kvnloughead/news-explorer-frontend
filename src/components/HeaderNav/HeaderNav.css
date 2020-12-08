@@ -8,10 +8,7 @@
 .header-nav__links_mobile {
   height: 248px;
   width: 100vw;
-  margin-top: -56px;
-  margin-left: -107px;
   list-style: none;
-  padding-top: 72px;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -178,8 +175,8 @@
   .header-nav__home {
     height: auto;
     text-align: left;
-    line-height: 56px;
-    margin-top: 50px;
+    margin-top: 4px;
+    padding-left: 16px;
   }
   
   .header-nav__bottom-border {
@@ -199,8 +196,8 @@
   
   .header-nav__saved-news {
     height: auto;
-    margin-left: 0;
     text-align: left;
+    line-height: 56px;
   }
   
   .header-nav__saved-news-text {
@@ -212,6 +209,7 @@
     height: 56px;
     margin: 0;
     padding-top: 13px;
+    margin-top: 14px;
     justify-content: center;
   }
 

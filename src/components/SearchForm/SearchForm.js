@@ -16,7 +16,7 @@ function SearchForm({
           showAllNavLinks ? 'search-form_mobile-menu' : ''
         }`}
       >
-        {!showAllNavLinks && (
+        {/* {!showAllNavLinks && ( */}
           <>
             <h2 className='search-form__title'>
               What's going on in the world?
@@ -26,8 +26,8 @@ function SearchForm({
               account.
             </p>
           </>
-        )}
-        {!(showAllNavLinks && modalIsOpen) && (
+        {/* )} */}
+        {/* {!(showAllNavLinks && modalIsOpen) && ( */}
           <form className={`search-form__form`}>
             <input
               className={`search-form__search-bar`}
@@ -43,7 +43,7 @@ function SearchForm({
               Search
             </button>
           </form>
-        )}
+        {/* )} */}
       </section>
     </>
   );

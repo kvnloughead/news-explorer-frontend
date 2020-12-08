@@ -31,6 +31,16 @@ function HeaderNav({
             : ''
         }`}
       >
+        <Link
+            to='/'
+            className={`header__title ${
+              !showAllNavLinks && !isMainPage && !windowInnerWidth < 768
+                ? 'header__title_dark'
+                : ''
+            }`}
+          >
+            NewsExplorer
+          </Link>
         {windowInnerWidth < 768 && (
           <button
             onClick={handleMenuIconClick}
