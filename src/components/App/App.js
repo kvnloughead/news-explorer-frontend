@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer.js';
 import SavedNews from '../SavedNews/SavedNews.js';
 import PopupWithForm from '../PopupWithForm/PopupWithForm.js';
 import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
+import Keyboard from '../Keyboard/Keyboard.js';
 
 import { allCardsArray, savedCardsArray } from '../../temporary/data.js';
 
@@ -24,6 +25,12 @@ function App() {
   const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
   const [notFound, setNotFound] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [showKeyboard, setShowKeyboard] = useState(false);
+
+  const handleInputFocus = () => {
+    setShowKeyboard(!showKeyboard);
+  };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -163,6 +170,8 @@ function App() {
           handleSignin={handleSignin}
           handleSignup={handleSignup}
           windowInnerWidth={windowInnerWidth}
+          handleInputFocus={handleInputFocus}
+          showKeyboard={showKeyboard}
         />
         {showAllNavLinks && (
           <HeaderMobileMenu
@@ -225,8 +234,10 @@ function App() {
           />
         )}
       </Route>
+      {showKeyboard && <Keyboard />}
       <Footer />
     </Router>
+    
   );
 }
 

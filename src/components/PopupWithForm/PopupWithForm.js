@@ -11,19 +11,14 @@ function PopupWithForm({
   handleSignin,
   handleSignup,
   windowInnerWidth,
+  handleInputFocus
 }) {
   const [isValid, setIsValid] = useState(false);
-  const [showKeyboard, setShowKeyboard] = useState(false);
+  // const [showKeyboard, setShowKeyboard] = useState(false);
 
-  const handleInputFocus = () => {
-    setShowKeyboard(!showKeyboard);
-  };
-
-  // useEffect(() => {
-  //   if (this.props.id === document.activeElement.id) {
-  //     setShowKeyboard(true);
-  //   }
-  // })
+  // const handleInputFocus = () => {
+  //   setShowKeyboard(!showKeyboard);
+  // };
 
   useEffect(() => {
     document.addEventListener('keydown', onClose);
@@ -155,11 +150,11 @@ function PopupWithForm({
             Sign {modalType === 'signin' ? 'up' : 'in'}
           </Link>
         </p>
-        {showKeyboard && (
+        {/* {showKeyboard && (
           <div
             className={`keyboard `}
           ></div>
-        )}
+        )} */}
       </div>
     </>
   );

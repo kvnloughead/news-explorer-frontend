@@ -157,10 +157,11 @@
   .keyboard {
     background-image: url('../../images/tablet-keyboard.png');    
     height: 264px;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
+    background-size: contain;
   }
 }
 
@@ -203,15 +204,14 @@
   .popup__submit-button {
     width: 288px;
     height: 64px;
-    margin: 23px 0 0 0;
+    margin: 23px auto 0 auto;
   }
 
   .keyboard {
     background-image: url('../../images/mobile-keyboard.png');    
-    height: 248px;
-    position: static;
-    margin-left: -16px;
-    margin-right: -16px;
+    min-height: 248px;
     width: 100vw;
+    background-size: cover;
+    z-index: 2;
   }
 }
