@@ -30,16 +30,20 @@ function App() {
 
   const handleSearchSubmit = (evt) => {
     evt.preventDefault();
-    const results = allCardsArray.filter(card =>
-      card.keyword.toLowerCase() === searchTerm.toLowerCase()
-    );
-    if (results.length === 0) { 
-      setNotFound(true);
-      setCards(results);
-    } else {
-      setNotFound(false);
-      setCards(results);
-    }
+    setIsLoading(true);
+    window.setTimeout(() => {
+      const results = allCardsArray.filter(card =>
+        card.keyword.toLowerCase() === searchTerm.toLowerCase()
+      );
+      setIsLoading(false);
+      if (results.length === 0) { 
+        setNotFound(true);
+        setCards(results);
+      } else {
+        setNotFound(false);
+        setCards(results);
+      }
+    }, 2000)
   }
 
   const handleMenuIconClick = () => {
