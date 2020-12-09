@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import HeaderNav from '../HeaderNav/HeaderNav.js';
 import SearchForm from '../SearchForm/SearchForm.js';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader.js';
@@ -26,24 +25,7 @@ function Header({
       class={`header__background ${isMainPage ? 'header__background_image' : ''}
       `}
     >
-      {/* <div
-        className={`${
-          showAllNavLinks && windowInnerWidth < 768
-            ? 'header__mobile-overlay'
-            : ''
-        }`}
-      > */}
         <header className={`header`}>
-          {/* <Link
-            to='/'
-            className={`header__title ${
-              !showAllNavLinks && !isMainPage && !windowInnerWidth < 768
-                ? 'header__title_dark'
-                : ''
-            }`}
-          >
-            NewsExplorer
-          </Link> */}
           <HeaderNav
             loggedIn={loggedIn}
             userName={userName}
@@ -58,7 +40,6 @@ function Header({
             modalIsOpen={modalIsOpen}
           />
         </header>
-      {/* </div> */}
       {isMainPage ? (
         <SearchForm
           modalIsOpen={modalIsOpen}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import logoutIcon from '../../images/icons/logout.png';
@@ -15,9 +15,8 @@ function HeaderNav({
   setShowAllNavLinks,
   handleResize,
   windowInnerWidth,
-  modalIsOpen
+  modalIsOpen,
 }) {
-
   useEffect(() => {
     window.addEventListener('resize', handleResize);
   });
@@ -32,32 +31,34 @@ function HeaderNav({
         }`}
       >
         <Link
-            to='/'
-            className={`header__title ${
-              !showAllNavLinks && !isMainPage && !windowInnerWidth < 768
-                ? 'header__title_dark'
-                : ''
-            }`}
-          >
-            NewsExplorer
-          </Link>
+          to='/'
+          className={`header-nav__title ${
+            !showAllNavLinks && !isMainPage && !windowInnerWidth < 768
+              ? 'header-nav__title_dark'
+              : ''
+          }`}
+        >
+          NewsExplorer
+        </Link>
         {windowInnerWidth < 768 && (
           <button
             onClick={handleMenuIconClick}
             className={`header-nav__menu ${
-              (showAllNavLinks || modalIsOpen) 
+              showAllNavLinks || modalIsOpen
                 ? `header-nav__menu_type_close`
                 : `header-nav__menu_type_burger${isMainPage ? '' : '-dark'}`
             }`}
           ></button>
-        )}  
+        )}
         {(windowInnerWidth >= 768 || showAllNavLinks) && (
-          <>
+          <ul className={`header-nav__links-container ${showAllNavLinks ? 'header-nav__links-container_mobile': ''}`}>
             <li
               class={`header-nav__home clickable ${
                 isMainPage && 'header-nav__bottom-border'
               }`}
-              onClick={() => {setShowAllNavLinks(false)}}
+              onClick={() => {
+                setShowAllNavLinks(false);
+              }}
             >
               <Link
                 class={`header-nav__home-text ${
@@ -75,8 +76,9 @@ function HeaderNav({
                 class={`header-nav__saved-news clickable ${
                   !isMainPage && 'header-nav__bottom-border_dark'
                 }`}
-                  onClick={() => {setShowAllNavLinks(false)}}
-
+                onClick={() => {
+                  setShowAllNavLinks(false);
+                }}
               >
                 <Link
                   className={`header-nav__saved-news-text ${
@@ -124,7 +126,7 @@ function HeaderNav({
                 </button>
               </li>
             )}
-          </>
+          </ul>
         )}
       </nav>
     </>
