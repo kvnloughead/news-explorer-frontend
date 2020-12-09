@@ -8,8 +8,8 @@ function About() {
       <img className='about__image' src={authorImage} alt='Author of the website' />
       <div className='about__text-container'>
         <h2 className='about__title'>About the author</h2>
-        <p className='about__text'>The author of this page currently does not feel like talking about himself. Please check back later. </p>
-        <p className='about__text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p className='about__text'>Hi, my name is Kevin and this is my final project in the 10 month web development course at Practicum by Yandex, where I am a student and a member of the student support team.</p>
+        <p className='about__text'>The project has a frontend in React and a backend in Express, and allows users to search for news articles using a public News API service.</p>
       </div>
     </section>
   );
