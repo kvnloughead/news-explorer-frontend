@@ -21,23 +21,6 @@
   min-height: 576px;
 }
 
-/* .header-nav__title {
-  font-family: 'Roboto Slab', serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
-  text-align: left;
-  margin: 0;
-  padding: 30px 0 26px 104px;
-  color: white;  
-  text-decoration: none;
-}
-
-.header-nav__title_dark {
-  color: #1A1B22;
-} */
-
 @media screen and (min-width: 1600px) {
   .header {
     padding: 0;
@@ -46,6 +29,7 @@
 }
 
 @media screen and (max-width: 1024px) {
+
   .header {
     height: 66px;
   }
@@ -55,15 +39,10 @@
     background-position: bottom;
   }
   
-  /* .header-nav__title {
-    font-size: 20px;
-    line-height: 24px;
-    margin: 0;
-    padding: 23px 0 18px 0;
-  } */
 }
 
 @media screen and (max-width: 767.5px) {
+
   .header {
     height: 56px;
   }

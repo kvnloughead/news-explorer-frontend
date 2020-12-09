@@ -13,7 +13,4 @@
 @import url('./components/SavedNewsHeader/SavedNewsHeader.css');
 @import url('./components/PopupWithForm/PopupWithForm.css');
 @import url('./components/HeaderMobileMenu/HeaderMobileMenu.css');
-
-.clickable:hover {
-  cursor: pointer;
-}
+@import url('./components/Keyboard/Keyboard.css');

@@ -1,6 +1,6 @@
 import { buildKeyWordString } from '../../utils/helpers.js';
 
-function SavedNewsHeader({ userName, cards, showAllNavLinks }) {
+function SavedNewsHeader({ userName, cards }) {
   const keywordString = buildKeyWordString(cards);
 
   return (

@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function SearchForm({
   showAllNavLinks,
-  modalIsOpen,
   handleSearchChange,
   searchTerm,
   handleSearchSubmit
@@ -16,7 +14,6 @@ function SearchForm({
           showAllNavLinks ? 'search-form_mobile-menu' : ''
         }`}
       >
-        {/* {!showAllNavLinks && ( */}
           <>
             <h2 className='search-form__title'>
               What's going on in the world?
@@ -26,8 +23,6 @@ function SearchForm({
               account.
             </p>
           </>
-        {/* )} */}
-        {/* {!(showAllNavLinks && modalIsOpen) && ( */}
           <form className={`search-form__form`}>
             <input
               className={`search-form__search-bar`}
@@ -43,7 +38,6 @@ function SearchForm({
               Search
             </button>
           </form>
-        {/* )} */}
       </section>
     </>
   );

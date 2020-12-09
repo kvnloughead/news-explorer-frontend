@@ -237,7 +237,6 @@ function App() {
       {showKeyboard && <Keyboard />}
       <Footer />
     </Router>
-    
   );
 }
 

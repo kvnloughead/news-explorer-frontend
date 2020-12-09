@@ -143,11 +143,6 @@ function PopupWithForm({
             Sign {modalType === 'signin' ? 'up' : 'in'}
           </button>
         </p>
-        {/* {showKeyboard && (
-          <div
-            className={`keyboard `}
-          ></div>
-        )} */}
       </div>
     </>
   );
