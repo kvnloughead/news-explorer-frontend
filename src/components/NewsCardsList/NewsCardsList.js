@@ -73,7 +73,7 @@ function NewsCardsList({
           ) : (
             <>
               {notFound && (
-                <div class='not-found'>
+                <div className='not-found'>
                   <div className='not-found__icon'></div>
                   <h3 className='not-found__title'>
                     {isMainPage ? 'Nothing found' : 'Nothing here'}

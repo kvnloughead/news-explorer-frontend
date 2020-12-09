@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
-
 function PopupWithForm({
   modalType,
   modalIsOpen,
@@ -14,11 +12,6 @@ function PopupWithForm({
   handleInputFocus
 }) {
   const [isValid, setIsValid] = useState(false);
-  // const [showKeyboard, setShowKeyboard] = useState(false);
-
-  // const handleInputFocus = () => {
-  //   setShowKeyboard(!showKeyboard);
-  // };
 
   useEffect(() => {
     document.addEventListener('keydown', onClose);
@@ -64,7 +57,7 @@ function PopupWithForm({
             noValidate
             onSubmit={modalType === 'signin' ? handleSignin : handleSignup}
           >
-            <label class='popup__input-label' for='email'>
+            <label className='popup__input-label' htmlFor='email'>
               Email
             </label>
             <input
@@ -81,7 +74,7 @@ function PopupWithForm({
             <span className='popup__input-error' id='email-input-error'>
               Insert error message here
             </span>
-            <label class='popup__input-label' for='password'>
+            <label className='popup__input-label' htmlFor='password'>
               Password
             </label>
             <input
@@ -101,7 +94,7 @@ function PopupWithForm({
             ></span>
             {modalType === 'signup' && (
               <>
-                <label class='popup__input-label' for='username'>
+                <label className='popup__input-label' htmlFor='username'>
                   Username
                 </label>
                 <input
@@ -139,7 +132,7 @@ function PopupWithForm({
           }`}
         >
           {modalType !== 'success' ? 'or ' : ''}
-          <Link
+          <button
             onClick={
               modalType === 'signin'
                 ? handleSignupButtonClick
@@ -148,7 +141,7 @@ function PopupWithForm({
             className={`popup__go-elsewhere popup__go-elsewhere_link`}
           >
             Sign {modalType === 'signin' ? 'up' : 'in'}
-          </Link>
+          </button>
         </p>
         {/* {showKeyboard && (
           <div

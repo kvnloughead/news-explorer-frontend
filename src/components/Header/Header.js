@@ -22,7 +22,7 @@ function Header({
 }) {
   return (
     <div
-      class={`header__background ${isMainPage ? 'header__background_image' : ''}
+      className={`header__background ${isMainPage ? 'header__background_image' : ''}
       `}
     >
         <header className={`header`}>

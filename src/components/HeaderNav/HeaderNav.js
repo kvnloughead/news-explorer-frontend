@@ -53,7 +53,7 @@ function HeaderNav({
         {(windowInnerWidth >= 768 || showAllNavLinks) && (
           <ul className={`header-nav__links-container ${showAllNavLinks ? 'header-nav__links-container_mobile': ''}`}>
             <li
-              class={`header-nav__home clickable ${
+              className={`header-nav__home clickable ${
                 isMainPage && 'header-nav__bottom-border'
               }`}
               onClick={() => {
@@ -61,7 +61,7 @@ function HeaderNav({
               }}
             >
               <Link
-                class={`header-nav__home-text ${
+                className={`header-nav__home-text ${
                   !isMainPage && !showAllNavLinks
                     ? 'header-nav__home-text_dark'
                     : ''
@@ -73,7 +73,7 @@ function HeaderNav({
             </li>
             {(loggedIn || showAllNavLinks) && (
               <li
-                class={`header-nav__saved-news clickable ${
+                className={`header-nav__saved-news clickable ${
                   !isMainPage && 'header-nav__bottom-border_dark'
                 }`}
                 onClick={() => {

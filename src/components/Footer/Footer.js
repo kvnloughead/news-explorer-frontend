@@ -15,10 +15,10 @@ function Footer() {
           Practicum by Yandex
         </a>
         <a className='footer__link footer__link_icon-container clickable' href='https://github.com/kvnloughead/'>
-          <img class='footer__icon clickable' src={githubIcon} alt=''/>
+          <img className='footer__icon clickable' src={githubIcon} alt=''/>
         </a>
         <a className='footer__link footer__link_icon-container clickable' href='https://www.facebook.com/'>
-          <img class='footer__icon clickable' src={facebookIcon} alt=''/>
+          <img className='footer__icon clickable' src={facebookIcon} alt=''/>
         </a>
       </nav>
     </footer>

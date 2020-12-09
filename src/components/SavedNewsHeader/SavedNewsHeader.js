@@ -14,7 +14,7 @@ function SavedNewsHeader({ userName, cards, showAllNavLinks }) {
           <p className='saved-news-header__keywords'>
             {cards.length > 0 && 'By keywords: '}
             {cards.length > 0 && (
-              <span class='saved-news-header__keywords saved-news-header__keywords_emphasized'>
+              <span className='saved-news-header__keywords saved-news-header__keywords_emphasized'>
                 {keywordString}
               </span>
             )}
