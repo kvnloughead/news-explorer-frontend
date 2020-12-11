@@ -10,14 +10,16 @@ function NewsCard({
   return (
     <>
       {card && (
-        <li className='card clickable'>
+        <li className="card clickable">
           {!isMainPage && (
-            <p className='card__keyword'>
+            <p className="card__keyword">
               {card.keyword[0].toUpperCase() + card.keyword.slice(1)}
             </p>
           )}
           {isMainPage ? (
             <button
+              type="button"
+              aria-label="save-article"
               onClick={() => {
                 handleBookmarkClick(card);
               }}
@@ -26,27 +28,34 @@ function NewsCard({
                   ? ' card__button_type_bookmark-saved'
                   : ' card__button_type_bookmark'
               }`}
-            ></button>
+            />
           ) : (
             <button
+              type="button"
+              aria-label="delete-article"
               onClick={() => {
                 handleDeleteClick(card);
               }}
               className={`card__button clickable ${
                 card.isSaved ? ' card__button_type_delete' : ''
               }`}
-            ></button>
+            />
           )}
           {(!isMainPage || !loggedIn) && (
-            <button className={`card__tooltip clickable`}>
-              {!loggedIn ? 'Sign in to save articles' : 'Remove from saved'}
-            </button>
+            <div
+              type="button"
+              className="card__tooltip clickable"
+            >
+              <p>
+                {!loggedIn ? 'Sign in to save articles' : 'Remove from saved'}
+              </p>
+            </div>
           )}
-          <img className='card__image' src={card.image} alt={card.title} />
-          <p className='card__date'>{card.date}</p>
-          <h3 className='card__title'>{card.title}</h3>
-          <p className='card__text'>{card.text}</p>
-          <cite className='card__source'>{card.source}</cite>
+          <img className="card__image" src={card.image} alt={card.title} />
+          <p className="card__date">{card.date}</p>
+          <h3 className="card__title">{card.title}</h3>
+          <p className="card__text">{card.text}</p>
+          <cite className="card__source">{card.source}</cite>
         </li>
       )}
     </>

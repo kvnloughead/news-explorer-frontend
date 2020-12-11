@@ -2,21 +2,21 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
-import Header from '../Header/Header.js';
-import Main from '../Main/Main.js';
-import Footer from '../Footer/Footer.js';
-import SavedNews from '../SavedNews/SavedNews.js';
-import PopupWithForm from '../PopupWithForm/PopupWithForm.js';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
+import SavedNews from '../SavedNews/SavedNews';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
-import Keyboard from '../Keyboard/Keyboard.js';
+import Keyboard from '../Keyboard/Keyboard';
 
-import { allCardsArray, savedCardsArray } from '../../temporary/data.js';
+import { allCardsArray, savedCardsArray } from '../../temporary/data';
 
 function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState(savedCardsArray);
   const [loggedIn, setLoggedIn] = useState(true);
-  const [userName, setUserName] = useState('Kevin');
+  const [userName] = useState('Kevin');
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [modalType, setModalType] = useState('');
@@ -41,7 +41,7 @@ function App() {
     setIsLoading(true);
     window.setTimeout(() => {
       const results = allCardsArray.filter(
-        (card) => card.keyword.toLowerCase() === searchTerm.toLowerCase()
+        (card) => card.keyword.toLowerCase() === searchTerm.toLowerCase(),
       );
       setIsLoading(false);
       if (results.length === 0) {
@@ -86,9 +86,7 @@ function App() {
   const handleBookmarkClick = (card) => {
     if (!card.isSaved) {
       card.isSaved = true;
-      const newCards = cards.map((c) => {
-        return c._id === card._id ? card : c;
-      });
+      const newCards = cards.map((c) => (c._id === card._id ? card : c));
       savedCards.push(card);
       setCards(newCards);
       setSavedCards(savedCards);
@@ -97,14 +95,10 @@ function App() {
 
   const handleDeleteClick = (card) => {
     setSavedCards(
-      savedCards.filter((c) => {
-        return c._id !== card._id;
-      })
+      savedCards.filter((c) => c._id !== card._id),
     );
     card.isSaved = false;
-    const newCards = cards.map((c) => {
-      return c._id === card._id ? card : c;
-    });
+    const newCards = cards.map((c) => (c._id === card._id ? card : c));
     savedCards.push(card);
     setCards(newCards);
   };
@@ -133,11 +127,11 @@ function App() {
 
   return (
     <Router>
-      <Route exact path='/'>
+      <Route exact path="/">
         <Header
           loggedIn={loggedIn}
           userName={userName}
-          isMainPage={true}
+          isMainPage
           handleSignout={handleSignout}
           handleSigninButtonClick={handleSigninButtonClick}
           handleMenuIconClick={handleMenuIconClick}
@@ -154,7 +148,7 @@ function App() {
           cards={cards}
           loggedIn={loggedIn}
           isLoading={isLoading}
-          isMainPage={true}
+          isMainPage
           onShowMore={handleShowMore}
           showAllCards={showAllCards}
           handleBookmarkClick={handleBookmarkClick}
@@ -177,7 +171,7 @@ function App() {
           <HeaderMobileMenu
             loggedIn={loggedIn}
             userName={userName}
-            isMainPage={true}
+            isMainPage
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}
             handleMenuIconClick={handleMenuIconClick}
@@ -189,7 +183,7 @@ function App() {
           />
         )}
       </Route>
-      <Route exact path='/saved-news'>
+      <Route exact path="/saved-news">
         <Header
           loggedIn={loggedIn}
           userName={userName}
@@ -210,7 +204,7 @@ function App() {
           cards={savedCards}
           loggedIn={loggedIn}
           isMainPage={false}
-          showAllCards={true}
+          showAllCards
           handleBookmarkClick={handleBookmarkClick}
           handleDeleteClick={handleDeleteClick}
           handleResize={handleResize}

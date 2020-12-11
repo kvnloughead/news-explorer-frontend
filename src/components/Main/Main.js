@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NewsCardsList from '../NewsCardsList/NewsCardsList.js';
-import About from '../About/About.js';
+import NewsCardsList from '../NewsCardsList/NewsCardsList';
+import About from '../About/About';
 
 function Main({
   cards,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HeaderNav from '../HeaderNav/HeaderNav.js';
+import HeaderNav from '../HeaderNav/HeaderNav';
 
 function HeaderMobileMenu({
   loggedIn,
@@ -17,7 +17,7 @@ function HeaderMobileMenu({
 }) {
   return (
     <>
-      <div className={`header__mobile-overlay`}>
+      <div className="header__mobile-overlay">
         <HeaderNav
           loggedIn={loggedIn}
           userName={userName}

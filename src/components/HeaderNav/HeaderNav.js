@@ -31,7 +31,7 @@ function HeaderNav({
         }`}
       >
         <Link
-          to='/'
+          to="/"
           className={`header-nav__title ${
             !showAllNavLinks && !isMainPage && !windowInnerWidth < 768
               ? 'header-nav__title_dark'
@@ -42,31 +42,42 @@ function HeaderNav({
         </Link>
         {windowInnerWidth < 768 && (
           <button
+            type="button"
+            aria-label="show-header-links-menu"
             onClick={handleMenuIconClick}
             className={`header-nav__menu ${
               showAllNavLinks || modalIsOpen
-                ? `header-nav__menu_type_close`
+                ? 'header-nav__menu_type_close'
                 : `header-nav__menu_type_burger${isMainPage ? '' : '-dark'}`
             }`}
-          ></button>
+          />
         )}
         {(windowInnerWidth >= 768 || showAllNavLinks) && (
-          <ul className={`header-nav__links-container ${showAllNavLinks ? 'header-nav__links-container_mobile': ''}`}>
+          <ul
+            className={`header-nav__links-container ${
+              showAllNavLinks ? 'header-nav__links-container_mobile' : ''
+            }`}
+          >
             <li
               className={`header-nav__home clickable ${
                 isMainPage && 'header-nav__bottom-border'
               }`}
-              onClick={() => {
-                setShowAllNavLinks(false);
-              }}
             >
               <Link
+                onClick={() => {
+                  setShowAllNavLinks(false);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setShowAllNavLinks(false);
+                  }
+                }}
                 className={`header-nav__home-text ${
                   !isMainPage && !showAllNavLinks
                     ? 'header-nav__home-text_dark'
                     : ''
                 }`}
-                to='/'
+                to="/"
               >
                 Home
               </Link>
@@ -76,17 +87,22 @@ function HeaderNav({
                 className={`header-nav__saved-news clickable ${
                   !isMainPage && 'header-nav__bottom-border_dark'
                 }`}
-                onClick={() => {
-                  setShowAllNavLinks(false);
-                }}
               >
                 <Link
+                  onClick={() => {
+                    setShowAllNavLinks(false);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setShowAllNavLinks(false);
+                    }
+                  }}
                   className={`header-nav__saved-news-text ${
                     isMainPage || showAllNavLinks
                       ? 'header-nav__saved-news-text_light'
                       : ''
                   }`}
-                  to='/saved-news'
+                  to="/saved-news"
                 >
                   Saved articles
                 </Link>
@@ -94,17 +110,19 @@ function HeaderNav({
             )}
 
             {!loggedIn ? (
-              <li className='header-nav__signin-container'>
+              <li className="header-nav__signin-container">
                 <button
-                  className='header-nav__signin clickable'
+                  type="button"
+                  className="header-nav__signin clickable"
                   onClick={handleSigninButtonClick}
                 >
                   Sign in
                 </button>
               </li>
             ) : (
-              <li className='header-nav__user-button-container'>
+              <li className="header-nav__user-button-container">
                 <button
+                  type="button"
                   className={`header-nav__user-button clickable ${
                     !isMainPage && !showAllNavLinks
                       ? 'header-nav__user-button_dark'
@@ -112,15 +130,15 @@ function HeaderNav({
                   }`}
                 >
                   {userName}
-                  <Link to='/' onClick={handleSignout}>
+                  <Link to="/" onClick={handleSignout}>
                     <img
-                      className='header-nav__logout-icon'
+                      className="header-nav__logout-icon"
                       src={
                         isMainPage || showAllNavLinks
                           ? logoutIcon
                           : logoutDarkIcon
                       }
-                      alt='Logout icon'
+                      alt="Logout icon"
                     />
                   </Link>
                 </button>

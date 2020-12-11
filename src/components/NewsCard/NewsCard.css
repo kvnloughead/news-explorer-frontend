@@ -80,6 +80,7 @@
   font-weight: 500;
   line-height: 14px;
   border: none; 
+  text-align: center;
 }
 
 .card__image {

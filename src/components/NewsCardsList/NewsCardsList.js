@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NewsCard from '../NewsCard/NewsCard.js';
+import NewsCard from '../NewsCard/NewsCard';
 
 function NewsCardsList({
   cards,
@@ -12,27 +12,27 @@ function NewsCardsList({
   onShowMore,
   handleDeleteClick,
   handleBookmarkClick,
-  notFound
+  notFound,
 }) {
   return (
-    <section className='news-cards-list'>
+    <section className="news-cards-list">
       {isLoading ? (
-        <div className='circle-preloader'>
-          <i className='circle-preloader__circle'></i>
-          <p className='circle-preloader__text'>Searching for news...</p>
+        <div className="circle-preloader">
+          <i className="circle-preloader__circle" />
+          <p className="circle-preloader__text">Searching for news...</p>
         </div>
       ) : (
         <>
           {cards.length > 0 ? (
-            <div className='news-cards-list__container'>
+            <div className="news-cards-list__container">
               {isMainPage && (
-                <h2 className='news-cards-list__title'>Search Results</h2>
+                <h2 className="news-cards-list__title">Search Results</h2>
               )}
-              <ul className='news-cards-list__list'>
-                {cards &&
-                  cards
+              <ul className="news-cards-list__list">
+                {cards
+                  && cards
                     .slice(0, 3)
-                    .map((card, i) => (
+                    .map((card) => (
                       <NewsCard
                         handleBookmarkClick={handleBookmarkClick}
                         handleDeleteClick={handleDeleteClick}
@@ -46,17 +46,19 @@ function NewsCardsList({
               </ul>
               {!showAllCards ? (
                 <button
-                  className='news-cards-list__button clickable'
+                  type="button"
+                  aria-label="show-all-cards"
+                  className="news-cards-list__button clickable"
                   onClick={onShowMore}
                 >
                   Show more
                 </button>
               ) : (
-                <ul className='news-cards-list__list'>
-                  {cards &&
-                    cards
+                <ul className="news-cards-list__list">
+                  {cards
+                    && cards
                       .slice(3)
-                      .map((card, i) => (
+                      .map((card) => (
                         <NewsCard
                           handleBookmarkClick={handleBookmarkClick}
                           handleDeleteClick={handleDeleteClick}
@@ -73,12 +75,12 @@ function NewsCardsList({
           ) : (
             <>
               {notFound && (
-                <div className='not-found'>
-                  <div className='not-found__icon'></div>
-                  <h3 className='not-found__title'>
+                <div className="not-found">
+                  <div className="not-found__icon" />
+                  <h3 className="not-found__title">
                     {isMainPage ? 'Nothing found' : 'Nothing here'}
                   </h3>
-                  <p className='not-found__text'>
+                  <p className="not-found__text">
                     {isMainPage
                       ? 'Sorry, but nothing matched your search terms.'
                       : 'Go save some articles!'}
