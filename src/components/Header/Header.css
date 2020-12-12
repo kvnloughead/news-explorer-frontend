@@ -3,7 +3,6 @@
   display: flex;
   justify-content: space-between;
   position: relative;
-  width: 100vw;
   box-sizing: border-box;
   margin: auto;
 }
@@ -17,7 +16,6 @@
   background-image: url('../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.jpg');
   background-size: cover;
   background-repeat: no-repeat;  
-  width: 100vw;
   min-height: 576px;
 }
 

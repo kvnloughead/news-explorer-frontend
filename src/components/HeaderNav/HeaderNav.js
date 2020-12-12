@@ -122,6 +122,7 @@ function HeaderNav({
             ) : (
               <li className="header-nav__user-button-container">
                 <button
+                  onClick={handleSignout}
                   type="button"
                   className={`header-nav__user-button clickable ${
                     !isMainPage && !showAllNavLinks
@@ -130,17 +131,15 @@ function HeaderNav({
                   }`}
                 >
                   {userName}
-                  <Link to="/" onClick={handleSignout}>
-                    <img
-                      className="header-nav__logout-icon"
-                      src={
+                  <img
+                    className="header-nav__logout-icon"
+                    src={
                         isMainPage || showAllNavLinks
                           ? logoutIcon
                           : logoutDarkIcon
                       }
-                      alt="Logout icon"
-                    />
-                  </Link>
+                    alt="Logout icon"
+                  />
                 </button>
               </li>
             )}

@@ -32,16 +32,12 @@ function App() {
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (event) => {
-    debugger
     const { target } = event;
     const { name } = target;
     const { value } = target;
 
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
-    console.log(isValid);
-    console.log(target.closest('form'));
-    console.log(target.closest('form').checkValidity());
     setIsValid(target.closest('form').checkValidity());
   };
 
