@@ -10,9 +10,10 @@ function PopupWithForm({
   handleSignup,
   windowInnerWidth,
   handleInputFocus,
+  isValid,
+  handleChange,
+  errors,
 }) {
-  const [isValid] = useState(false);
-
   useEffect(() => {
     document.addEventListener('keydown', onClose);
     return () => {
@@ -26,9 +27,9 @@ function PopupWithForm({
         role="button"
         aria-label="close-modal"
         tabIndex={0}
-        className={
-          `popup__overlay${modalIsOpen ? ' popup__overlay_visible' : ''}`
-        }
+        className={`popup__overlay${
+          modalIsOpen ? ' popup__overlay_visible' : ''
+        }`}
         onClick={onClose}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -37,11 +38,9 @@ function PopupWithForm({
         }}
       />
       <div
-        className={
-          `popup${
-            modalIsOpen ? ' popup_visible' : ''
-          }${modalType === 'success' ? ' popup_success' : ''}`
-        }
+        className={`popup${modalIsOpen ? ' popup_visible' : ''}${
+          modalType === 'success' ? ' popup_success' : ''
+        }`}
       >
         {windowInnerWidth > 767 && (
           <button
@@ -78,9 +77,10 @@ function PopupWithForm({
               autoComplete="on"
               onFocus={handleInputFocus}
               onBlur={handleInputFocus}
+              onChange={handleChange}
             />
             <span className="popup__input-error" id="email-input-error">
-              Insert error message here
+              {errors.email}
             </span>
             <label className="popup__input-label" htmlFor="password">
               Password
@@ -95,11 +95,12 @@ function PopupWithForm({
               autoComplete="on"
               onFocus={handleInputFocus}
               onBlur={handleInputFocus}
+              onChange={handleChange}
+              minLength={4}
             />
-            <span
-              className="popup__input-error"
-              id="password-input-error"
-            />
+            <span className="popup__input-error" id="password-input-error">
+              {errors.password}
+            </span>
             {modalType === 'signup' && (
               <>
                 <label className="popup__input-label" htmlFor="username">
@@ -115,17 +116,22 @@ function PopupWithForm({
                   autoComplete="on"
                   onFocus={handleInputFocus}
                   onBlur={handleInputFocus}
+                  onChange={handleChange}
+                  minLength={4}
                 />
                 <span
                   className="popup__input-error"
                   id="username-input-error"
-                />
+                >
+                  {errors.username}
+                </span>
               </>
             )}
             <button
               className={`popup__submit-button ${
                 isValid ? 'popup__submit-button_active clickable' : ''
               }`}
+              disabled={!isValid}
               type="submit"
               value={`Sign ${modalType === 'signin' ? 'in' : 'up'}`}
               aria-label={`submit-sign${modalType === 'signin' ? 'in' : 'up'}`}
@@ -143,11 +149,7 @@ function PopupWithForm({
           {modalType !== 'success' ? 'or ' : ''}
           <button
             type="button"
-            aria-label={
-              modalType === 'signin'
-                ? 'sign-up'
-                : 'sign-in'
-            }
+            aria-label={modalType === 'signin' ? 'sign-up' : 'sign-in'}
             onClick={
               modalType === 'signin'
                 ? handleSignupButtonClick

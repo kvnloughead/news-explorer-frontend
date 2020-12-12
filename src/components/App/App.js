@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
@@ -25,8 +25,34 @@ function App() {
   const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
   const [notFound, setNotFound] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-
   const [showKeyboard, setShowKeyboard] = useState(false);
+
+  const [values, setValues] = useState({});
+  const [errors, setErrors] = useState({});
+  const [isValid, setIsValid] = useState(false);
+
+  const handleChange = (event) => {
+    debugger
+    const { target } = event;
+    const { name } = target;
+    const { value } = target;
+
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    console.log(isValid);
+    console.log(target.closest('form'));
+    console.log(target.closest('form').checkValidity());
+    setIsValid(target.closest('form').checkValidity());
+  };
+
+  const resetForm = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    },
+    [setValues, setErrors, setIsValid],
+  );
 
   const handleInputFocus = () => {
     setShowKeyboard(!showKeyboard);
@@ -166,6 +192,9 @@ function App() {
           windowInnerWidth={windowInnerWidth}
           handleInputFocus={handleInputFocus}
           showKeyboard={showKeyboard}
+          isValid={isValid}
+          handleChange={handleChange}
+          errors={errors}
         />
         {showAllNavLinks && (
           <HeaderMobileMenu
