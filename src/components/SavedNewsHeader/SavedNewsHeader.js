@@ -10,7 +10,7 @@ function SavedNewsHeader({ userName, cards }) {
         <p className="saved-news-header__greeting">
           {userName && userName}
           , you have
-          {cards.length}
+          {` ${cards.length}`}
           {' '}
           saved article
           {cards.length !== 1 ? 's' : ''}

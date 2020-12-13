@@ -35,14 +35,13 @@ function App() {
     const { target } = event;
     const { name } = target;
     const { value } = target;
-
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest('form').checkValidity());
   };
 
   const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
+    (newValues = { email: '', password: '', username: '' }, newErrors = {}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
@@ -127,6 +126,7 @@ function App() {
 
   const closeModal = (evt) => {
     if (!evt.key || evt.key === 'Escape') {
+      resetForm();
       setmodalIsOpen(false);
     }
   };
@@ -190,7 +190,9 @@ function App() {
           showKeyboard={showKeyboard}
           isValid={isValid}
           handleChange={handleChange}
+          resetForm={resetForm}
           errors={errors}
+          values={values}
         />
         {showAllNavLinks && (
           <HeaderMobileMenu

@@ -12,7 +12,9 @@ function PopupWithForm({
   handleInputFocus,
   isValid,
   handleChange,
+  resetForm,
   errors,
+  values,
 }) {
   useEffect(() => {
     document.addEventListener('keydown', onClose);
@@ -62,6 +64,7 @@ function PopupWithForm({
             className="popup__form"
             action="#"
             noValidate
+            onReset={resetForm}
             onSubmit={modalType === 'signin' ? handleSignin : handleSignup}
           >
             <label className="popup__input-label" htmlFor="email">
@@ -78,6 +81,7 @@ function PopupWithForm({
               onFocus={handleInputFocus}
               onBlur={handleInputFocus}
               onChange={handleChange}
+              value={values.email}
             />
             <span className="popup__input-error" id="email-input-error">
               {errors.email}
