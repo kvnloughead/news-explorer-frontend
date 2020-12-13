@@ -13,7 +13,7 @@
 }
 
 .header__background_image {
-  background-image: url('../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.jpg');
+  background-image: url('../../images/header-image-desktop.jpg');
   background-size: cover;
   background-repeat: no-repeat;  
   min-height: 576px;
@@ -35,6 +35,7 @@
   .header__background_image {
     min-height: 400px;
     background-position: bottom;
+    background-image: url('../../images/header-image-tablet.png');
   }
   
 }
@@ -54,5 +55,10 @@
     line-height: 24px;
     padding: 16px 0 16px 16px;
   }
+}
 
+@media screen and (max-width: 320px) {
+  .header__background_image {
+    background-image: url('../../images/header-image-mobile.png');
+  }
 }
