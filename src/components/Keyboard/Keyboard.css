@@ -1,0 +1,21 @@
+@media screen and (max-width: 768px) {
+  .keyboard {
+    background-image: url('../../images/tablet-keyboard.png');    
+    height: 264px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background-size: contain;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .keyboard {
+    background-image: url('../../images/mobile-keyboard.png');    
+    min-height: 248px;
+    width: 100vw;
+    background-size: cover;
+    z-index: 2;
+  }
+}

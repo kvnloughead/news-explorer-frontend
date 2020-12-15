@@ -1,0 +1,17 @@
+.header__mobile-overlay {
+  background: linear-gradient(
+    180deg,
+    #1a1b22 0,
+    #1a1b22 calc(10% - 0.5px),
+    #c4c4c4 calc(10% - 0.5px), 
+    #c4c4c4, calc(10% + 1.5px),
+    #1a1b22 calc(10% + 1.5px),
+    #1a1b22 50%,
+    rgba(255, 255, 255, 0.5) 50%
+  );
+  height: 568px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+}
