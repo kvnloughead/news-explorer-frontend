@@ -1,3 +1,12 @@
+const months = ['January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'];
+
+module.exports.convertDate = (dateString) => {
+  const [year, month] = dateString.split('-');
+  const [day] = dateString.split('-')[2].split('T');
+  return `${months[month - 1]} ${day}, ${year}`;
+};
+
 const rankKeywords = (cards) => {
   const counts = {};
   cards.forEach((card) => {
@@ -11,6 +20,7 @@ const rankKeywords = (cards) => {
   );
   return keywordsSorted;
 };
+
 module.exports.buildKeyWordString = (cards) => {
   const words = rankKeywords(cards);
   let keywordString;

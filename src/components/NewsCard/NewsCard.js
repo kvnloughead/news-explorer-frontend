@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ImageUnavailable from '../ImageUnavailable/ImageUnavailable';
+import { convertDate } from '../../utils/helpers';
 
 function NewsCard({
   card,
@@ -59,7 +60,7 @@ function NewsCard({
             ) : (
               <ImageUnavailable />
             )}
-          <p className="card__date">{card.publishedAt}</p>
+          <p className="card__date">{convertDate(card.publishedAt)}</p>
           <h3 className="card__title">{card.title}</h3>
           <p className="card__text">{card.description}</p>
           <cite className="card__source">{card.source.name}</cite>
