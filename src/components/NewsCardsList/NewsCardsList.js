@@ -31,7 +31,7 @@ function NewsCardsList({
               <ul className="news-cards-list__list">
                 {cards
                   && cards
-                    .slice(0, 3)
+                    .slice(0, showAllCards ? cards.length : 3)
                     .map((card) => (
                       <NewsCard
                         handleBookmarkClick={handleBookmarkClick}
@@ -44,7 +44,7 @@ function NewsCardsList({
                       />
                     ))}
               </ul>
-              {!showAllCards ? (
+              {!showAllCards && (
                 <button
                   type="button"
                   aria-label="show-all-cards"
@@ -53,23 +53,6 @@ function NewsCardsList({
                 >
                   Show more
                 </button>
-              ) : (
-                <ul className="news-cards-list__list">
-                  {cards
-                    && cards
-                      .slice(3)
-                      .map((card) => (
-                        <NewsCard
-                          handleBookmarkClick={handleBookmarkClick}
-                          handleDeleteClick={handleDeleteClick}
-                          loggedIn={loggedIn}
-                          isSaved={isSaved}
-                          isMainPage={isMainPage}
-                          key={card._id}
-                          card={card}
-                        />
-                      ))}
-                </ul>
               )}
             </div>
           ) : (
