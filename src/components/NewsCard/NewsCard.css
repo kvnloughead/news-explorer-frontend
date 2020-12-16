@@ -108,9 +108,15 @@
   font-weight: 400;
   line-height: 30px;
   text-align: left;
-  margin: 12px 24px 0 24px;
+  margin: 12px 24px 16px 24px;
   color: #1A1B22;
-  height: 82px;
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 352px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .card__text {
@@ -122,6 +128,13 @@
   text-align: left;
   margin: 0 24px 18px 24px;
   color: #1A1B22;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 352px;
+  height: 110px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 .card__source {
@@ -146,7 +159,7 @@
 }
 
 
-@media screen and (max-width: 1439.5px) {
+@media screen and (max-width: 768px) {
   .card {
     width: 224px;
     height: 420px;
@@ -162,6 +175,11 @@
     height: 40px;
     top: 8px;
     left: 8px;
+  }
+
+  .card__title {
+    width: 192px;
+    height: 72px;
   }
 
   .card__button {
@@ -191,7 +209,7 @@
   .card__title {
     font-size: 22px;
     line-height: 24px;
-    margin: 10px 16px 0 16px;
+    margin: 10px 16px 10px 16px;
   }
   
   .card__text {

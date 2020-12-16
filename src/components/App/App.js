@@ -9,6 +9,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
 import Keyboard from '../Keyboard/Keyboard';
+import Api from '../../utils/Api';
 
 import { allCardsArray, savedCardsArray } from '../../temporary/data';
 
@@ -30,6 +31,8 @@ function App() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+
+  Api.getArticles('Nature');
 
   const handleChange = (event) => {
     const { target } = event;
@@ -60,19 +63,21 @@ function App() {
   const handleSearchSubmit = (evt) => {
     evt.preventDefault();
     setIsLoading(true);
-    window.setTimeout(() => {
-      const results = allCardsArray.filter(
-        (card) => card.keyword.toLowerCase() === searchTerm.toLowerCase(),
-      );
-      setIsLoading(false);
-      if (results.length === 0) {
-        setNotFound(true);
-        setCards(results);
-      } else {
-        setNotFound(false);
-        setCards(results);
-      }
-    }, 2000);
+    Api.getArticles(searchTerm)
+      .then((data) => {
+        if (data.length > 0) {
+          setNotFound(false);
+          setCards(data);
+          setIsLoading(false);
+        } else {
+          setNotFound(true);
+          setCards(data);
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleMenuIconClick = () => {

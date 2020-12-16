@@ -51,11 +51,11 @@ function NewsCard({
               </p>
             </div>
           )}
-          <img className="card__image" src={card.image} alt={card.title} />
-          <p className="card__date">{card.date}</p>
+          <img className="card__image" src={card.urlToImage} alt={card.title} />
+          <p className="card__date">{card.publishedAt}</p>
           <h3 className="card__title">{card.title}</h3>
-          <p className="card__text">{card.text}</p>
-          <cite className="card__source">{card.source}</cite>
+          <p className="card__text">{card.description}</p>
+          <cite className="card__source">{card.source.name}</cite>
         </li>
       )}
     </>
