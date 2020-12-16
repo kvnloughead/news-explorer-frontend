@@ -93,11 +93,15 @@
 
 .card__image_unavailable {
   font-family: 'Roboto Slab', serif;
-    font-size: 26px;
-    font-style: normal;
-    font-weight: 400;
-    text-align: center;
-    line-height: 46px;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  font-size: 42px;
+  line-height: 46px;
+  padding-top: 80px;
+  max-width: 352px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .card__date {
@@ -160,6 +164,7 @@
   text-transform: uppercase;
   position: absolute;
   bottom: 24px;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 1600px) {
@@ -255,6 +260,14 @@
   }
 }
 
+@media screen and  (max-width: 768px) {
+  .card__image_unavailable {
+    font-size: 26px;
+    line-height: 36px;
+    padding-top: 36px;
+  }
+}
+
 @media screen and (max-width: 580px) {
   .card {
     width: 288px;
@@ -286,11 +299,8 @@
   }
 
   .card__image_unavailable {
-    margin: 0 auto;
     padding-top: 50px;
     width: 144px;
-    align-self: center;
-    box-sizing: border-box;
   }
   
   .card__date {

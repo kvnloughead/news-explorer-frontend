@@ -13,7 +13,7 @@ function NewsCard({
   return (
     <>
       {card && (
-        <li className="card clickable">
+        <li className="card">
           {!isMainPage && (
             <p className="card__keyword">
               {card.keyword[0].toUpperCase() + card.keyword.slice(1)}
@@ -63,7 +63,7 @@ function NewsCard({
           <p className="card__date">{convertDate(card.publishedAt)}</p>
           <h3 className="card__title">{card.title}</h3>
           <p className="card__text">{card.description}</p>
-          <cite className="card__source">{card.source.name}</cite>
+          <a href={card.url} className="card__source clickable">{card.source.name}</a>
         </li>
       )}
     </>
