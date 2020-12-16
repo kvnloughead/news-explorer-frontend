@@ -11,7 +11,7 @@ import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
 import Keyboard from '../Keyboard/Keyboard';
 import Api from '../../utils/Api';
 
-import { allCardsArray, savedCardsArray } from '../../temporary/data';
+import { savedCardsArray } from '../../temporary/data';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -27,12 +27,11 @@ function App() {
   const [notFound, setNotFound] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showKeyboard, setShowKeyboard] = useState(false);
+  const [searchError, setSearchError] = useState(false);
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
-
-  Api.getArticles('Nature');
 
   const handleChange = (event) => {
     const { target } = event;
@@ -62,18 +61,17 @@ function App() {
 
   const handleSearchSubmit = (evt) => {
     evt.preventDefault();
+    if (searchTerm.length === 0) {
+      setSearchError(true);
+      return;
+    }
     setIsLoading(true);
     Api.getArticles(searchTerm)
       .then((data) => {
-        if (data.length > 0) {
-          setNotFound(false);
-          setCards(data);
-          setIsLoading(false);
-        } else {
-          setNotFound(true);
-          setCards(data);
-          setIsLoading(false);
-        }
+        setNotFound(data.length === 0);
+        setCards(data);
+        setIsLoading(false);
+        setSearchError(false);
       })
       .catch((err) => {
         console.log(err);
@@ -168,8 +166,9 @@ function App() {
           modalIsOpen={modalIsOpen}
           handleSearchSubmit={handleSearchSubmit}
           handleSearchChange={handleSearchChange}
-          searchTerm={searchTerm}
           setShowAllNavLinks={setShowAllNavLinks}
+          searchTerm={searchTerm}
+          searchError={searchError}
         />
         <Main
           cards={cards}

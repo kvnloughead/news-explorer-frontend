@@ -5,6 +5,7 @@ function SearchForm({
   handleSearchChange,
   searchTerm,
   handleSearchSubmit,
+  searchError,
 }) {
   return (
     <>
@@ -29,7 +30,7 @@ function SearchForm({
             id="search"
             name="search"
             aria-label="search-for-articles"
-            placeholder="Enter topic"
+            placeholder={searchError ? 'Please enter a keyword' : 'Enter topic'}
             onChange={handleSearchChange}
             value={searchTerm}
           />
