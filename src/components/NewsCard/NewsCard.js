@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ImageUnavailable from '../ImageUnavailable/ImageUnavailable';
+
 function NewsCard({
   card,
   isMainPage,
@@ -51,7 +53,12 @@ function NewsCard({
               </p>
             </div>
           )}
-          <img className="card__image" src={card.urlToImage} alt={card.title} />
+          {card.urlToImage
+            ? (
+              <img className="card__image" src={card.urlToImage} alt={card.title} />
+            ) : (
+              <ImageUnavailable />
+            )}
           <p className="card__date">{card.publishedAt}</p>
           <h3 className="card__title">{card.title}</h3>
           <p className="card__text">{card.description}</p>
