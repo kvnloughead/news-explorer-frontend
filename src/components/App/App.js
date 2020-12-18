@@ -9,7 +9,8 @@ import SavedNews from '../SavedNews/SavedNews';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
 import Keyboard from '../Keyboard/Keyboard';
-import Api from '../../utils/Api';
+import NewsApi from '../../utils/NewsApi';
+import MainApi from '../../utils/MainApi';
 
 import { savedCardsArray } from '../../temporary/data';
 
@@ -17,7 +18,6 @@ function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState(savedCardsArray);
   const [loggedIn, setLoggedIn] = useState(true);
-  const [userName] = useState('Kevin');
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [modalType, setModalType] = useState('');
@@ -28,6 +28,9 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [searchError, setSearchError] = useState(false);
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [userName, setUserName] = useState('');
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -55,6 +58,19 @@ function App() {
     setShowKeyboard(!showKeyboard);
   };
 
+  const handleSignupSubmit = (e) => {
+    debugger;
+    MainApi.register(values.email, values.password, values.username)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleSigninSubmit = (e) => {
+
+  };
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -66,7 +82,7 @@ function App() {
       return;
     }
     setIsLoading(true);
-    Api.getArticles(searchTerm)
+    NewsApi.getArticles(searchTerm)
       .then((data) => {
         setNotFound(data.length === 0);
         setCards(data);
@@ -128,7 +144,8 @@ function App() {
   };
 
   const closeModal = (evt) => {
-    if (!evt.key || evt.key === 'Escape') {
+    evt.stopPropagation();
+    if (!evt.type === 'keydown' || evt.key === 'Escape') {
       resetForm();
       setmodalIsOpen(false);
     }
@@ -155,7 +172,7 @@ function App() {
       <Route exact path="/">
         <Header
           loggedIn={loggedIn}
-          userName={userName}
+          // userName={userName}
           isMainPage
           handleSignout={handleSignout}
           handleSigninButtonClick={handleSigninButtonClick}
@@ -197,11 +214,13 @@ function App() {
           resetForm={resetForm}
           errors={errors}
           values={values}
+          handleSignupSubmit={handleSignupSubmit}
+          handleSigninSubmit={handleSigninSubmit}
         />
         {showAllNavLinks && (
           <HeaderMobileMenu
             loggedIn={loggedIn}
-            userName={userName}
+            // userName={userName}
             isMainPage
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}
@@ -217,7 +236,7 @@ function App() {
       <Route exact path="/saved-news">
         <Header
           loggedIn={loggedIn}
-          userName={userName}
+          // userName={userName}
           isMainPage={false}
           cards={savedCards}
           handleSignout={handleSignout}
@@ -246,7 +265,7 @@ function App() {
         {showAllNavLinks && (
           <HeaderMobileMenu
             loggedIn={loggedIn}
-            userName={userName}
+            // userName={userName}
             isMainPage={false}
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}

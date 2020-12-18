@@ -6,8 +6,6 @@ function PopupWithForm({
   onClose,
   handleSigninButtonClick,
   handleSignupButtonClick,
-  handleSignin,
-  handleSignup,
   windowInnerWidth,
   handleInputFocus,
   isValid,
@@ -15,6 +13,8 @@ function PopupWithForm({
   resetForm,
   errors,
   values,
+  handleSignupSubmit,
+  handleSigninSubmit,
 }) {
   useEffect(() => {
     document.addEventListener('keydown', onClose);
@@ -59,13 +59,13 @@ function PopupWithForm({
         </h2>
         {modalType !== 'success' && (
           <form
+            onSubmit={modalType === 'signin' ? handleSigninSubmit : handleSignupSubmit}
             id={`${modalType}-form`}
             name={`${modalType}Form`}
             className="popup__form"
             action="#"
             noValidate
             onReset={resetForm}
-            onSubmit={modalType === 'signin' ? handleSignin : handleSignup}
           >
             <label className="popup__input-label" htmlFor="email">
               Email

@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-class Api {
+class NewsApi {
   constructor(options) {
     this.baseUrl = options.baseUrl;
     this.headers = options.headers;
@@ -13,9 +13,9 @@ class Api {
   getArticles(keyword) {
     return fetch(
       `${this.practicumUrl}/v2/everything?q=${keyword}`
-      + `&from=${this.lastWeek.toISOString()}`
-      + `&to=${this.today.toISOString()}`
-      + `&sortBy=popularity&pageSize=100&apiKey=${this.apiKey}`,
+        + `&from=${this.lastWeek.toISOString()}`
+        + `&to=${this.today.toISOString()}`
+        + `&sortBy=popularity&pageSize=100&apiKey=${this.apiKey}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ class Api {
   }
 }
 
-const api = new Api({
+const newsApi = new NewsApi({
   // baseUrl: 'https://nomoreparties.co/news',
   newsApiUrl: 'http://newsapi.org',
   practicumUrl: 'https://nomoreparties.co/news',
@@ -40,4 +40,4 @@ const api = new Api({
   lastWeek: new Date(Date.now() - 7 * 24 * 3600 * 1000),
 });
 
-export default api;
+export default newsApi;
