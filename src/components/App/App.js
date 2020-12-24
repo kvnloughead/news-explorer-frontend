@@ -59,10 +59,9 @@ function App() {
   };
 
   const handleSignupSubmit = (e) => {
-    debugger;
     MainApi.register(values.email, values.password, values.username)
-      .then((res) => {
-        console.log(res)
+      .then((data) => {
+        console.log(data);
       })
       .catch((err) => console.log(err));
   };
