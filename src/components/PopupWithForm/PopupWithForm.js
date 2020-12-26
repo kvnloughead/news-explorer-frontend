@@ -15,6 +15,7 @@ function PopupWithForm({
   values,
   handleSignupSubmit,
   handleSigninSubmit,
+  submitError,
 }) {
   useEffect(() => {
     document.addEventListener('keydown', onClose);
@@ -131,6 +132,12 @@ function PopupWithForm({
                 </span>
               </>
             )}
+            <span
+              className="popup__input-error popup__input-error_submit-error"
+              id="submit-error"
+            >
+              {submitError}
+            </span>
             <button
               className={`popup__submit-button ${
                 isValid ? 'popup__submit-button_active clickable' : ''

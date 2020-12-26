@@ -28,6 +28,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [searchError, setSearchError] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   // const [userName, setUserName] = useState('');
@@ -59,11 +60,16 @@ function App() {
   };
 
   const handleSignupSubmit = (e) => {
+    e.preventDefault();
     MainApi.register(values.email, values.password, values.username)
       .then((data) => {
-        console.log(data);
+        if (data.message) {
+          throw new Error(data.message);
+        } else {
+          setModalType('success');
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setSubmitError(err.message));
   };
 
   const handleSigninSubmit = (e) => {
@@ -171,7 +177,7 @@ function App() {
       <Route exact path="/">
         <Header
           loggedIn={loggedIn}
-          // userName={userName}
+          userName={values.username}
           isMainPage
           handleSignout={handleSignout}
           handleSigninButtonClick={handleSigninButtonClick}
@@ -215,11 +221,12 @@ function App() {
           values={values}
           handleSignupSubmit={handleSignupSubmit}
           handleSigninSubmit={handleSigninSubmit}
+          submitError={submitError}
         />
         {showAllNavLinks && (
           <HeaderMobileMenu
             loggedIn={loggedIn}
-            // userName={userName}
+            userName={values.username}
             isMainPage
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}
@@ -235,7 +242,7 @@ function App() {
       <Route exact path="/saved-news">
         <Header
           loggedIn={loggedIn}
-          // userName={userName}
+          userName={values.username}
           isMainPage={false}
           cards={savedCards}
           handleSignout={handleSignout}
@@ -264,7 +271,7 @@ function App() {
         {showAllNavLinks && (
           <HeaderMobileMenu
             loggedIn={loggedIn}
-            // userName={userName}
+            userName={values.username}
             isMainPage={false}
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}

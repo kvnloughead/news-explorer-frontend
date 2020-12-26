@@ -10,17 +10,8 @@ module.exports.register = (email, password, name) => fetch(`${BASE_URL}/signup`,
   body: JSON.stringify({ email, password, name }),
 })
   .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-  .then((data) => {
-    console.log(data);
-    return data;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+    return res.json();
+  });
 
 // module.exports.authorize = (identifier, password) => fetch(`${BASE_URL}/signin`, {
 //   method: 'POST',
