@@ -30,7 +30,7 @@ function App() {
   const [searchError, setSearchError] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [currentUser, setCurrentUser] = useState({});
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -102,6 +102,22 @@ function App() {
       })
       .catch((err) => console.log(err.message));
   };
+
+  useEffect(() => {
+    if (token) {
+      MainApi
+        .getContent(token)
+        .then((res) => {
+          setLoggedIn(true);
+          setCurrentUser(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);

@@ -28,15 +28,14 @@ module.exports.authorize = (identifier, password) => fetch(`${BASE_URL}/signin`,
     }
   });
 
-// module.exports.getContent = (token) => fetch(`${BASE_URL}/users/me`, {
-//   method: 'GET',
-//   headers: {
-//     Accept: 'application/json',
-//     'Content-Type': 'application/json',
-//     Authorization: `Bearer ${token}`,
-//   },
-// }).then((res) => (res.ok
-//   ? res.json()
-//   : Promise.reject(`${res.status} - ${res.message}`)))
-//   .then((data) => data)
-//   .catch((err) => console.log(err));
+module.exports.getContent = (token) => fetch(`${BASE_URL}/users/me`, {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+}).then((res) => (res.ok
+  ? res.json()
+  : Promise.reject(new Error(`${res.status} - ${res.message}`))))
+  .then((data) => data);
