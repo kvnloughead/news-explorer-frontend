@@ -29,6 +29,7 @@ function App() {
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [searchError, setSearchError] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [token, setToken] = useState('');
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   // const [userName, setUserName] = useState('');
@@ -72,8 +73,35 @@ function App() {
       .catch((err) => setSubmitError(err.message));
   };
 
-  const handleSigninSubmit = (e) => {
+  const handleSignin = () => {
+    setLoggedIn(true);
+  };
 
+  const handleSigninSubmit = (e) => {
+    e.preventDefault();
+    MainApi.authorize(values.email, values.password)
+      .then((data) => {
+        if (data && data.token) {
+          setToken(data.token);
+          localStorage.setItem('token', data.token);
+          handleSignin();
+        } else {
+          resetForm();
+          if (!values.email || !values.password) {
+            throw new Error('400 - one or more of the fields were not provided');
+          }
+          if (!data) {
+            throw new Error('401 - bad email or password');
+          }
+        }
+      })
+      .then(() => {
+        resetForm();
+      })
+      .then(() => {
+        setmodalIsOpen(false);
+      })
+      .catch((err) => console.log(err.message));
   };
 
   const handleSearchChange = (event) => {
@@ -158,10 +186,6 @@ function App() {
 
   const handleShowMore = () => {
     setShowAllCards(true);
-  };
-
-  const handleSignin = () => {
-    setLoggedIn(true);
   };
 
   const handleSignup = () => {
