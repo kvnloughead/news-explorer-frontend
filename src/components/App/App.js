@@ -29,10 +29,8 @@ function App() {
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [searchError, setSearchError] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [userName, setUserName] = useState('');
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -84,18 +82,19 @@ function App() {
         if (data && data.token) {
           setToken(data.token);
           localStorage.setItem('token', data.token);
-          handleSignin();
+          setCurrentUser({ ...values, name: data.username });
         } else {
           resetForm();
           if (!values.email || !values.password) {
-            throw new Error('400 - one or more of the fields were not provided');
+            throw new Error('One or more of the fields were not provided');
           }
           if (!data) {
-            throw new Error('401 - bad email or password');
+            throw new Error('Bad email or password');
           }
         }
       })
       .then(() => {
+        handleSignin();
         resetForm();
       })
       .then(() => {
@@ -201,7 +200,7 @@ function App() {
       <Route exact path="/">
         <Header
           loggedIn={loggedIn}
-          userName={values.username}
+          userName={currentUser.name}
           isMainPage
           handleSignout={handleSignout}
           handleSigninButtonClick={handleSigninButtonClick}
@@ -250,7 +249,7 @@ function App() {
         {showAllNavLinks && (
           <HeaderMobileMenu
             loggedIn={loggedIn}
-            userName={values.username}
+            userName={currentUser.name}
             isMainPage
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}
@@ -266,7 +265,7 @@ function App() {
       <Route exact path="/saved-news">
         <Header
           loggedIn={loggedIn}
-          userName={values.username}
+          userName={currentUser.name}
           isMainPage={false}
           cards={savedCards}
           handleSignout={handleSignout}
@@ -295,7 +294,7 @@ function App() {
         {showAllNavLinks && (
           <HeaderMobileMenu
             loggedIn={loggedIn}
-            userName={values.username}
+            userName={currentUser.name}
             isMainPage={false}
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}
