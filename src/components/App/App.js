@@ -79,6 +79,9 @@ function App() {
     e.preventDefault();
     MainApi.authorize(values.email, values.password)
       .then((data) => {
+        if (data.message) {
+          throw new Error(data.message);
+        }
         if (data && data.token) {
           setToken(data.token);
           localStorage.setItem('token', data.token);
@@ -100,7 +103,7 @@ function App() {
       .then(() => {
         setmodalIsOpen(false);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => setSubmitError(err.message));
   };
 
   useEffect(() => {
@@ -193,7 +196,7 @@ function App() {
 
   const closeModal = (evt) => {
     evt.stopPropagation();
-    if (!evt.type === 'keydown' || evt.key === 'Escape') {
+    if (evt.type === 'click' || evt.key === 'Escape') {
       resetForm();
       setmodalIsOpen(false);
     }
@@ -208,6 +211,7 @@ function App() {
   };
 
   const handleSignout = () => {
+    localStorage.removeItem('token');
     setLoggedIn(false);
   };
 

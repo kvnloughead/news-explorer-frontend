@@ -24,8 +24,8 @@ module.exports.authorize = (identifier, password) => fetch(`${BASE_URL}/signin`,
   .then((data) => {
     if (!data.message) {
       localStorage.setItem('token', data.token);
-      return data;
     }
+    return data;
   });
 
 module.exports.getContent = (token) => fetch(`${BASE_URL}/users/me`, {
