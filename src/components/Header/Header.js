@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderNav from '../HeaderNav/HeaderNav';
 import SearchForm from '../SearchForm/SearchForm';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Header({
   cards,
@@ -21,6 +22,8 @@ function Header({
   searchTerm,
   searchError,
 }) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <div
       className={`header__background ${isMainPage ? 'header__background_image' : ''}

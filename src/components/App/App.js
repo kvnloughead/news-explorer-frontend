@@ -11,12 +11,11 @@ import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
 import Keyboard from '../Keyboard/Keyboard';
 import NewsApi from '../../utils/NewsApi';
 import MainApi from '../../utils/MainApi';
-
-import { savedCardsArray } from '../../temporary/data';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [savedCards, setSavedCards] = useState(savedCardsArray);
+  const [savedCards, setSavedCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
@@ -136,6 +135,11 @@ function App() {
     NewsApi.getArticles(searchTerm)
       .then((data) => {
         setNotFound(data.length === 0);
+        data.forEach((c) => {
+          c.keyword = searchTerm;
+          c.source = c.source.name;
+          c.date = c.publishedAt;
+        });
         setCards(data);
         setIsLoading(false);
         setSearchError(false);
@@ -176,11 +180,21 @@ function App() {
 
   const handleBookmarkClick = (card) => {
     if (!card.isSaved) {
-      card.isSaved = true;
-      const newCards = cards.map((c) => (c._id === card._id ? card : c));
-      savedCards.push(card);
-      setCards(newCards);
-      setSavedCards(savedCards);
+      MainApi
+        .saveArticle(card, token)
+        .then((newCard) => {
+          newCard.isSaved = true;
+          // const newSavedCards = savedCards.map((c) => (c._id === card._id ? newCard : c));
+          const newSavedCards = [...savedCards, newCard];
+          setSavedCards(newSavedCards);
+        })
+        .catch((err) => console.log(err));
+
+      // card.isSaved = true;
+      // const newCards = cards.map((c) => (c._id === card._id ? card : c));
+      // savedCards.push(card);
+      // setCards(newCards);
+      // setSavedCards(savedCards);
     }
   };
 
@@ -216,58 +230,10 @@ function App() {
   };
 
   return (
-    <Router>
-      <Route exact path="/">
-        <Header
-          loggedIn={loggedIn}
-          userName={currentUser.name}
-          isMainPage
-          handleSignout={handleSignout}
-          handleSigninButtonClick={handleSigninButtonClick}
-          handleMenuIconClick={handleMenuIconClick}
-          showAllNavLinks={showAllNavLinks}
-          handleResize={handleResize}
-          windowInnerWidth={windowInnerWidth}
-          modalIsOpen={modalIsOpen}
-          handleSearchSubmit={handleSearchSubmit}
-          handleSearchChange={handleSearchChange}
-          setShowAllNavLinks={setShowAllNavLinks}
-          searchTerm={searchTerm}
-          searchError={searchError}
-        />
-        <Main
-          cards={cards}
-          loggedIn={loggedIn}
-          isLoading={isLoading}
-          isMainPage
-          onShowMore={handleShowMore}
-          showAllCards={showAllCards}
-          handleBookmarkClick={handleBookmarkClick}
-          handleDeleteClick={handleDeleteClick}
-          notFound={notFound}
-        />
-        <PopupWithForm
-          modalType={modalType}
-          modalIsOpen={modalIsOpen}
-          onClose={closeModal}
-          handleSignupButtonClick={handleSignupButtonClick}
-          handleSigninButtonClick={handleSigninButtonClick}
-          handleSignin={handleSignin}
-          handleSignup={handleSignup}
-          windowInnerWidth={windowInnerWidth}
-          handleInputFocus={handleInputFocus}
-          showKeyboard={showKeyboard}
-          isValid={isValid}
-          handleChange={handleChange}
-          resetForm={resetForm}
-          errors={errors}
-          values={values}
-          handleSignupSubmit={handleSignupSubmit}
-          handleSigninSubmit={handleSigninSubmit}
-          submitError={submitError}
-        />
-        {showAllNavLinks && (
-          <HeaderMobileMenu
+    <CurrentUserContext.Provider value={currentUser}>
+      <Router>
+        <Route exact path="/">
+          <Header
             loggedIn={loggedIn}
             userName={currentUser.name}
             isMainPage
@@ -275,61 +241,111 @@ function App() {
             handleSigninButtonClick={handleSigninButtonClick}
             handleMenuIconClick={handleMenuIconClick}
             showAllNavLinks={showAllNavLinks}
-            setShowAllNavLinks={setShowAllNavLinks}
             handleResize={handleResize}
             windowInnerWidth={windowInnerWidth}
             modalIsOpen={modalIsOpen}
+            handleSearchSubmit={handleSearchSubmit}
+            handleSearchChange={handleSearchChange}
+            setShowAllNavLinks={setShowAllNavLinks}
+            searchTerm={searchTerm}
+            searchError={searchError}
           />
-        )}
-      </Route>
-      <Route exact path="/saved-news">
-        <Header
-          loggedIn={loggedIn}
-          userName={currentUser.name}
-          isMainPage={false}
-          cards={savedCards}
-          handleSignout={handleSignout}
-          handleResize={handleResize}
-          handleMenuIconClick={handleMenuIconClick}
-          showAllNavLinks={showAllNavLinks}
-          windowInnerWidth={windowInnerWidth}
-          modalIsOpen={modalIsOpen}
-          handleSearchSubmit={handleSearchSubmit}
-          handleSearchChange={handleSearchChange}
-          searchTerm={searchTerm}
-          setShowAllNavLinks={setShowAllNavLinks}
-        />
-        <SavedNews
-          cards={savedCards}
-          loggedIn={loggedIn}
-          isMainPage={false}
-          showAllCards
-          handleBookmarkClick={handleBookmarkClick}
-          handleDeleteClick={handleDeleteClick}
-          handleResize={handleResize}
-          handleMenuIconClick={handleMenuIconClick}
-          showAllNavLinks={showAllNavLinks}
-          windowInnerWidth={windowInnerWidth}
-        />
-        {showAllNavLinks && (
-          <HeaderMobileMenu
+          <Main
+            cards={cards}
+            loggedIn={loggedIn}
+            isLoading={isLoading}
+            isMainPage
+            onShowMore={handleShowMore}
+            showAllCards={showAllCards}
+            handleBookmarkClick={handleBookmarkClick}
+            handleDeleteClick={handleDeleteClick}
+            notFound={notFound}
+          />
+          <PopupWithForm
+            modalType={modalType}
+            modalIsOpen={modalIsOpen}
+            onClose={closeModal}
+            handleSignupButtonClick={handleSignupButtonClick}
+            handleSigninButtonClick={handleSigninButtonClick}
+            handleSignin={handleSignin}
+            handleSignup={handleSignup}
+            windowInnerWidth={windowInnerWidth}
+            handleInputFocus={handleInputFocus}
+            showKeyboard={showKeyboard}
+            isValid={isValid}
+            handleChange={handleChange}
+            resetForm={resetForm}
+            errors={errors}
+            values={values}
+            handleSignupSubmit={handleSignupSubmit}
+            handleSigninSubmit={handleSigninSubmit}
+            submitError={submitError}
+          />
+          {showAllNavLinks && (
+            <HeaderMobileMenu
+              loggedIn={loggedIn}
+              userName={currentUser.name}
+              isMainPage
+              handleSignout={handleSignout}
+              handleSigninButtonClick={handleSigninButtonClick}
+              handleMenuIconClick={handleMenuIconClick}
+              showAllNavLinks={showAllNavLinks}
+              setShowAllNavLinks={setShowAllNavLinks}
+              handleResize={handleResize}
+              windowInnerWidth={windowInnerWidth}
+              modalIsOpen={modalIsOpen}
+            />
+          )}
+        </Route>
+        <Route exact path="/saved-news">
+          <Header
             loggedIn={loggedIn}
             userName={currentUser.name}
             isMainPage={false}
+            cards={savedCards}
             handleSignout={handleSignout}
-            handleSigninButtonClick={handleSigninButtonClick}
+            handleResize={handleResize}
             handleMenuIconClick={handleMenuIconClick}
             showAllNavLinks={showAllNavLinks}
-            setShowAllNavLinks={setShowAllNavLinks}
-            handleResize={handleResize}
             windowInnerWidth={windowInnerWidth}
             modalIsOpen={modalIsOpen}
+            handleSearchSubmit={handleSearchSubmit}
+            handleSearchChange={handleSearchChange}
+            searchTerm={searchTerm}
+            setShowAllNavLinks={setShowAllNavLinks}
           />
-        )}
-      </Route>
-      {showKeyboard && <Keyboard />}
-      <Footer />
-    </Router>
+          <SavedNews
+            cards={savedCards}
+            loggedIn={loggedIn}
+            isMainPage={false}
+            showAllCards
+            handleBookmarkClick={handleBookmarkClick}
+            handleDeleteClick={handleDeleteClick}
+            handleResize={handleResize}
+            handleMenuIconClick={handleMenuIconClick}
+            showAllNavLinks={showAllNavLinks}
+            windowInnerWidth={windowInnerWidth}
+          />
+          {showAllNavLinks && (
+            <HeaderMobileMenu
+              loggedIn={loggedIn}
+              userName={currentUser.name}
+              isMainPage={false}
+              handleSignout={handleSignout}
+              handleSigninButtonClick={handleSigninButtonClick}
+              handleMenuIconClick={handleMenuIconClick}
+              showAllNavLinks={showAllNavLinks}
+              setShowAllNavLinks={setShowAllNavLinks}
+              handleResize={handleResize}
+              windowInnerWidth={windowInnerWidth}
+              modalIsOpen={modalIsOpen}
+            />
+          )}
+        </Route>
+        {showKeyboard && <Keyboard />}
+        <Footer />
+      </Router>
+    </CurrentUserContext.Provider>
   );
 }
 

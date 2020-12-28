@@ -39,3 +39,18 @@ module.exports.getContent = (token) => fetch(`${BASE_URL}/users/me`, {
   ? res.json()
   : Promise.reject(new Error(`${res.status} - ${res.message}`))))
   .then((data) => data);
+
+module.exports.saveArticle = ({
+  keyword, content, date, source, title, url, urlToImage,
+}, token) => fetch(`${BASE_URL}/articles`, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+  body: JSON.stringify({
+    keyword, title, text: content, date, source, link: url, image: urlToImage,
+  }),
+})
+  .then((res) => res.json());
