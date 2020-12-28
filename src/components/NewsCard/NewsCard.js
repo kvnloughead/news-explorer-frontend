@@ -61,10 +61,10 @@ function NewsCard({
             ) : (
               <ImageUnavailable />
             )}
-          <p className="card__date">{convertDate(card.date)}</p>
+          <p className="card__date">{convertDate(card.publishedAt)}</p>
           <h3 className="card__title">{card.title}</h3>
           <p className="card__text">{card.description}</p>
-          <a href={card.url} className="card__source clickable">{card.source.name}</a>
+          <a href={card.url} className="card__source clickable">{card.source}</a>
         </li>
       )}
     </>

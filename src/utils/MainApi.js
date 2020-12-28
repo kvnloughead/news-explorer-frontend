@@ -41,7 +41,7 @@ module.exports.getContent = (token) => fetch(`${BASE_URL}/users/me`, {
   .then((data) => data);
 
 module.exports.saveArticle = ({
-  keyword, content, date, source, title, url, urlToImage,
+  keyword, description, publishedAt, source, title, url, urlToImage,
 }, token) => fetch(`${BASE_URL}/articles`, {
   method: 'POST',
   headers: {
@@ -50,7 +50,7 @@ module.exports.saveArticle = ({
     Authorization: `Bearer ${token}`,
   },
   body: JSON.stringify({
-    keyword, title, text: content, date, source, link: url, image: urlToImage,
+    keyword, title, description, publishedAt, source, url, urlToImage,
   }),
 })
   .then((res) => res.json());

@@ -35,6 +35,15 @@ function App() {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
+  useEffect(() => {
+    if (localStorage.getItem('searchResults')) {
+      setCards(JSON.parse(localStorage.getItem('searchResults')));
+    }
+    if (localStorage.getItem('savedCards')) {
+      setSavedCards(JSON.parse(localStorage.getItem('savedCards')));
+    }
+  }, []);
+
   const handleChange = (event) => {
     const { target } = event;
     const { name } = target;
@@ -138,11 +147,11 @@ function App() {
         data.forEach((c) => {
           c.keyword = searchTerm;
           c.source = c.source.name;
-          c.date = c.publishedAt;
         });
         setCards(data);
         setIsLoading(false);
         setSearchError(false);
+        localStorage.setItem('searchResults', JSON.stringify(data));
       })
       .catch((err) => {
         console.log(err);
@@ -186,6 +195,7 @@ function App() {
           newCard.isSaved = true;
           const newSavedCards = [...savedCards, newCard];
           setSavedCards(newSavedCards);
+          localStorage.setItem('savedCards', JSON.stringify(newSavedCards));
         })
         .catch((err) => console.log(err));
     }

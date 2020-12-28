@@ -28,6 +28,8 @@ module.exports.buildKeyWordString = (cards) => {
     [keywordString] = words;
   } else if (words.length === 2) {
     keywordString = `${words[0]} and ${words[1]}`;
+  } else if (words.length === 3) {
+    keywordString = `${words[0]}, ${words[1]} and ${words[2]}`;
   } else {
     keywordString = `${words[0]}, ${words[1]} and ${words.length - 2} other${
       words.length - 2 !== 1 ? 's' : ''
