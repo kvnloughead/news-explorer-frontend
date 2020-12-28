@@ -184,17 +184,10 @@ function App() {
         .saveArticle(card, token)
         .then((newCard) => {
           newCard.isSaved = true;
-          // const newSavedCards = savedCards.map((c) => (c._id === card._id ? newCard : c));
           const newSavedCards = [...savedCards, newCard];
           setSavedCards(newSavedCards);
         })
         .catch((err) => console.log(err));
-
-      // card.isSaved = true;
-      // const newCards = cards.map((c) => (c._id === card._id ? card : c));
-      // savedCards.push(card);
-      // setCards(newCards);
-      // setSavedCards(savedCards);
     }
   };
 

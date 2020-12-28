@@ -22,11 +22,12 @@ function NewsCard({
           {isMainPage ? (
             <button
               type="button"
+              disabled={!loggedIn}
               aria-label="save-article"
               onClick={() => {
                 handleBookmarkClick(card);
               }}
-              className={`card__button clickable ${
+              className={`card__button ${loggedIn ? 'clickable' : ''}${
                 card.isSaved
                   ? ' card__button_type_bookmark-saved'
                   : ' card__button_type_bookmark'
