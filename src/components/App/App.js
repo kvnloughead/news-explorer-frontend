@@ -189,6 +189,22 @@ function App() {
     setModalType('signup');
   };
 
+  const handleDeleteClick = (card) => {
+    MainApi.deleteArticle(card._id, token)
+      .then((res) => {
+        if (res.ok) {
+          card.isSaved = false;
+          const newSavedCards = savedCards.filter((c) => c._id !== card._id);
+          setSavedCards(newSavedCards);
+          localStorage.setItem('savedCards', JSON.stringify(newSavedCards));
+          const newCards = cards.map((c) => (c._id === card._id ? card : c));
+          setCards(newCards);
+          localStorage.setItem('searchResults', JSON.stringify(newCards));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleBookmarkClick = (card) => {
     if (!card.isSaved) {
       MainApi
@@ -198,19 +214,14 @@ function App() {
           const newSavedCards = [...savedCards, newCard];
           setSavedCards(newSavedCards);
           localStorage.setItem('savedCards', JSON.stringify(newSavedCards));
+          const newCards = cards.map((c) => (c === card ? newCard : c));
+          setCards(newCards);
+          localStorage.setItem('searchResults', JSON.stringify(newCards));
         })
         .catch((err) => console.log(err));
+    } else {
+      handleDeleteClick(card);
     }
-  };
-
-  const handleDeleteClick = (card) => {
-    setSavedCards(
-      savedCards.filter((c) => c._id !== card._id),
-    );
-    card.isSaved = false;
-    const newCards = cards.map((c) => (c._id === card._id ? card : c));
-    savedCards.push(card);
-    setCards(newCards);
   };
 
   const closeModal = (evt) => {

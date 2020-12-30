@@ -54,3 +54,12 @@ module.exports.saveArticle = ({
   }),
 })
   .then((res) => res.json());
+
+module.exports.deleteArticle = (cardId, token) => fetch(`${BASE_URL}/articles/${cardId}`, {
+  method: 'DELETE',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+});
