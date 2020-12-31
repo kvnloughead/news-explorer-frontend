@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 
 import './App.css';
 import Header from '../Header/Header';
@@ -12,6 +12,7 @@ import Keyboard from '../Keyboard/Keyboard';
 import NewsApi from '../../utils/NewsApi';
 import MainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { articleIsSaved } from '../../utils/helpers';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -45,6 +46,20 @@ function App() {
       setSavedCards(JSON.parse(localStorage.getItem('savedCards')));
     }
   }, []);
+
+  const updateCards = (newCards, setterFunction, localStorageKey) => {
+    setterFunction(newCards);
+    localStorage.setItem(localStorageKey, JSON.stringify(newCards));
+  };
+
+  useEffect(() => {
+    MainApi.getArticles(token)
+      .then((data) => {
+        data.filter((card) => card.owner === currentUser._id);
+        updateCards(data, setSavedCards, 'savedCards');
+      })
+      .catch((err) => console.log(err));
+  }, [loggedIn]);
 
   const handleChange = (event) => {
     const { target } = event;
@@ -149,6 +164,9 @@ function App() {
         data.forEach((c) => {
           c.keyword = searchTerm;
           c.source = c.source.name;
+          if (articleIsSaved(c, savedCards)) {
+            c.isSaved = true;
+          }
         });
         setCards(data);
         setIsLoading(false);
@@ -195,11 +213,9 @@ function App() {
         if (res.ok) {
           card.isSaved = false;
           const newSavedCards = savedCards.filter((c) => c._id !== card._id);
-          setSavedCards(newSavedCards);
-          localStorage.setItem('savedCards', JSON.stringify(newSavedCards));
+          updateCards(newSavedCards, setSavedCards, 'savedCards');
           const newCards = cards.map((c) => (c._id === card._id ? card : c));
-          setCards(newCards);
-          localStorage.setItem('searchResults', JSON.stringify(newCards));
+          updateCards(newCards, setCards, 'searchResults');
         }
       })
       .catch((err) => console.log(err));
@@ -212,11 +228,9 @@ function App() {
         .then((newCard) => {
           newCard.isSaved = true;
           const newSavedCards = [...savedCards, newCard];
-          setSavedCards(newSavedCards);
-          localStorage.setItem('savedCards', JSON.stringify(newSavedCards));
+          updateCards(newSavedCards, setSavedCards, 'savedCards');
           const newCards = cards.map((c) => (c === card ? newCard : c));
-          setCards(newCards);
-          localStorage.setItem('searchResults', JSON.stringify(newCards));
+          updateCards(newCards, setCards, 'searchResults');
         })
         .catch((err) => console.log(err));
     } else {
@@ -241,10 +255,8 @@ function App() {
   };
 
   const handleSignout = () => {
-    // localStorage.removeItem('token');
     localStorage.clear();
     setLoggedIn(false);
-    // history.push('/');
   };
 
   useEffect(() => {

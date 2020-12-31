@@ -40,6 +40,16 @@ module.exports.getContent = (token) => fetch(`${BASE_URL}/users/me`, {
   : Promise.reject(new Error(`${res.status} - ${res.message}`))))
   .then((data) => data);
 
+module.exports.getArticles = (token) => fetch(`${BASE_URL}/articles`, {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+})
+  .then((res) => res.json());
+
 module.exports.saveArticle = ({
   keyword, description, publishedAt, source, title, url, urlToImage,
 }, token) => fetch(`${BASE_URL}/articles`, {

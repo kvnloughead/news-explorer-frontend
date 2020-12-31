@@ -40,9 +40,7 @@ function NewsCard({
               onClick={() => {
                 handleDeleteClick(card);
               }}
-              className={`card__button clickable ${
-                card.isSaved ? ' card__button_type_delete' : ''
-              }`}
+              className="card__button clickable card__button_type_delete"
             />
           )}
           {(!isMainPage || !loggedIn) && (

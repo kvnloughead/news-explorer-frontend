@@ -1,10 +1,22 @@
 const months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
 
+const articleProperties = ['keyword', 'title', 'description', 'publishedAt', 'source', 'url', 'urlToImage'];
+
+// eslint-disable-next-line arrow-body-style
+const areSameArticle = (article, savedArticle) => {
+  return articleProperties.every((key) => article[key] === savedArticle[key]);
+};
+
 module.exports.convertDate = (dateString) => {
   const [year, month] = dateString.split('-');
   const [day] = dateString.split('-')[2].split('T');
   return `${months[month - 1]} ${day}, ${year}`;
+};
+
+// eslint-disable-next-line arrow-body-style
+module.exports.articleIsSaved = (article, savedArticles) => {
+  return savedArticles.some((a) => areSameArticle(article, a));
 };
 
 const rankKeywords = (cards) => {
