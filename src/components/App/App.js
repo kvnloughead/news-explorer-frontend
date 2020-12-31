@@ -261,6 +261,9 @@ function App() {
 
   const handleSignout = () => {
     localStorage.clear();
+    const newCards = cards;
+    newCards.forEach((c) => { c.isSaved = false; });
+    setCards(newCards);
     setLoggedIn(false);
   };
 
