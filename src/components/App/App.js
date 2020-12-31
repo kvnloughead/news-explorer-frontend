@@ -164,9 +164,14 @@ function App() {
         data.forEach((c) => {
           c.keyword = searchTerm;
           c.source = c.source.name;
-          if (articleIsSaved(c, savedCards)) {
+          const [isSaved, id] = articleIsSaved(c, savedCards);
+          if (isSaved) {
             c.isSaved = true;
+            c._id = id;
           }
+          // if (articleIsSaved(c, savedCards)) {
+          //   c.isSaved = true;
+          // }
         });
         setCards(data);
         setIsLoading(false);

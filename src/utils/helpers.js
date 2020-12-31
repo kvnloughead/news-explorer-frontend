@@ -16,7 +16,16 @@ module.exports.convertDate = (dateString) => {
 
 // eslint-disable-next-line arrow-body-style
 module.exports.articleIsSaved = (article, savedArticles) => {
-  return savedArticles.some((a) => areSameArticle(article, a));
+  let isSaved = false;
+  let id;
+  savedArticles.forEach((a) => {
+    if (areSameArticle(article, a)) {
+      isSaved = true;
+      id = a._id;
+    }
+  });
+  return [isSaved, id];
+  // return savedArticles.some((a) => areSameArticle(article, a));
 };
 
 const rankKeywords = (cards) => {
