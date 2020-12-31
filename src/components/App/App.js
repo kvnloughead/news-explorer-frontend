@@ -57,6 +57,13 @@ function App() {
       .then((data) => {
         data.filter((card) => card.owner === currentUser._id);
         updateCards(data, setSavedCards, 'savedCards');
+        cards.forEach((c) => {
+          const [isSaved, id] = articleIsSaved(c, savedCards);
+          if (isSaved) {
+            c.isSaved = true;
+            c._id = id;
+          }
+        });
       })
       .catch((err) => console.log(err));
   }, [loggedIn]);
@@ -169,9 +176,6 @@ function App() {
             c.isSaved = true;
             c._id = id;
           }
-          // if (articleIsSaved(c, savedCards)) {
-          //   c.isSaved = true;
-          // }
         });
         setCards(data);
         setIsLoading(false);

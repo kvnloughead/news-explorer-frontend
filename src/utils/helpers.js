@@ -25,7 +25,6 @@ module.exports.articleIsSaved = (article, savedArticles) => {
     }
   });
   return [isSaved, id];
-  // return savedArticles.some((a) => areSameArticle(article, a));
 };
 
 const rankKeywords = (cards) => {
