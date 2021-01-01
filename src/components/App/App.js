@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import { Route, useHistory, Redirect } from 'react-router-dom';
 
 import './App.css';
 import Header from '../Header/Header';
@@ -12,7 +12,8 @@ import Keyboard from '../Keyboard/Keyboard';
 import NewsApi from '../../utils/NewsApi';
 import MainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import { articleIsSaved } from '../../utils/helpers';
+import { articleIsSaved, sortByKeywordFrequency } from '../../utils/helpers';
+import { imageUnavailableUrl } from '../../utils/constants';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -48,6 +49,9 @@ function App() {
   }, []);
 
   const updateCards = (newCards, setterFunction, localStorageKey) => {
+    if (localStorageKey === 'savedCards') {
+      newCards = sortByKeywordFrequency(newCards);
+    }
     setterFunction(newCards);
     localStorage.setItem(localStorageKey, JSON.stringify(newCards));
   };
@@ -176,6 +180,9 @@ function App() {
             c.isSaved = true;
             c._id = id;
           }
+          if (!c.urlToImage || c.urlToImage.length === 0) {
+            c.urlToImage = imageUnavailableUrl;
+          }
         });
         setCards(data);
         setIsLoading(false);
@@ -234,14 +241,17 @@ function App() {
     if (!card.isSaved) {
       MainApi
         .saveArticle(card, token)
-        .then((newCard) => {
-          newCard.isSaved = true;
-          const newSavedCards = [...savedCards, newCard];
+        .then((data) => {
+          if (data.message) {
+            throw new Error(data.message);
+          }
+          data.isSaved = true;
+          const newSavedCards = [...savedCards, data];
           updateCards(newSavedCards, setSavedCards, 'savedCards');
-          const newCards = cards.map((c) => (c === card ? newCard : c));
+          const newCards = cards.map((c) => (c === card ? data : c));
           updateCards(newCards, setCards, 'searchResults');
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err, err.message));
     } else {
       handleDeleteClick(card);
     }
@@ -391,6 +401,7 @@ function App() {
       </Route>
       {showKeyboard && <Keyboard />}
       <Footer />
+      <Redirect from="*" to="/" />
     </CurrentUserContext.Provider>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ImageUnavailable from '../ImageUnavailable/ImageUnavailable';
+// import { imageUnavailableUrl } from '../../utils/constants';
 import { convertDate } from '../../utils/helpers';
 
 function NewsCard({
@@ -53,12 +53,8 @@ function NewsCard({
               </p>
             </div>
           )}
-          {card.urlToImage
-            ? (
-              <img className="card__image" src={card.urlToImage} alt={card.title} />
-            ) : (
-              <ImageUnavailable />
-            )}
+          <img className="card__image" src={card.urlToImage} alt={card.title} />
+          {/* <img className="card__image" src={card.urlToImage ? card.urlToImage : imageUnavailableUrl} alt={card.title} /> */}
           <p className="card__date">{convertDate(card.publishedAt)}</p>
           <h3 className="card__title">{card.title}</h3>
           <p className="card__text">{card.description}</p>

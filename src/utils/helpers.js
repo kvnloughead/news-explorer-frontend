@@ -57,3 +57,10 @@ module.exports.buildKeyWordString = (cards) => {
   }
   return keywordString;
 };
+
+module.exports.sortByKeywordFrequency = (cards) => {
+  const frequencies = rankKeywords(cards);
+  const compareFreqs = (a, b) => frequencies.indexOf(a.keyword) - frequencies.indexOf(b.keyword);
+  cards.sort(compareFreqs);
+  return cards;
+};
