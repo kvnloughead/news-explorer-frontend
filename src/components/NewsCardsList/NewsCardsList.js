@@ -13,6 +13,8 @@ function NewsCardsList({
   handleDeleteClick,
   handleBookmarkClick,
   handleSigninButtonClick,
+  numCardsShown,
+  setNumCardsShown,
   notFound,
 }) {
   return (
@@ -32,7 +34,7 @@ function NewsCardsList({
               <ul className="news-cards-list__list">
                 {cards
                   && cards
-                    .slice(0, showAllCards ? cards.length : 3)
+                    .slice(0, showAllCards ? cards.length : Math.min(numCardsShown, cards.length))
                     .map((card) => (
                       <NewsCard
                         handleSigninButtonClick={handleSigninButtonClick}
@@ -46,12 +48,14 @@ function NewsCardsList({
                       />
                     ))}
               </ul>
-              {!showAllCards && (
+              {numCardsShown < cards.length && (
                 <button
                   type="button"
                   aria-label="show-all-cards"
                   className="news-cards-list__button clickable"
-                  onClick={onShowMore}
+                  onClick={() => {
+                    onShowMore(numCardsShown, setNumCardsShown);
+                  }}
                 >
                   Show more
                 </button>

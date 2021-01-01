@@ -13,8 +13,10 @@ function Main({
   onShowMore,
   handleBookmarkClick,
   handleDeleteClick,
+  numCardsShown,
   notFound,
   handleSigninButtonClick,
+  setNumCardsShown
 }) {
   return (
     <>
@@ -26,11 +28,12 @@ function Main({
             isSaved={isSaved}
             isLoading={isLoading}
             isMainPage={isMainPage}
-            showAllCards={showAllCards}
             onShowMore={onShowMore}
             handleSigninButtonClick={handleSigninButtonClick}
             handleBookmarkClick={handleBookmarkClick}
             handleDeleteClick={handleDeleteClick}
+            numCardsShown={numCardsShown}
+            setNumCardsShown={setNumCardsShown}
             notFound={notFound}
           />
         )}

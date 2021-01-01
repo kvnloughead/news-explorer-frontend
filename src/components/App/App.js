@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Route, useHistory, Redirect } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 
 import './App.css';
 import Header from '../Header/Header';
@@ -22,7 +22,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [modalType, setModalType] = useState('');
-  const [showAllCards, setShowAllCards] = useState(false);
   const [showAllNavLinks, setShowAllNavLinks] = useState(false);
   const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
   const [notFound, setNotFound] = useState(false);
@@ -32,6 +31,8 @@ function App() {
   const [submitError, setSubmitError] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [numCardsShown, setNumCardsShown] = useState(3);
+  const [numSavedCardsShown, setNumSavedCardsShown] = useState(3);
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -265,8 +266,8 @@ function App() {
     }
   };
 
-  const handleShowMore = () => {
-    setShowAllCards(true);
+  const handleShowMore = (num, setNum) => {
+    setNum(num + 3);
   };
 
   const handleSignup = () => {
@@ -313,10 +314,11 @@ function App() {
           isLoading={isLoading}
           isMainPage
           onShowMore={handleShowMore}
-          showAllCards={showAllCards}
           handleSigninButtonClick={handleSigninButtonClick}
           handleBookmarkClick={handleBookmarkClick}
           handleDeleteClick={handleDeleteClick}
+          numCardsShown={numCardsShown}
+          setNumCardsShown={setNumCardsShown}
           notFound={notFound}
         />
         <PopupWithForm
@@ -376,7 +378,9 @@ function App() {
           cards={savedCards}
           loggedIn={loggedIn}
           isMainPage={false}
-          showAllCards
+          onShowMore={handleShowMore}
+          numCardsShown={numSavedCardsShown}
+          setNumCardsShown={setNumSavedCardsShown}
           handleSigninButtonClick={handleSigninButtonClick}
           handleBookmarkClick={handleBookmarkClick}
           handleDeleteClick={handleDeleteClick}

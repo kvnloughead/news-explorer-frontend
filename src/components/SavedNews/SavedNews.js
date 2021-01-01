@@ -5,7 +5,9 @@ import NewsCardsList from '../NewsCardsList/NewsCardsList';
 function SavedNews({
   cards,
   loggedIn,
-  showAllCards,
+  onShowMore,
+  numCardsShown,
+  setNumCardsShown,
   handleSigninButtonClick,
   handleBookmarkClick,
   handleDeleteClick,
@@ -22,7 +24,9 @@ function SavedNews({
     <NewsCardsList
       cards={cards}
       loggedIn={loggedIn}
-      showAllCards={showAllCards}
+      onShowMore={onShowMore}
+      numCardsShown={numCardsShown}
+      setNumCardsShown={setNumCardsShown}
       isMainPage={false}
       handleBookmarkClick={handleBookmarkClick}
       handleDeleteClick={handleDeleteClick}
