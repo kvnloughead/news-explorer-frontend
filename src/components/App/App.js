@@ -377,6 +377,7 @@ function App() {
           loggedIn={loggedIn}
           isMainPage={false}
           showAllCards
+          handleSigninButtonClick={handleSigninButtonClick}
           handleBookmarkClick={handleBookmarkClick}
           handleDeleteClick={handleDeleteClick}
           handleResize={handleResize}
@@ -402,7 +403,6 @@ function App() {
       </Route>
       {showKeyboard && <Keyboard />}
       <Footer />
-      <Redirect from="*" to="/" />
     </CurrentUserContext.Provider>
   );
 }
