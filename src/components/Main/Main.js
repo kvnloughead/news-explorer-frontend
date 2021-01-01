@@ -14,6 +14,7 @@ function Main({
   handleBookmarkClick,
   handleDeleteClick,
   notFound,
+  handleSigninButtonClick,
 }) {
   return (
     <>
@@ -27,6 +28,7 @@ function Main({
             isMainPage={isMainPage}
             showAllCards={showAllCards}
             onShowMore={onShowMore}
+            handleSigninButtonClick={handleSigninButtonClick}
             handleBookmarkClick={handleBookmarkClick}
             handleDeleteClick={handleDeleteClick}
             notFound={notFound}

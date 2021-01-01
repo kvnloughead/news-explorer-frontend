@@ -314,6 +314,7 @@ function App() {
           isMainPage
           onShowMore={handleShowMore}
           showAllCards={showAllCards}
+          handleSigninButtonClick={handleSigninButtonClick}
           handleBookmarkClick={handleBookmarkClick}
           handleDeleteClick={handleDeleteClick}
           notFound={notFound}

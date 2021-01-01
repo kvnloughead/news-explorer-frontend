@@ -12,6 +12,7 @@ function NewsCardsList({
   onShowMore,
   handleDeleteClick,
   handleBookmarkClick,
+  handleSigninButtonClick,
   notFound,
 }) {
   return (
@@ -34,6 +35,7 @@ function NewsCardsList({
                     .slice(0, showAllCards ? cards.length : 3)
                     .map((card) => (
                       <NewsCard
+                        handleSigninButtonClick={handleSigninButtonClick}
                         handleBookmarkClick={handleBookmarkClick}
                         handleDeleteClick={handleDeleteClick}
                         isMainPage={isMainPage}
