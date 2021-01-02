@@ -195,8 +195,12 @@ function App() {
       });
   };
 
-  const handleMenuIconClick = () => {
-    setShowAllNavLinks(!showAllNavLinks);
+  const handleMenuIconClick = (e) => {
+    if (e.target.ariaLabel === 'show-header-links-menu') {
+      setShowAllNavLinks(!showAllNavLinks);
+    } else {
+      setShowAllNavLinks(false);
+    }
   };
 
   useEffect(() => {
@@ -293,7 +297,6 @@ function App() {
       <Route exact path="/">
         <Header
           loggedIn={loggedIn}
-          userName={currentUser.name}
           isMainPage
           handleSignout={handleSignout}
           handleSigninButtonClick={handleSigninButtonClick}
@@ -344,7 +347,6 @@ function App() {
         {showAllNavLinks && (
           <HeaderMobileMenu
             loggedIn={loggedIn}
-            userName={currentUser.name}
             isMainPage
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}
@@ -360,7 +362,6 @@ function App() {
       <Route exact path="/saved-news">
         <Header
           loggedIn={loggedIn}
-          userName={currentUser.name}
           isMainPage={false}
           cards={savedCards}
           handleSignout={handleSignout}
@@ -392,14 +393,13 @@ function App() {
         {showAllNavLinks && (
           <HeaderMobileMenu
             loggedIn={loggedIn}
-            userName={currentUser.name}
             isMainPage={false}
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}
             handleMenuIconClick={handleMenuIconClick}
-            showAllNavLinks={showAllNavLinks}
             setShowAllNavLinks={setShowAllNavLinks}
             handleResize={handleResize}
+            showAllNavLinks={showAllNavLinks}
             windowInnerWidth={windowInnerWidth}
             modalIsOpen={modalIsOpen}
           />

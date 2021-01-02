@@ -9,14 +9,13 @@ function Main({
   isSaved,
   isLoading,
   isMainPage,
-  showAllCards,
   onShowMore,
   handleBookmarkClick,
   handleDeleteClick,
   numCardsShown,
   notFound,
   handleSigninButtonClick,
-  setNumCardsShown
+  setNumCardsShown,
 }) {
   return (
     <>

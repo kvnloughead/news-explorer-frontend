@@ -65,14 +65,8 @@ function HeaderNav({
               }`}
             >
               <Link
-                onClick={() => {
-                  setShowAllNavLinks(false);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setShowAllNavLinks(false);
-                  }
-                }}
+                onClick={handleMenuIconClick}
+                onKeyDown={handleMenuIconClick}
                 className={`header-nav__home-text ${
                   !isMainPage && !showAllNavLinks
                     ? 'header-nav__home-text_dark'
@@ -90,14 +84,8 @@ function HeaderNav({
                 }`}
               >
                 <Link
-                  onClick={() => {
-                    setShowAllNavLinks(false);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      setShowAllNavLinks(false);
-                    }
-                  }}
+                  onClick={handleMenuIconClick}
+                  onKeyDown={handleMenuIconClick}
                   className={`header-nav__saved-news-text ${
                     isMainPage || showAllNavLinks
                       ? 'header-nav__saved-news-text_light'
