@@ -53,9 +53,7 @@ function NewsCardsList({
                   type="button"
                   aria-label="show-all-cards"
                   className="news-cards-list__button clickable"
-                  onClick={() => {
-                    onShowMore(numCardsShown, setNumCardsShown);
-                  }}
+                  onClick={onShowMore.bind(this, numCardsShown, setNumCardsShown)}
                 >
                   Show more
                 </button>

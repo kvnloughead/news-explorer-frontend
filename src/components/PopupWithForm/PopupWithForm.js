@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 function PopupWithForm({
   modalType,
   modalIsOpen,
-  onClose,
+  closeModal,
   handleSigninButtonClick,
   handleSignupButtonClick,
   windowInnerWidth,
@@ -18,9 +18,9 @@ function PopupWithForm({
   submitError,
 }) {
   useEffect(() => {
-    document.addEventListener('keydown', onClose);
+    document.addEventListener('keydown', closeModal);
     return () => {
-      document.removeEventListener('keydown', onClose);
+      document.removeEventListener('keydown', closeModal);
     };
   });
 
@@ -33,12 +33,8 @@ function PopupWithForm({
         className={`popup__overlay${
           modalIsOpen ? ' popup__overlay_visible' : ''
         }`}
-        onClick={onClose}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            onclose();
-          }
-        }}
+        onClick={closeModal}
+        onKeyDown={closeModal}
       />
       <div
         className={`popup${modalIsOpen ? ' popup_visible' : ''}${
@@ -50,7 +46,7 @@ function PopupWithForm({
             type="button"
             aria-label="close-modal"
             className="popup__close-button clickable"
-            onClick={onClose}
+            onClick={closeModal}
           />
         )}
         <h2 className="popup__title">

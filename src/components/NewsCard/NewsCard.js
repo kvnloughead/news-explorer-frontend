@@ -23,13 +23,7 @@ function NewsCard({
             <button
               type="button"
               aria-label="save-article"
-              onClick={() => {
-                if (loggedIn) {
-                  handleBookmarkClick(card);
-                } else {
-                  handleSigninButtonClick();
-                }
-              }}
+              onClick={loggedIn ? handleBookmarkClick.bind(this, card) : handleSigninButtonClick}
               className={`card__button ${loggedIn ? 'clickable' : ''}${
                 card.isSaved
                   ? ' card__button_type_bookmark-saved'
@@ -40,9 +34,7 @@ function NewsCard({
             <button
               type="button"
               aria-label="delete-article"
-              onClick={() => {
-                handleDeleteClick(card);
-              }}
+              onClick={handleDeleteClick.bind(this, card)}
               className="card__button clickable card__button_type_delete"
             />
           )}

@@ -327,7 +327,7 @@ function App() {
         <PopupWithForm
           modalType={modalType}
           modalIsOpen={modalIsOpen}
-          onClose={closeModal}
+          closeModal={closeModal}
           handleSignupButtonClick={handleSignupButtonClick}
           handleSigninButtonClick={handleSigninButtonClick}
           handleSignin={handleSignin}
