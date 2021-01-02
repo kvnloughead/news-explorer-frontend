@@ -13,7 +13,7 @@ import NewsApi from '../../utils/NewsApi';
 import MainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { articleIsSaved, sortByKeywordFrequency } from '../../utils/helpers';
-import { imageUnavailableUrl } from '../../utils/constants';
+import { IMAGE_UNAVAILABLE_URL } from '../../utils/constants';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -182,7 +182,7 @@ function App() {
             c._id = id;
           }
           if (!c.urlToImage || c.urlToImage.length === 0) {
-            c.urlToImage = imageUnavailableUrl;
+            c.urlToImage = IMAGE_UNAVAILABLE_URL;
           }
         });
         setCards(data);

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 import logoutIcon from '../../images/icons/logout.png';
 import logoutDarkIcon from '../../images/icons/logout-dark.png';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function HeaderNav({
   loggedIn,
-  userName,
   isMainPage,
   handleSignout,
   handleSigninButtonClick,
@@ -17,10 +17,11 @@ function HeaderNav({
   windowInnerWidth,
   modalIsOpen,
 }) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   useEffect(() => {
     window.addEventListener('resize', handleResize);
   });
-
   return (
     <>
       <nav
@@ -130,7 +131,7 @@ function HeaderNav({
                       : ''
                   }`}
                 >
-                  {userName}
+                  {currentUser.name}
                   <img
                     className="header-nav__logout-icon"
                     src={
