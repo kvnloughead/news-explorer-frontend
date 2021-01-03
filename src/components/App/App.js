@@ -160,7 +160,6 @@ function App() {
           setCurrentUser(res);
         })
         .catch((err) => {
-          debugger;
           if (err.statusCode !== 401) {
             setCurrentError({ type: 'server' });
           }
