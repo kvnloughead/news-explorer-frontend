@@ -186,10 +186,12 @@ function App() {
         data.forEach((c) => {
           c.keyword = searchTerm;
           c.source = c.source.name;
-          const [isSaved, id] = articleIsSaved(c, savedCards);
-          if (isSaved) {
-            c.isSaved = true;
-            c._id = id;
+          if (loggedIn) {
+            const [isSaved, id] = articleIsSaved(c, savedCards);
+            if (isSaved) {
+              c.isSaved = true;
+              c._id = id;
+            }
           }
           if (!c.urlToImage || c.urlToImage.length === 0) {
             c.urlToImage = IMAGE_UNAVAILABLE_URL;
