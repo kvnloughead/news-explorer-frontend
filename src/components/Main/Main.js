@@ -17,7 +17,6 @@ function Main({
   notFound,
   handleSigninButtonClick,
   setNumCardsShown,
-  searchError,
 }) {
   const error = React.useContext(ErrorContext);
 
@@ -38,7 +37,6 @@ function Main({
             numCardsShown={numCardsShown}
             setNumCardsShown={setNumCardsShown}
             notFound={notFound}
-            searchError={searchError}
           />
         )}
         <About />

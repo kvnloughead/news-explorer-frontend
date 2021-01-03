@@ -18,9 +18,7 @@ function NewsCardsList({
   numCardsShown,
   setNumCardsShown,
   notFound,
-  searchError,
 }) {
-  debugger;
   const error = React.useContext(ErrorContext);
 
   return (

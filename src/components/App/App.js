@@ -28,7 +28,6 @@ function App() {
   const [notFound, setNotFound] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showKeyboard, setShowKeyboard] = useState(false);
-  const [searchError, setSearchError] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -189,11 +188,11 @@ function App() {
         });
         setCards(data);
         setIsLoading(false);
-        setSearchError('');
+        setCurrentError({ type: '' });
         localStorage.setItem('searchResults', JSON.stringify(data));
       })
       .catch(() => {
-        setSearchError('server');
+        setCurrentError({ type: 'server' });
       });
   };
 
@@ -241,7 +240,7 @@ function App() {
           updateCards(newCards, setCards, 'searchResults');
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => setCurrentError({ type: 'cardButton', cardId: card._id }));
   };
 
   const handleBookmarkClick = (card) => {
@@ -258,7 +257,7 @@ function App() {
           const newCards = cards.map((c) => (c === card ? data : c));
           updateCards(newCards, setCards, 'searchResults');
         })
-        .catch((err) => console.log(err, err.message));
+        .catch(() => setCurrentError({ type: 'cardButton', cardId: card._id }));
     } else {
       handleDeleteClick(card);
     }
@@ -312,7 +311,6 @@ function App() {
             handleSearchChange={handleSearchChange}
             setShowAllNavLinks={setShowAllNavLinks}
             searchTerm={searchTerm}
-            searchError={searchError}
           />
           <Main
             cards={cards}
@@ -326,7 +324,6 @@ function App() {
             numCardsShown={numCardsShown}
             setNumCardsShown={setNumCardsShown}
             notFound={notFound}
-            searchError={searchError}
           />
           <PopupWithForm
             modalType={modalType}

@@ -5,7 +5,6 @@ function SearchForm({
   handleSearchChange,
   searchTerm,
   handleSearchSubmit,
-  searchError,
 }) {
   return (
     <>

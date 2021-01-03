@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { convertDate } from '../../utils/helpers';
+import { SEARCH_RESULTS_ERROR } from '../../utils/constants';
+import ErrorContext from '../../contexts/ErrorContext';
 
 function NewsCard({
   card,
@@ -10,6 +12,7 @@ function NewsCard({
   handleBookmarkClick,
   handleDeleteClick,
 }) {
+  const error = useContext(ErrorContext);
   return (
     <>
       {card && (
@@ -38,15 +41,21 @@ function NewsCard({
               className="card__button clickable card__button_type_delete"
             />
           )}
-          {(!isMainPage || !loggedIn) && (
+          {(!isMainPage || !loggedIn || error.type === 'cardButton') && (
             <div
               type="button"
-              className="card__tooltip clickable"
-              // className={`card__tooltip clickable ${deleteError ? 'card__tooltip_visible' : ''}`}
+              className={`card__tooltip clickable ${(error.type === 'cardButton' && error.cardId === card._id) ? 'card__tooltip_visible' : ''}`}
             >
-              <p>
-                {!loggedIn ? 'Sign in to save articles' : 'Remove from saved'}
-              </p>
+              {(error.type === 'cardButton' && error.cardId === card._id) && (
+                <p>
+                  {SEARCH_RESULTS_ERROR[error.type]}
+                </p>
+              )}
+              {(error.type !== 'cardButton') && (
+                <p>
+                  {!loggedIn ? 'Sign in to save articles' : 'Remove from saved'}
+                </p>
+              )}
             </div>
           )}
           <img className="card__image" src={card.urlToImage} alt={card.title} />
