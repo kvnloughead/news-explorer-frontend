@@ -1,5 +1,6 @@
 import React from 'react';
 import { SEARCH_RESULTS_ERROR } from '../../utils/constants';
+import ErrorContext from '../../contexts/ErrorContext';
 
 import NewsCard from '../NewsCard/NewsCard';
 
@@ -19,6 +20,9 @@ function NewsCardsList({
   notFound,
   searchError,
 }) {
+  debugger;
+  const error = React.useContext(ErrorContext);
+
   return (
     <section className="news-cards-list">
       {isLoading ? (
@@ -76,14 +80,14 @@ function NewsCardsList({
                   </p>
                 </div>
               )}
-              {searchError.length > 0 && (
+              {error.type.length > 0 && (
                 <div className="not-found">
                   <div className="not-found__icon" />
                   <h3 className="not-found__title">
                     Something happened ...
                   </h3>
                   <p className="not-found__text">
-                    {SEARCH_RESULTS_ERROR[searchError]}
+                    {SEARCH_RESULTS_ERROR[error.type]}
                   </p>
                 </div>
               )}

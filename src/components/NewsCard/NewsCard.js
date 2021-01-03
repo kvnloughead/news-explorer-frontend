@@ -42,6 +42,7 @@ function NewsCard({
             <div
               type="button"
               className="card__tooltip clickable"
+              // className={`card__tooltip clickable ${deleteError ? 'card__tooltip_visible' : ''}`}
             >
               <p>
                 {!loggedIn ? 'Sign in to save articles' : 'Remove from saved'}

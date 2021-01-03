@@ -12,7 +12,6 @@ function HeaderNav({
   handleSigninButtonClick,
   handleMenuIconClick,
   showAllNavLinks,
-  setShowAllNavLinks,
   handleResize,
   windowInnerWidth,
   modalIsOpen,
