@@ -1,11 +1,11 @@
 /* eslint-disable consistent-return */
-// const BASE_URL = 'https://api.knews.students.nomoreparties.site';
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://api.knews.students.nomoreparties.site';
+// const BASE_URL = 'http://localhost:3001';
 
 module.exports.register = (email, password, name) => fetch(`${BASE_URL}/signup`, {
   method: 'POST',
   headers: {
-    Acccept: 'application/json',
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ email, password, name }),
@@ -15,7 +15,7 @@ module.exports.register = (email, password, name) => fetch(`${BASE_URL}/signup`,
 module.exports.authorize = (identifier, password) => fetch(`${BASE_URL}/signin`, {
   method: 'POST',
   headers: {
-    Acccept: 'application/json',
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ email: identifier, password }),
