@@ -61,6 +61,9 @@ function App() {
   useEffect(() => {
     MainApi.getArticles(token)
       .then((data) => {
+        if (data.message) {
+          throw new Error(data.message);
+        }
         data.filter((card) => card.owner === currentUser._id);
         updateCards(data, setSavedCards, 'savedCards');
         cards.forEach((c) => {
@@ -71,8 +74,10 @@ function App() {
           }
         });
       })
-      .catch(() => {
-        setCurrentError({ type: 'server' });
+      .catch((err) => {
+        if (err.message !== 'Authorization Required') {
+          setCurrentError({ type: 'server' });
+        }
       });
   }, [loggedIn]);
 
@@ -154,8 +159,11 @@ function App() {
           setLoggedIn(true);
           setCurrentUser(res);
         })
-        .catch(() => {
-          setCurrentError({ type: 'server' });
+        .catch((err) => {
+          debugger;
+          if (err.statusCode !== 401) {
+            setCurrentError({ type: 'server' });
+          }
         });
     } else {
       setLoggedIn(false);
