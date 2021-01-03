@@ -47,7 +47,7 @@ function NewsCardsList({
                         isMainPage={isMainPage}
                         loggedIn={loggedIn}
                         isSaved={isSaved}
-                        key={card._id}
+                        key={card._id ? card._id : cards.indexOf(card)}
                         card={card}
                       />
                     ))}

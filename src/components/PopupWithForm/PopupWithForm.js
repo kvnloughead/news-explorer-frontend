@@ -78,7 +78,7 @@ function PopupWithForm({
               onFocus={handleInputFocus}
               onBlur={handleInputFocus}
               onChange={handleChange}
-              value={values.email}
+              value={values.email || ''}
             />
             <span className="popup__input-error" id="email-input-error">
               {errors.email}
