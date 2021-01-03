@@ -16,11 +16,12 @@ function Main({
   notFound,
   handleSigninButtonClick,
   setNumCardsShown,
+  searchError,
 }) {
   return (
     <>
       <main>
-        {(cards.length > 0 || notFound || isLoading) && (
+        {(cards.length > 0 || notFound || isLoading || searchError.length > 0) && (
           <NewsCardsList
             cards={cards}
             loggedIn={loggedIn}
@@ -34,6 +35,7 @@ function Main({
             numCardsShown={numCardsShown}
             setNumCardsShown={setNumCardsShown}
             notFound={notFound}
+            searchError={searchError}
           />
         )}
         <About />

@@ -122,7 +122,7 @@ function App() {
         if (data && data.token) {
           setToken(data.token);
           localStorage.setItem('token', data.token);
-          setCurrentUser({ ...values, name: data.username });
+          setCurrentUser({ email: values.email, name: data.username });
         } else {
           resetForm();
           if (!values.email || !values.password) {
@@ -166,7 +166,7 @@ function App() {
   const handleSearchSubmit = (evt) => {
     evt.preventDefault();
     if (searchTerm.length === 0) {
-      setSearchError(true);
+      setSearchError('keyword');
       return;
     }
     setIsLoading(true);
@@ -187,11 +187,11 @@ function App() {
         });
         setCards(data);
         setIsLoading(false);
-        setSearchError(false);
+        setSearchError('');
         localStorage.setItem('searchResults', JSON.stringify(data));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        setSearchError('server');
       });
   };
 
@@ -323,6 +323,7 @@ function App() {
           numCardsShown={numCardsShown}
           setNumCardsShown={setNumCardsShown}
           notFound={notFound}
+          searchError={searchError}
         />
         <PopupWithForm
           modalType={modalType}

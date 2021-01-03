@@ -30,7 +30,7 @@ function SearchForm({
             id="search"
             name="search"
             aria-label="search-for-articles"
-            placeholder={searchError ? 'Please enter a keyword' : 'Enter topic'}
+            placeholder="Enter topic"
             onChange={handleSearchChange}
             value={searchTerm}
           />

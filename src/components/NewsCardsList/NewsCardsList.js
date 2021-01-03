@@ -1,4 +1,5 @@
 import React from 'react';
+import { SEARCH_RESULTS_ERROR } from '../../utils/constants';
 
 import NewsCard from '../NewsCard/NewsCard';
 
@@ -16,6 +17,7 @@ function NewsCardsList({
   numCardsShown,
   setNumCardsShown,
   notFound,
+  searchError,
 }) {
   return (
     <section className="news-cards-list">
@@ -71,6 +73,17 @@ function NewsCardsList({
                     {isMainPage
                       ? 'Sorry, but nothing matched your search terms.'
                       : 'Go save some articles!'}
+                  </p>
+                </div>
+              )}
+              {searchError.length > 0 && (
+                <div className="not-found">
+                  <div className="not-found__icon" />
+                  <h3 className="not-found__title">
+                    Something happened ...
+                  </h3>
+                  <p className="not-found__text">
+                    {SEARCH_RESULTS_ERROR[searchError]}
                   </p>
                 </div>
               )}
