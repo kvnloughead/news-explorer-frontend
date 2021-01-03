@@ -71,7 +71,9 @@ function App() {
           }
         });
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        setCurrentError({ type: 'server' });
+      });
   }, [loggedIn]);
 
   const handleChange = (event) => {
@@ -152,8 +154,8 @@ function App() {
           setLoggedIn(true);
           setCurrentUser(res);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          setCurrentError({ type: 'server' });
         });
     } else {
       setLoggedIn(false);
