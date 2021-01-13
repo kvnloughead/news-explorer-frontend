@@ -1,4 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
+import {
+  useEffect, useState, useCallback,
+} from 'react';
 import { Route, useHistory } from 'react-router-dom';
 
 import './App.css';
@@ -59,14 +61,14 @@ function App() {
   };
 
   useEffect(() => {
-    if (token) {
+    if (token && !localStorage.getItem('savedCards')) {
       mainApi.getArticles(token)
         .then((data) => {
           if (data.message) {
             throw new Error(data.message);
           }
-          data.filter((card) => card.owner === currentUser._id);
-          updateCards(data, setSavedCards, 'savedCards');
+          const ownedCards = data.filter((card) => card.owner === currentUser._id);
+          updateCards(ownedCards, setSavedCards, 'savedCards');
           cards.forEach((c) => {
             const [isSaved, id] = articleIsSaved(c, savedCards);
             if (isSaved) {
@@ -136,7 +138,7 @@ function App() {
         if (data && data.token) {
           setToken(data.token);
           localStorage.setItem('token', data.token);
-          setCurrentUser({ email: values.email, name: data.username });
+          setCurrentUser({ email: values.email, name: data.username, _id: data._id });
         } else {
           resetForm();
           if (!values.email || !values.password) {
