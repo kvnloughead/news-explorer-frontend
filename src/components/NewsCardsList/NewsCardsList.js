@@ -23,7 +23,7 @@ function NewsCardsList({
 
   return (
     <section className="news-cards-list">
-      {isLoading ? (
+      {isLoading === 'search' ? (
         <div className="circle-preloader">
           <i className="circle-preloader__circle" />
           <p className="circle-preloader__text">Searching for news...</p>

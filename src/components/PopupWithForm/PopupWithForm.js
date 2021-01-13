@@ -16,6 +16,7 @@ function PopupWithForm({
   handleSignupSubmit,
   handleSigninSubmit,
   submitError,
+  isLoading,
 }) {
   useEffect(() => {
     document.addEventListener('keydown', closeModal);
@@ -79,6 +80,7 @@ function PopupWithForm({
               onBlur={handleInputFocus}
               onChange={handleChange}
               value={values.email || ''}
+              disabled={isLoading === 'auth'}
             />
             <span className="popup__input-error" id="email-input-error">
               {errors.email}
@@ -98,6 +100,7 @@ function PopupWithForm({
               onBlur={handleInputFocus}
               onChange={handleChange}
               minLength={4}
+              disabled={isLoading === 'auth'}
             />
             <span className="popup__input-error" id="password-input-error">
               {errors.password}
@@ -119,6 +122,7 @@ function PopupWithForm({
                   onBlur={handleInputFocus}
                   onChange={handleChange}
                   minLength={4}
+                  disabled={isLoading === 'auth'}
                 />
                 <span
                   className="popup__input-error"

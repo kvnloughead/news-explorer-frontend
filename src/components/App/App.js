@@ -20,7 +20,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState('');
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [showAllNavLinks, setShowAllNavLinks] = useState(false);
@@ -108,6 +108,7 @@ function App() {
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
+    setIsLoading('auth');
     mainApi.register(values.email, values.password, values.username)
       .then((data) => {
         if (data.message) {
@@ -115,6 +116,7 @@ function App() {
         } else {
           setModalType('success');
         }
+        setIsLoading('');
       })
       .catch((err) => setSubmitError(err.message));
   };
@@ -125,6 +127,7 @@ function App() {
 
   const handleSigninSubmit = (e) => {
     e.preventDefault();
+    setIsLoading('auth');
     mainApi.authorize(values.email, values.password)
       .then((data) => {
         if (data.message) {
@@ -143,6 +146,7 @@ function App() {
             throw new Error('Bad email or password');
           }
         }
+        setIsLoading('');
       })
       .then(() => {
         handleSignin();
@@ -182,7 +186,7 @@ function App() {
       setCurrentError({ type: 'keyword' });
       return;
     }
-    setIsLoading(true);
+    setIsLoading('search');
     NewsApi.getArticles(searchTerm)
       .then((data) => {
         setNotFound(data.length === 0);
@@ -201,7 +205,7 @@ function App() {
           }
         });
         setCards(data);
-        setIsLoading(false);
+        setIsLoading('');
         setCurrentError({ type: '' });
         localStorage.setItem('searchResults', JSON.stringify(data));
       })
@@ -325,6 +329,7 @@ function App() {
             handleSearchChange={handleSearchChange}
             setShowAllNavLinks={setShowAllNavLinks}
             searchTerm={searchTerm}
+            isLoading={isLoading}
           />
           <Main
             cards={cards}
@@ -358,6 +363,7 @@ function App() {
             handleSignupSubmit={handleSignupSubmit}
             handleSigninSubmit={handleSigninSubmit}
             submitError={submitError}
+            isLoading={isLoading}
           />
           {showAllNavLinks && (
             <HeaderMobileMenu

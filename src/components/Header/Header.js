@@ -18,6 +18,7 @@ function Header({
   handleSearchSubmit,
   setShowAllNavLinks,
   searchTerm,
+  isLoading,
 }) {
   return (
     <div
@@ -46,6 +47,7 @@ function Header({
           handleSearchChange={handleSearchChange}
           handleSearchSubmit={handleSearchSubmit}
           searchTerm={searchTerm}
+          isLoading={isLoading}
         />
       ) : (
         <SavedNewsHeader
