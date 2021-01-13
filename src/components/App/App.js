@@ -10,11 +10,11 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
 import Keyboard from '../Keyboard/Keyboard';
 import NewsApi from '../../utils/NewsApi';
-import MainApi from '../../utils/MainApi';
+import mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ErrorContext from '../../contexts/ErrorContext';
 import { articleIsSaved, sortByKeywordFrequency } from '../../utils/helpers';
-import { IMAGE_UNAVAILABLE_URL } from '../../utils/constants';
+import { IMAGE_UNAVAILABLE_URL, NUM_CARDS } from '../../utils/constants';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -31,8 +31,8 @@ function App() {
   const [submitError, setSubmitError] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [numCardsShown, setNumCardsShown] = useState(3);
-  const [numSavedCardsShown, setNumSavedCardsShown] = useState(3);
+  const [numCardsShown, setNumCardsShown] = useState(NUM_CARDS);
+  const [numSavedCardsShown, setNumSavedCardsShown] = useState(NUM_CARDS);
   const [currentError, setCurrentError] = useState({ type: '' });
 
   const [values, setValues] = useState({});
@@ -59,26 +59,28 @@ function App() {
   };
 
   useEffect(() => {
-    MainApi.getArticles(token)
-      .then((data) => {
-        if (data.message) {
-          throw new Error(data.message);
-        }
-        data.filter((card) => card.owner === currentUser._id);
-        updateCards(data, setSavedCards, 'savedCards');
-        cards.forEach((c) => {
-          const [isSaved, id] = articleIsSaved(c, savedCards);
-          if (isSaved) {
-            c.isSaved = true;
-            c._id = id;
+    if (token) {
+      mainApi.getArticles(token)
+        .then((data) => {
+          if (data.message) {
+            throw new Error(data.message);
+          }
+          data.filter((card) => card.owner === currentUser._id);
+          updateCards(data, setSavedCards, 'savedCards');
+          cards.forEach((c) => {
+            const [isSaved, id] = articleIsSaved(c, savedCards);
+            if (isSaved) {
+              c.isSaved = true;
+              c._id = id;
+            }
+          });
+        })
+        .catch((err) => {
+          if (err.message !== 'Authorization Required') {
+            setCurrentError({ type: 'server' });
           }
         });
-      })
-      .catch((err) => {
-        if (err.message !== 'Authorization Required') {
-          setCurrentError({ type: 'server' });
-        }
-      });
+    }
   }, [loggedIn]);
 
   const handleChange = (event) => {
@@ -106,7 +108,7 @@ function App() {
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
-    MainApi.register(values.email, values.password, values.username)
+    mainApi.register(values.email, values.password, values.username)
       .then((data) => {
         if (data.message) {
           throw new Error(data.message);
@@ -123,7 +125,7 @@ function App() {
 
   const handleSigninSubmit = (e) => {
     e.preventDefault();
-    MainApi.authorize(values.email, values.password)
+    mainApi.authorize(values.email, values.password)
       .then((data) => {
         if (data.message) {
           throw new Error(data.message);
@@ -154,7 +156,7 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      MainApi
+      mainApi
         .getContent(token)
         .then((res) => {
           setLoggedIn(true);
@@ -242,7 +244,7 @@ function App() {
   };
 
   const handleDeleteClick = (card) => {
-    MainApi.deleteArticle(card._id, token)
+    mainApi.deleteArticle(card._id, token)
       .then((res) => {
         if (res.ok) {
           card.isSaved = false;
@@ -257,7 +259,7 @@ function App() {
 
   const handleBookmarkClick = (card) => {
     if (!card.isSaved) {
-      MainApi
+      mainApi
         .saveArticle(card, token)
         .then((data) => {
           if (data.message) {
@@ -284,7 +286,7 @@ function App() {
   };
 
   const handleShowMore = (num, setNum) => {
-    setNum(num + 3);
+    setNum(num + NUM_CARDS);
   };
 
   const handleSignup = () => {
