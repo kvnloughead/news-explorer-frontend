@@ -4,3 +4,11 @@ module.exports.SEARCH_RESULTS_ERROR = {
   keyword: 'Please enter a keyword',
   cardButton: 'Something went wrong...',
 };
+module.exports.NUM_CARDS = 3;
+
+module.exports.API_KEY = 'ee3e693144704e9c8d98437bdd341b2b';
+module.exports.NEWS_API_URL = 'http://newsapi.org';
+module.exports.PROXY_URL = 'https://nomoreparties.co/news';
+module.exports.SEARCH_RANGE_MS = 7 * 24 * 3600 * 1000;
+
+module.exports.BASE_URL = 'https://api.knews.students.nomoreparties.site';

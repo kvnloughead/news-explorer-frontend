@@ -1,4 +1,6 @@
 /* eslint-disable consistent-return */
+import { API_KEY, NEWS_API_URL, PROXY_URL, SEARCH_RANGE_MS } from './constants';
+
 class NewsApi {
   constructor(options) {
     this.baseUrl = options.baseUrl;
@@ -32,12 +34,11 @@ class NewsApi {
 }
 
 const newsApi = new NewsApi({
-  // baseUrl: 'https://nomoreparties.co/news',
-  newsApiUrl: 'http://newsapi.org',
-  practicumUrl: 'https://nomoreparties.co/news',
-  apiKey: 'ee3e693144704e9c8d98437bdd341b2b',
+  newsApiUrl: NEWS_API_URL,
+  apiKey: API_KEY,
   today: new Date(),
-  lastWeek: new Date(Date.now() - 7 * 24 * 3600 * 1000),
+  lastWeek: new Date(Date.now() - SEARCH_RANGE_MS),
+  practicumUrl: PROXY_URL,
 });
 
 export default newsApi;
