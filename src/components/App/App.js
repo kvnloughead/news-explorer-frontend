@@ -95,6 +95,7 @@ function App() {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
+      setSubmitError('');
     },
     [setValues, setErrors, setIsValid],
   );
