@@ -1,5 +1,7 @@
 /* eslint-disable consistent-return */
-import { API_KEY, NEWS_API_URL, PROXY_URL, SEARCH_RANGE_MS } from './constants';
+import {
+  API_KEY, NEWS_API_URL, PROXY_URL, SEARCH_RANGE_MS,
+} from './constants';
 
 class NewsApi {
   constructor(options) {
