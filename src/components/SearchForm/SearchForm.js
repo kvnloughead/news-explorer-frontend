@@ -5,6 +5,7 @@ function SearchForm({
   handleSearchChange,
   searchTerm,
   handleSearchSubmit,
+  isLoading,
 }) {
   return (
     <>
@@ -30,6 +31,7 @@ function SearchForm({
             name="search"
             aria-label="search-for-articles"
             placeholder="Enter topic"
+            disabled={isLoading === 'search'}
             onChange={handleSearchChange}
             value={searchTerm}
           />

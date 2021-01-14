@@ -1,17 +1,32 @@
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import NewsCardsList from '../NewsCardsList/NewsCardsList';
 
 function SavedNews({
   cards,
   loggedIn,
-  showAllCards,
+  onShowMore,
+  numCardsShown,
+  setNumCardsShown,
+  handleSigninButtonClick,
   handleBookmarkClick,
   handleDeleteClick,
 }) {
+  const history = useHistory();
+  useEffect(() => {
+    if (!loggedIn) {
+      history.push('/');
+      handleSigninButtonClick();
+    }
+  });
+
   return (
     <NewsCardsList
       cards={cards}
       loggedIn={loggedIn}
-      showAllCards={showAllCards}
+      onShowMore={onShowMore}
+      numCardsShown={numCardsShown}
+      setNumCardsShown={setNumCardsShown}
       isMainPage={false}
       handleBookmarkClick={handleBookmarkClick}
       handleDeleteClick={handleDeleteClick}

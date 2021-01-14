@@ -6,7 +6,6 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 function Header({
   cards,
   loggedIn,
-  userName,
   isMainPage,
   handleSignout,
   handleSigninButtonClick,
@@ -16,9 +15,10 @@ function Header({
   windowInnerWidth,
   modalIsOpen,
   handleSearchChange,
-  searchTerm,
   handleSearchSubmit,
   setShowAllNavLinks,
+  searchTerm,
+  isLoading,
 }) {
   return (
     <div
@@ -28,7 +28,6 @@ function Header({
       <header className="header">
         <HeaderNav
           loggedIn={loggedIn}
-          userName={userName}
           isMainPage={isMainPage}
           handleSignout={handleSignout}
           handleSigninButtonClick={handleSigninButtonClick}
@@ -46,12 +45,12 @@ function Header({
           windowInnerWidth={windowInnerWidth}
           showAllNavLinks={showAllNavLinks}
           handleSearchChange={handleSearchChange}
-          searchTerm={searchTerm}
           handleSearchSubmit={handleSearchSubmit}
+          searchTerm={searchTerm}
+          isLoading={isLoading}
         />
       ) : (
         <SavedNewsHeader
-          userName={userName}
           cards={cards}
           showAllNavLinks={showAllNavLinks}
         />

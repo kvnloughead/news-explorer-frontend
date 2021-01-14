@@ -1,5 +1,7 @@
-import { useEffect, useState, useCallback } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {
+  useEffect, useState, useCallback,
+} from 'react';
+import { Route, useHistory } from 'react-router-dom';
 
 import './App.css';
 import Header from '../Header/Header';
@@ -9,27 +11,79 @@ import SavedNews from '../SavedNews/SavedNews';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
 import Keyboard from '../Keyboard/Keyboard';
-
-import { allCardsArray, savedCardsArray } from '../../temporary/data';
+import NewsApi from '../../utils/NewsApi';
+import mainApi from '../../utils/MainApi';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import ErrorContext from '../../contexts/ErrorContext';
+import { articleIsSaved, sortByKeywordFrequency } from '../../utils/helpers';
+import { IMAGE_UNAVAILABLE_URL, NUM_CARDS } from '../../utils/constants';
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [savedCards, setSavedCards] = useState(savedCardsArray);
+  const [savedCards, setSavedCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
-  const [userName] = useState('Kevin');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState('');
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [modalType, setModalType] = useState('');
-  const [showAllCards, setShowAllCards] = useState(false);
   const [showAllNavLinks, setShowAllNavLinks] = useState(false);
   const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
   const [notFound, setNotFound] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showKeyboard, setShowKeyboard] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [numCardsShown, setNumCardsShown] = useState(NUM_CARDS);
+  const [numSavedCardsShown, setNumSavedCardsShown] = useState(NUM_CARDS);
+  const [currentError, setCurrentError] = useState({ type: '' });
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem('searchResults')) {
+      setCards(JSON.parse(localStorage.getItem('searchResults')));
+    }
+    if (localStorage.getItem('savedCards')) {
+      setSavedCards(JSON.parse(localStorage.getItem('savedCards')));
+    }
+  }, []);
+
+  const updateCards = (newCards, setterFunction, localStorageKey) => {
+    if (localStorageKey === 'savedCards') {
+      newCards = sortByKeywordFrequency(newCards);
+    }
+    setterFunction(newCards);
+    localStorage.setItem(localStorageKey, JSON.stringify(newCards));
+  };
+
+  useEffect(() => {
+    if (token && !localStorage.getItem('savedCards')) {
+      mainApi.getArticles(token)
+        .then((data) => {
+          if (data.message) {
+            throw new Error(data.message);
+          }
+          const ownedCards = data.filter((card) => card.owner === currentUser._id);
+          updateCards(ownedCards, setSavedCards, 'savedCards');
+          cards.forEach((c) => {
+            const [isSaved, id] = articleIsSaved(c, savedCards);
+            if (isSaved) {
+              c.isSaved = true;
+              c._id = id;
+            }
+          });
+        })
+        .catch((err) => {
+          if (err.message !== 'Authorization Required') {
+            setCurrentError({ type: 'server' });
+          }
+        });
+    }
+  }, [loggedIn]);
 
   const handleChange = (event) => {
     const { target } = event;
@@ -45,6 +99,7 @@ function App() {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
+      setSubmitError('');
     },
     [setValues, setErrors, setIsValid],
   );
@@ -53,30 +108,120 @@ function App() {
     setShowKeyboard(!showKeyboard);
   };
 
+  const handleSignupSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading('auth');
+    mainApi.register(values.email, values.password, values.username)
+      .then((data) => {
+        if (data.message) {
+          throw new Error(data.message);
+        } else {
+          setModalType('success');
+        }
+        setIsLoading('');
+      })
+      .catch((err) => setSubmitError(err.message));
+  };
+
+  const handleSignin = () => {
+    setLoggedIn(true);
+  };
+
+  const handleSigninSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading('auth');
+    mainApi.authorize(values.email, values.password)
+      .then((data) => {
+        if (data.message) {
+          throw new Error(data.message);
+        }
+        if (data && data.token) {
+          setToken(data.token);
+          localStorage.setItem('token', data.token);
+          setCurrentUser({ email: values.email, name: data.username, _id: data._id });
+        } else {
+          resetForm();
+          if (!values.email || !values.password) {
+            throw new Error('One or more of the fields were not provided');
+          }
+          if (!data) {
+            throw new Error('Bad email or password');
+          }
+        }
+        setIsLoading('');
+      })
+      .then(() => {
+        handleSignin();
+        resetForm();
+      })
+      .then(() => {
+        setmodalIsOpen(false);
+      })
+      .catch((err) => setSubmitError(err.message));
+  };
+
+  useEffect(() => {
+    if (token) {
+      mainApi
+        .getContent(token)
+        .then((res) => {
+          setLoggedIn(true);
+          setCurrentUser(res);
+        })
+        .catch((err) => {
+          if (err.statusCode !== 401) {
+            setCurrentError({ type: 'server' });
+          }
+        });
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const handleSearchSubmit = (evt) => {
     evt.preventDefault();
-    setIsLoading(true);
-    window.setTimeout(() => {
-      const results = allCardsArray.filter(
-        (card) => card.keyword.toLowerCase() === searchTerm.toLowerCase(),
-      );
-      setIsLoading(false);
-      if (results.length === 0) {
-        setNotFound(true);
-        setCards(results);
-      } else {
-        setNotFound(false);
-        setCards(results);
-      }
-    }, 2000);
+    if (searchTerm.length === 0) {
+      setCurrentError({ type: 'keyword' });
+      return;
+    }
+    setIsLoading('search');
+    NewsApi.getArticles(searchTerm)
+      .then((data) => {
+        setNotFound(data.length === 0);
+        data.forEach((c) => {
+          c.keyword = searchTerm;
+          c.source = c.source.name;
+          if (loggedIn) {
+            const [isSaved, id] = articleIsSaved(c, savedCards);
+            if (isSaved) {
+              c.isSaved = true;
+              c._id = id;
+            }
+          }
+          if (!c.urlToImage || c.urlToImage.length === 0) {
+            c.urlToImage = IMAGE_UNAVAILABLE_URL;
+          }
+        });
+        setCards(data);
+        setIsLoading('');
+        setCurrentError({ type: '' });
+        localStorage.setItem('searchResults', JSON.stringify(data));
+      })
+      .catch(() => {
+        setCurrentError({ type: 'server' });
+      });
   };
 
-  const handleMenuIconClick = () => {
-    setShowAllNavLinks(!showAllNavLinks);
+  const handleMenuIconClick = (e) => {
+    if (e.target.ariaLabel === 'show-header-links-menu') {
+      setShowAllNavLinks(!showAllNavLinks);
+    } else {
+      setShowAllNavLinks(false);
+    }
   };
 
   useEffect(() => {
@@ -104,39 +249,50 @@ function App() {
     setModalType('signup');
   };
 
+  const handleDeleteClick = (card) => {
+    mainApi.deleteArticle(card._id, token)
+      .then((res) => {
+        if (res.ok) {
+          card.isSaved = false;
+          const newSavedCards = savedCards.filter((c) => c._id !== card._id);
+          updateCards(newSavedCards, setSavedCards, 'savedCards');
+          const newCards = cards.map((c) => (c._id === card._id ? card : c));
+          updateCards(newCards, setCards, 'searchResults');
+        }
+      })
+      .catch(() => setCurrentError({ type: 'cardButton', cardId: card._id }));
+  };
+
   const handleBookmarkClick = (card) => {
     if (!card.isSaved) {
-      card.isSaved = true;
-      const newCards = cards.map((c) => (c._id === card._id ? card : c));
-      savedCards.push(card);
-      setCards(newCards);
-      setSavedCards(savedCards);
+      mainApi
+        .saveArticle(card, token)
+        .then((data) => {
+          if (data.message) {
+            throw new Error(data.message);
+          }
+          data.isSaved = true;
+          const newSavedCards = [...savedCards, data];
+          updateCards(newSavedCards, setSavedCards, 'savedCards');
+          const newCards = cards.map((c) => (c === card ? data : c));
+          updateCards(newCards, setCards, 'searchResults');
+        })
+        .catch(() => setCurrentError({ type: 'cardButton', cardId: card._id }));
+    } else {
+      handleDeleteClick(card);
     }
   };
 
-  const handleDeleteClick = (card) => {
-    setSavedCards(
-      savedCards.filter((c) => c._id !== card._id),
-    );
-    card.isSaved = false;
-    const newCards = cards.map((c) => (c._id === card._id ? card : c));
-    savedCards.push(card);
-    setCards(newCards);
-  };
-
   const closeModal = (evt) => {
-    if (!evt.key || evt.key === 'Escape') {
+    evt.stopPropagation();
+    if (evt.type === 'click' || evt.key === 'Escape') {
       resetForm();
       setmodalIsOpen(false);
     }
   };
 
-  const handleShowMore = () => {
-    setShowAllCards(true);
-  };
-
-  const handleSignin = () => {
-    setLoggedIn(true);
+  const handleShowMore = (num, setNum) => {
+    setNum(num + NUM_CARDS);
   };
 
   const handleSignup = () => {
@@ -144,120 +300,138 @@ function App() {
   };
 
   const handleSignout = () => {
+    localStorage.clear();
+    const newCards = cards;
+    newCards.forEach((c) => { c.isSaved = false; });
+    setCards(newCards);
     setLoggedIn(false);
   };
 
+  useEffect(() => {
+    if (!loggedIn) {
+      history.push('/');
+    }
+  });
+
   return (
-    <Router>
-      <Route exact path="/">
-        <Header
-          loggedIn={loggedIn}
-          userName={userName}
-          isMainPage
-          handleSignout={handleSignout}
-          handleSigninButtonClick={handleSigninButtonClick}
-          handleMenuIconClick={handleMenuIconClick}
-          showAllNavLinks={showAllNavLinks}
-          handleResize={handleResize}
-          windowInnerWidth={windowInnerWidth}
-          modalIsOpen={modalIsOpen}
-          handleSearchSubmit={handleSearchSubmit}
-          handleSearchChange={handleSearchChange}
-          searchTerm={searchTerm}
-          setShowAllNavLinks={setShowAllNavLinks}
-        />
-        <Main
-          cards={cards}
-          loggedIn={loggedIn}
-          isLoading={isLoading}
-          isMainPage
-          onShowMore={handleShowMore}
-          showAllCards={showAllCards}
-          handleBookmarkClick={handleBookmarkClick}
-          handleDeleteClick={handleDeleteClick}
-          notFound={notFound}
-        />
-        <PopupWithForm
-          modalType={modalType}
-          modalIsOpen={modalIsOpen}
-          onClose={closeModal}
-          handleSignupButtonClick={handleSignupButtonClick}
-          handleSigninButtonClick={handleSigninButtonClick}
-          handleSignin={handleSignin}
-          handleSignup={handleSignup}
-          windowInnerWidth={windowInnerWidth}
-          handleInputFocus={handleInputFocus}
-          showKeyboard={showKeyboard}
-          isValid={isValid}
-          handleChange={handleChange}
-          resetForm={resetForm}
-          errors={errors}
-          values={values}
-        />
-        {showAllNavLinks && (
-          <HeaderMobileMenu
+    <CurrentUserContext.Provider value={currentUser}>
+      <ErrorContext.Provider value={currentError}>
+        <Route exact path="/">
+          <Header
             loggedIn={loggedIn}
-            userName={userName}
             isMainPage
             handleSignout={handleSignout}
             handleSigninButtonClick={handleSigninButtonClick}
             handleMenuIconClick={handleMenuIconClick}
             showAllNavLinks={showAllNavLinks}
-            setShowAllNavLinks={setShowAllNavLinks}
             handleResize={handleResize}
             windowInnerWidth={windowInnerWidth}
             modalIsOpen={modalIsOpen}
+            handleSearchSubmit={handleSearchSubmit}
+            handleSearchChange={handleSearchChange}
+            setShowAllNavLinks={setShowAllNavLinks}
+            searchTerm={searchTerm}
+            isLoading={isLoading}
           />
-        )}
-      </Route>
-      <Route exact path="/saved-news">
-        <Header
-          loggedIn={loggedIn}
-          userName={userName}
-          isMainPage={false}
-          cards={savedCards}
-          handleSignout={handleSignout}
-          handleResize={handleResize}
-          handleMenuIconClick={handleMenuIconClick}
-          showAllNavLinks={showAllNavLinks}
-          windowInnerWidth={windowInnerWidth}
-          modalIsOpen={modalIsOpen}
-          handleSearchSubmit={handleSearchSubmit}
-          handleSearchChange={handleSearchChange}
-          searchTerm={searchTerm}
-          setShowAllNavLinks={setShowAllNavLinks}
-        />
-        <SavedNews
-          cards={savedCards}
-          loggedIn={loggedIn}
-          isMainPage={false}
-          showAllCards
-          handleBookmarkClick={handleBookmarkClick}
-          handleDeleteClick={handleDeleteClick}
-          handleResize={handleResize}
-          handleMenuIconClick={handleMenuIconClick}
-          showAllNavLinks={showAllNavLinks}
-          windowInnerWidth={windowInnerWidth}
-        />
-        {showAllNavLinks && (
-          <HeaderMobileMenu
+          <Main
+            cards={cards}
             loggedIn={loggedIn}
-            userName={userName}
-            isMainPage={false}
-            handleSignout={handleSignout}
+            isLoading={isLoading}
+            isMainPage
+            onShowMore={handleShowMore}
             handleSigninButtonClick={handleSigninButtonClick}
+            handleBookmarkClick={handleBookmarkClick}
+            handleDeleteClick={handleDeleteClick}
+            numCardsShown={numCardsShown}
+            setNumCardsShown={setNumCardsShown}
+            notFound={notFound}
+          />
+          <PopupWithForm
+            modalType={modalType}
+            modalIsOpen={modalIsOpen}
+            closeModal={closeModal}
+            handleSignupButtonClick={handleSignupButtonClick}
+            handleSigninButtonClick={handleSigninButtonClick}
+            handleSignin={handleSignin}
+            handleSignup={handleSignup}
+            windowInnerWidth={windowInnerWidth}
+            handleInputFocus={handleInputFocus}
+            showKeyboard={showKeyboard}
+            isValid={isValid}
+            handleChange={handleChange}
+            resetForm={resetForm}
+            errors={errors}
+            values={values}
+            handleSignupSubmit={handleSignupSubmit}
+            handleSigninSubmit={handleSigninSubmit}
+            submitError={submitError}
+            isLoading={isLoading}
+          />
+          {showAllNavLinks && (
+            <HeaderMobileMenu
+              loggedIn={loggedIn}
+              isMainPage
+              handleSignout={handleSignout}
+              handleSigninButtonClick={handleSigninButtonClick}
+              handleMenuIconClick={handleMenuIconClick}
+              showAllNavLinks={showAllNavLinks}
+              setShowAllNavLinks={setShowAllNavLinks}
+              handleResize={handleResize}
+              windowInnerWidth={windowInnerWidth}
+              modalIsOpen={modalIsOpen}
+            />
+          )}
+        </Route>
+        <Route exact path="/saved-news">
+          <Header
+            loggedIn={loggedIn}
+            isMainPage={false}
+            cards={savedCards}
+            handleSignout={handleSignout}
+            handleResize={handleResize}
             handleMenuIconClick={handleMenuIconClick}
             showAllNavLinks={showAllNavLinks}
-            setShowAllNavLinks={setShowAllNavLinks}
-            handleResize={handleResize}
             windowInnerWidth={windowInnerWidth}
             modalIsOpen={modalIsOpen}
+            handleSearchSubmit={handleSearchSubmit}
+            handleSearchChange={handleSearchChange}
+            searchTerm={searchTerm}
+            setShowAllNavLinks={setShowAllNavLinks}
           />
-        )}
-      </Route>
-      {showKeyboard && <Keyboard />}
-      <Footer />
-    </Router>
+          <SavedNews
+            cards={savedCards}
+            loggedIn={loggedIn}
+            isMainPage={false}
+            onShowMore={handleShowMore}
+            numCardsShown={numSavedCardsShown}
+            setNumCardsShown={setNumSavedCardsShown}
+            handleSigninButtonClick={handleSigninButtonClick}
+            handleBookmarkClick={handleBookmarkClick}
+            handleDeleteClick={handleDeleteClick}
+            handleResize={handleResize}
+            handleMenuIconClick={handleMenuIconClick}
+            showAllNavLinks={showAllNavLinks}
+            windowInnerWidth={windowInnerWidth}
+          />
+          {showAllNavLinks && (
+            <HeaderMobileMenu
+              loggedIn={loggedIn}
+              isMainPage={false}
+              handleSignout={handleSignout}
+              handleSigninButtonClick={handleSigninButtonClick}
+              handleMenuIconClick={handleMenuIconClick}
+              setShowAllNavLinks={setShowAllNavLinks}
+              handleResize={handleResize}
+              showAllNavLinks={showAllNavLinks}
+              windowInnerWidth={windowInnerWidth}
+              modalIsOpen={modalIsOpen}
+            />
+          )}
+        </Route>
+        {showKeyboard && <Keyboard />}
+        <Footer />
+      </ErrorContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 

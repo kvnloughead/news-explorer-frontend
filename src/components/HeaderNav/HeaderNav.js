@@ -3,24 +3,24 @@ import { Link } from 'react-router-dom';
 
 import logoutIcon from '../../images/icons/logout.png';
 import logoutDarkIcon from '../../images/icons/logout-dark.png';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function HeaderNav({
   loggedIn,
-  userName,
   isMainPage,
   handleSignout,
   handleSigninButtonClick,
   handleMenuIconClick,
   showAllNavLinks,
-  setShowAllNavLinks,
   handleResize,
   windowInnerWidth,
   modalIsOpen,
 }) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   useEffect(() => {
     window.addEventListener('resize', handleResize);
   });
-
   return (
     <>
       <nav
@@ -64,14 +64,8 @@ function HeaderNav({
               }`}
             >
               <Link
-                onClick={() => {
-                  setShowAllNavLinks(false);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setShowAllNavLinks(false);
-                  }
-                }}
+                onClick={handleMenuIconClick}
+                onKeyDown={handleMenuIconClick}
                 className={`header-nav__home-text ${
                   !isMainPage && !showAllNavLinks
                     ? 'header-nav__home-text_dark'
@@ -89,14 +83,8 @@ function HeaderNav({
                 }`}
               >
                 <Link
-                  onClick={() => {
-                    setShowAllNavLinks(false);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      setShowAllNavLinks(false);
-                    }
-                  }}
+                  onClick={handleMenuIconClick}
+                  onKeyDown={handleMenuIconClick}
                   className={`header-nav__saved-news-text ${
                     isMainPage || showAllNavLinks
                       ? 'header-nav__saved-news-text_light'
@@ -130,7 +118,7 @@ function HeaderNav({
                       : ''
                   }`}
                 >
-                  {userName}
+                  {currentUser.name}
                   <img
                     className="header-nav__logout-icon"
                     src={

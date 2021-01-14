@@ -3,11 +3,9 @@ import { useEffect } from 'react';
 function PopupWithForm({
   modalType,
   modalIsOpen,
-  onClose,
+  closeModal,
   handleSigninButtonClick,
   handleSignupButtonClick,
-  handleSignin,
-  handleSignup,
   windowInnerWidth,
   handleInputFocus,
   isValid,
@@ -15,11 +13,15 @@ function PopupWithForm({
   resetForm,
   errors,
   values,
+  handleSignupSubmit,
+  handleSigninSubmit,
+  submitError,
+  isLoading,
 }) {
   useEffect(() => {
-    document.addEventListener('keydown', onClose);
+    document.addEventListener('keydown', closeModal);
     return () => {
-      document.removeEventListener('keydown', onClose);
+      document.removeEventListener('keydown', closeModal);
     };
   });
 
@@ -32,12 +34,8 @@ function PopupWithForm({
         className={`popup__overlay${
           modalIsOpen ? ' popup__overlay_visible' : ''
         }`}
-        onClick={onClose}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            onclose();
-          }
-        }}
+        onClick={closeModal}
+        onKeyDown={closeModal}
       />
       <div
         className={`popup${modalIsOpen ? ' popup_visible' : ''}${
@@ -49,7 +47,7 @@ function PopupWithForm({
             type="button"
             aria-label="close-modal"
             className="popup__close-button clickable"
-            onClick={onClose}
+            onClick={closeModal}
           />
         )}
         <h2 className="popup__title">
@@ -59,13 +57,13 @@ function PopupWithForm({
         </h2>
         {modalType !== 'success' && (
           <form
+            onSubmit={modalType === 'signin' ? handleSigninSubmit : handleSignupSubmit}
             id={`${modalType}-form`}
             name={`${modalType}Form`}
             className="popup__form"
             action="#"
             noValidate
             onReset={resetForm}
-            onSubmit={modalType === 'signin' ? handleSignin : handleSignup}
           >
             <label className="popup__input-label" htmlFor="email">
               Email
@@ -81,7 +79,8 @@ function PopupWithForm({
               onFocus={handleInputFocus}
               onBlur={handleInputFocus}
               onChange={handleChange}
-              value={values.email}
+              value={values.email || ''}
+              disabled={isLoading === 'auth'}
             />
             <span className="popup__input-error" id="email-input-error">
               {errors.email}
@@ -101,6 +100,7 @@ function PopupWithForm({
               onBlur={handleInputFocus}
               onChange={handleChange}
               minLength={4}
+              disabled={isLoading === 'auth'}
             />
             <span className="popup__input-error" id="password-input-error">
               {errors.password}
@@ -122,6 +122,7 @@ function PopupWithForm({
                   onBlur={handleInputFocus}
                   onChange={handleChange}
                   minLength={4}
+                  disabled={isLoading === 'auth'}
                 />
                 <span
                   className="popup__input-error"
@@ -131,6 +132,12 @@ function PopupWithForm({
                 </span>
               </>
             )}
+            <span
+              className="popup__input-error popup__input-error_submit-error"
+              id="submit-error"
+            >
+              {submitError}
+            </span>
             <button
               className={`popup__submit-button ${
                 isValid ? 'popup__submit-button_active clickable' : ''
