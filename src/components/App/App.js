@@ -15,7 +15,7 @@ import NewsApi from '../../utils/NewsApi';
 import mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ErrorContext from '../../contexts/ErrorContext';
-import { articleIsSaved, sortByKeywordFrequency } from '../../utils/helpers';
+import { sortByKeywordFrequency, articleIsSaved } from '../../utils/helpers';
 import { IMAGE_UNAVAILABLE_URL, NUM_CARDS } from '../../utils/constants';
 
 function App() {

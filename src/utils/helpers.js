@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 const months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -8,14 +9,14 @@ const areSameArticle = (article, savedArticle) => {
   return articleProperties.every((key) => article[key] === savedArticle[key]);
 };
 
-module.exports.convertDate = (dateString) => {
+export const convertDate = (dateString) => {
   const [year, month] = dateString.split('-');
   const [day] = dateString.split('-')[2].split('T');
   return `${months[month - 1]} ${day}, ${year}`;
 };
 
 // eslint-disable-next-line arrow-body-style
-module.exports.articleIsSaved = (article, savedArticles) => {
+export const articleIsSaved = (article, savedArticles) => {
   let isSaved = false;
   let id;
   savedArticles.forEach((a) => {
@@ -41,7 +42,7 @@ const rankKeywords = (cards) => {
   return keywordsSorted;
 };
 
-module.exports.buildKeyWordString = (cards) => {
+export const buildKeyWordString = (cards) => {
   const words = rankKeywords(cards);
   let keywordString;
   if (words.length === 1) {
@@ -58,7 +59,7 @@ module.exports.buildKeyWordString = (cards) => {
   return keywordString;
 };
 
-module.exports.sortByKeywordFrequency = (cards) => {
+export const sortByKeywordFrequency = (cards) => {
   const frequencies = rankKeywords(cards);
   const compareFreqs = (a, b) => frequencies.indexOf(a.keyword) - frequencies.indexOf(b.keyword);
   cards.sort(compareFreqs);
