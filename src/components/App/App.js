@@ -118,9 +118,9 @@ function App() {
         } else {
           setModalType('success');
         }
-        setIsLoading('');
       })
-      .catch((err) => setSubmitError(err.message));
+      .catch((err) => setSubmitError(err.message))
+      .finally(() => setIsLoading(''));
   };
 
   const handleSignin = () => {
@@ -148,7 +148,6 @@ function App() {
             throw new Error('Bad email or password');
           }
         }
-        setIsLoading('');
       })
       .then(() => {
         handleSignin();
@@ -157,7 +156,8 @@ function App() {
       .then(() => {
         setmodalIsOpen(false);
       })
-      .catch((err) => setSubmitError(err.message));
+      .catch((err) => setSubmitError(err.message))
+      .finally(() => setIsLoading(''));
   };
 
   useEffect(() => {
@@ -207,13 +207,13 @@ function App() {
           }
         });
         setCards(data);
-        setIsLoading('');
         setCurrentError({ type: '' });
         localStorage.setItem('searchResults', JSON.stringify(data));
       })
       .catch(() => {
         setCurrentError({ type: 'server' });
-      });
+      })
+      .finally(() => setIsLoading(''));
   };
 
   const handleMenuIconClick = (e) => {
