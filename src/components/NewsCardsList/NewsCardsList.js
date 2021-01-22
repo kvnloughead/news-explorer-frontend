@@ -1,8 +1,8 @@
 import React from 'react';
-import { SEARCH_RESULTS_ERROR } from '../../utils/constants';
 import ErrorContext from '../../contexts/ErrorContext';
 
 import NewsCard from '../NewsCard/NewsCard';
+import CardsListError from '../CardsListError/CardsListError';
 
 function NewsCardsList({
   cards,
@@ -65,30 +65,9 @@ function NewsCardsList({
             </div>
           ) : (
             <>
-              {notFound && (
-                <div className="not-found">
-                  <div className="not-found__icon" />
-                  <h3 className="not-found__title">
-                    {isMainPage ? 'Nothing found' : 'Nothing here'}
-                  </h3>
-                  <p className="not-found__text">
-                    {isMainPage
-                      ? 'Sorry, but nothing matched your search terms.'
-                      : 'Go save some articles!'}
-                  </p>
-                </div>
-              )}
-              {error.type.length > 0 && (
-                <div className="not-found">
-                  <div className="not-found__icon" />
-                  <h3 className="not-found__title">
-                    Something happened ...
-                  </h3>
-                  <p className="not-found__text">
-                    {SEARCH_RESULTS_ERROR[error.type]}
-                  </p>
-                </div>
-              )}
+              {!isMainPage && <CardsListError type="noCards" />}
+              {notFound && <CardsListError type="notFound" />}
+              {error.type.length > 0 && <CardsListError type="searchError" />}
             </>
           )}
         </>

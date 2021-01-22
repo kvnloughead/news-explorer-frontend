@@ -120,7 +120,10 @@ function App() {
         }
       })
       .catch((err) => setSubmitError(err.message))
-      .finally(() => setIsLoading(''));
+      .finally(() => {
+        setIsLoading('');
+        setSubmitError('');
+      });
   };
 
   const handleSignin = () => {
