@@ -1,6 +1,6 @@
-This is the React frontend for my news article collection application, which is the final project in Practicum by Yandex's web development curriculum.
+This is the React frontend for my news article collection application, which is the final project in Practicum by Yandex's web development curriculum. 
 
-The repo for its backend (using Express and MongoDB) is located [here](https://github.com/kvnloughead/news-explorer-api). The backend is deployed [here]('https://api.knews.students.nomoreparties.site').
+The repo for its backend (using Express and MongoDB) is located [here](https://github.com/kvnloughead/news-explorer-api). 
 
 ## Features
 - Popup modals for user authentication.
@@ -8,7 +8,8 @@ The repo for its backend (using Express and MongoDB) is located [here](https://g
 - Articles can be saved to and removed from Mongo DB by authorized users.
 - Responsive design
 
-## Backend Deployment
-- Deployed on AWS
-- Domain - https://api.k.news.students.nomoreparties.site/
+## Deployment
+- [Frontend](https://kvnloughead.github.io/news-explorer-frontend/)
+- Backend is deployed on AWS
+- Domain - https://api.knews.students.nomoreparties.site
 - Public IP - 40.117.37.231

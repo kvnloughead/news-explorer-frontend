@@ -5,6 +5,17 @@ export const SEARCH_RESULTS_ERROR = {
   cardButton: 'Something went wrong...',
 };
 export const NUM_CARDS = 3;
+export const CARDS_LIST_ERROR_TITLE = {
+  notFound: 'Nothing found',
+  noCards: 'Nothing here',
+  searchError: 'Something happened',
+};
+
+export const CARDS_LIST_ERROR_TEXT = {
+  notFound: 'Sorry, but nothing matched your search terms.',
+  noCards: 'Go save some articles!',
+  searchError: 'Please enter a keyword.',
+};
 
 export const API_KEY = 'ee3e693144704e9c8d98437bdd341b2b';
 export const NEWS_API_URL = 'http://newsapi.org';
