@@ -1,6 +1,6 @@
 import React from 'react';
 
-import authorImage from '../../images/kevin.png';
+import authorImage from '../../images/kevin-3.png';
 
 function About() {
   return (
