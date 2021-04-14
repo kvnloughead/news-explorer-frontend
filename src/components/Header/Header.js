@@ -1,6 +1,7 @@
 import React from 'react';
 import HeaderNav from '../HeaderNav/HeaderNav';
 import SearchForm from '../SearchForm/SearchForm';
+import HeaderMobileMenu from '../HeaderMobileMenu/HeaderMobileMenu';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 
 function Header({
@@ -38,6 +39,20 @@ function Header({
           windowInnerWidth={windowInnerWidth}
           modalIsOpen={modalIsOpen}
         />
+        {showAllNavLinks && (
+        <HeaderMobileMenu
+          loggedIn={loggedIn}
+          isMainPage
+          handleSignout={handleSignout}
+          handleSigninButtonClick={handleSigninButtonClick}
+          handleMenuIconClick={handleMenuIconClick}
+          showAllNavLinks={showAllNavLinks}
+          setShowAllNavLinks={setShowAllNavLinks}
+          handleResize={handleResize}
+          windowInnerWidth={windowInnerWidth}
+          modalIsOpen={modalIsOpen}
+        />
+        )}
       </header>
       {isMainPage ? (
         <SearchForm
