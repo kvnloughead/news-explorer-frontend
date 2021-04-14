@@ -2,7 +2,7 @@ import {
   useEffect, useState, useCallback,
 } from 'react';
 import {
-  Route, useHistory, useLocation, Switch,
+  Route, useLocation, Switch,
 } from 'react-router-dom';
 
 import './App.css';
@@ -25,7 +25,7 @@ function App() {
   const [savedCards, setSavedCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState('');
-  const [modalIsOpen, setmodalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [showAllNavLinks, setShowAllNavLinks] = useState(false);
   const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
@@ -43,7 +43,6 @@ function App() {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
-  const history = useHistory();
   const location = useLocation();
 
   useEffect(() => {
@@ -160,7 +159,7 @@ function App() {
         resetForm();
       })
       .then(() => {
-        setmodalIsOpen(false);
+        setModalIsOpen(false);
       })
       .catch((err) => setSubmitError(err.message))
       .finally(() => setIsLoading(''));
@@ -243,7 +242,7 @@ function App() {
   };
 
   const handleSigninButtonClick = () => {
-    setmodalIsOpen(true);
+    setModalIsOpen(true);
     if (windowInnerWidth <= 767) {
       setShowAllNavLinks(true);
     }
@@ -251,7 +250,7 @@ function App() {
   };
 
   const handleSignupButtonClick = () => {
-    setmodalIsOpen(true);
+    setModalIsOpen(true);
     setModalType('signup');
   };
 
@@ -293,7 +292,7 @@ function App() {
     evt.stopPropagation();
     if (evt.type === 'click' || evt.key === 'Escape') {
       resetForm();
-      setmodalIsOpen(false);
+      setModalIsOpen(false);
     }
   };
 
@@ -312,6 +311,14 @@ function App() {
     setCards(newCards);
     setLoggedIn(false);
   };
+
+  useEffect(() => {
+    if (!loggedIn && location.signin) {
+      setModalType('signin');
+      setModalIsOpen(true);
+    } else setModalIsOpen(false);
+    location.signin = false;
+  }, [location, loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
