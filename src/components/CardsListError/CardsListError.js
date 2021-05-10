@@ -1,15 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import { CARDS_LIST_ERROR_TEXT, CARDS_LIST_ERROR_TITLE } from '../../utils/constants';
 
 import {
-  Container, Icon, Title, Text,
+  Container, IconStyles, Title, Text,
 }
   from './styles';
+
+const Icon = styled.div`${IconStyles}`;
 
 function CardsListError({ type }) {
   return (
     <Container>
-      <Icon />
+      <Icon type={type} />
       <Title>
         {CARDS_LIST_ERROR_TITLE[type]}
       </Title>

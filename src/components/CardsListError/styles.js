@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import NotFoundIcon from '../../images/icons/not-found.png';
+import SearchIcon from '../../images/icons/search-icon.png';
 
 export const Container = styled.div`
   display: flex;
@@ -8,11 +9,11 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const Icon = styled.div`
+export const IconStyles = css`
   margin: 86px 0 0 0;
   width: 96px;
   height: 96px;
-  background-image: url(${NotFoundIcon});
+  background-image: url(${(props) => (props && props.type !== 'noSearch' ? `${NotFoundIcon}` : `${SearchIcon}`)});
   background-size: cover;
 `;
 
