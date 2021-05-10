@@ -17,13 +17,14 @@ function Main({
   notFound,
   handleSigninButtonClick,
   setNumCardsShown,
+  noSearch,
 }) {
   const error = React.useContext(ErrorContext);
 
   return (
     <>
       <main>
-        {(cards.length > 0 || notFound || isLoading || error.type.length > 0) && (
+        {(cards.length > 0 || notFound || isLoading || error.type.length > 0 || noSearch) && (
           <NewsCardsList
             cards={cards}
             loggedIn={loggedIn}
@@ -37,6 +38,7 @@ function Main({
             numCardsShown={numCardsShown}
             setNumCardsShown={setNumCardsShown}
             notFound={notFound}
+            noSearch={noSearch}
           />
         )}
         <About />

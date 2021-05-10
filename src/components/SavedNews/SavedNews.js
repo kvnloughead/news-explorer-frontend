@@ -13,12 +13,12 @@ function SavedNews({
   handleDeleteClick,
 }) {
   const history = useHistory();
-  // useEffect(() => {
-  //   if (!loggedIn) {
-  //     history.push('/');
-  //     handleSigninButtonClick();
-  //   }
-  // });
+  useEffect(() => {
+    if (!loggedIn) {
+      history.push('/');
+      handleSigninButtonClick();
+    }
+  });
 
   return (
     <NewsCardsList

@@ -38,6 +38,7 @@ function App() {
   const [numCardsShown, setNumCardsShown] = useState(NUM_CARDS);
   const [numSavedCardsShown, setNumSavedCardsShown] = useState(NUM_CARDS);
   const [currentError, setCurrentError] = useState({ type: '' });
+  const [noSearch, setIsNoSearch] = useState(true);
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -189,6 +190,7 @@ function App() {
 
   const handleSearchSubmit = (evt) => {
     evt.preventDefault();
+    setIsNoSearch(false);
     if (searchTerm.length === 0) {
       setCurrentError({ type: 'keyword' });
       return;
@@ -353,6 +355,7 @@ function App() {
               numCardsShown={numCardsShown}
               setNumCardsShown={setNumCardsShown}
               notFound={notFound}
+              noSearch={noSearch}
             />
             <PopupWithForm
               modalType={modalType}

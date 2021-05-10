@@ -18,6 +18,7 @@ function NewsCardsList({
   numCardsShown,
   setNumCardsShown,
   notFound,
+  noSearch,
 }) {
   const error = React.useContext(ErrorContext);
 
@@ -66,6 +67,7 @@ function NewsCardsList({
           ) : (
             <>
               {!isMainPage && <CardsListError type="noCards" />}
+              {(isMainPage && noSearch) && <CardsListError type="noSearch" />}
               {notFound && <CardsListError type="notFound" />}
               {error.type.length > 0 && <CardsListError type="searchError" />}
             </>

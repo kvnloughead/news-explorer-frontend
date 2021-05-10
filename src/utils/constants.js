@@ -9,12 +9,14 @@ export const CARDS_LIST_ERROR_TITLE = {
   notFound: 'Nothing found',
   noCards: 'Nothing here',
   searchError: 'Something happened',
+  noSearch: 'Welcome',
 };
 
 export const CARDS_LIST_ERROR_TEXT = {
   notFound: 'Sorry, but nothing matched your search terms.',
   noCards: 'Go save some articles!',
   searchError: 'Please enter a keyword.',
+  noSearch: 'What would you like to read about?',
 };
 
 export const API_KEY = 'ee3e693144704e9c8d98437bdd341b2b';
