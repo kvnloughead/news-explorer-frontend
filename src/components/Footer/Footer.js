@@ -6,7 +6,7 @@ import facebookIcon from '../../images/icons/facebook-icon.svg';
 function Footer() {
   return (
     <footer className="footer">
-      <p className="footer__copyright">© 2020 Supersite, Powered by News API</p>
+      <p className="footer__copyright">© 2021 Kevin Loughead, Powered by News API</p>
       <nav className="footer__nav">
         <Link className="footer__link clickable" to="/">
           Home
